@@ -13,10 +13,10 @@ public class Hello {
      */
     public static String getGreeting(String name) {
         if (name.equals("")) {
-            System.out.println("Hello!");
+            return "Hello!";
         }
 
-        return "Hello" + " " +  name + "!";
+        return "Hello," + " " +  name + "!";
     }
 
     /**
