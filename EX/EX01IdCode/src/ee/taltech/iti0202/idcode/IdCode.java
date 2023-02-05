@@ -187,6 +187,7 @@
 
           remainder = sum % 11;
           if (remainder == 10) {
+              sum = 0;
               for (int i = 0; i < 10; i++) {
                   int digit = Integer.parseInt(idCodeValue.substring(i, i + 1));
 
@@ -213,7 +214,7 @@
        * @param args info.
        */
       public static void main(String[] args) {
-          IdCode validMaleIdCode = new IdCode("37605030299");
+          IdCode validMaleIdCode = new IdCode("47605037779");
           System.out.println(validMaleIdCode.isCorrect());
           System.out.println(validMaleIdCode.getInformation());
           System.out.println(validMaleIdCode.getGender());
