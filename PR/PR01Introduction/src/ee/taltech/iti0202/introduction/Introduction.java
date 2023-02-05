@@ -25,11 +25,10 @@ public class Introduction {
         } else if ((valueOne == valueTwo * 2) || (valueTwo == valueOne * 2)) {
             return "good";
 
-        } else
+        } else {
             return "ok";
-
+        }
     }
-    
     /**
      * Method gets a list of numbers.
      * Return a list containing only even numbers of the given list.
@@ -51,10 +50,8 @@ public class Introduction {
             }
 
         }
-
         return list1;
     }
-    
     /**
      * Method gets an array of numbers.
      * Return an array containing only even numbers of the given array.
@@ -74,12 +71,11 @@ public class Introduction {
             }
             return output.stream().mapToInt(i -> i).toArray();
         }
-
-    
         /**
      * Method gets two Strings as parameters.
      * If two words have the same length, just put them together. If the length is
-     * different, remove so many letters from the beginning of the longer word that the two words are the same length, and
+     * different, remove so many letters from the beginning of the longer word that the two words are the same length,
+         * and
      * then put them together.
      * If the first word was longer, return the answer in lower case. If the second word was longer,
      * return the answer in capital letters.
@@ -101,9 +97,6 @@ public class Introduction {
             calc1 = first.length() - second.length();
             String short1 = first.substring(calc1);
             return short1.toLowerCase() + second.toLowerCase();
-
-
-            
         } else {
             calc2 = second.length() - first.length();
             String short2 = second.substring(calc2);
@@ -135,19 +128,21 @@ public class Introduction {
         }
         return counter;
     }
-    
     /**
      * Run tests.
      * @param args Arguments from command line.
      */
     public static void main(String[] args) {
+        final int HOW_IS_OUTCOME_VALUE_SECOND = 6;
+        final int NUMBER_SEVEN = 7;
+        final int NUMBER_NINE = 9;
+        final int NUMBER_TWENTY_FOUR = 24;
+        final int NUMBER_MINUS_SIX = -6;
         Introduction introduction = new Introduction();
-        System.out.println(introduction.howIsOutcome(3, 6)); // "bad"
-        
-        List<Integer> nums = new ArrayList<>(Arrays.asList(4, 7, 5, 2, 1, 2, -2, 0));
+        System.out.println(introduction.howIsOutcome(3, HOW_IS_OUTCOME_VALUE_SECOND)); // "bad"
+        List<Integer> nums = new ArrayList<>(Arrays.asList(4, NUMBER_SEVEN, 5, 2, 1, 2, -2, 0));
         System.out.println(introduction.findEvenNumbersList(nums)); // [4, 2, 2, -2, 0]
-        
-        int[] array = {9, 0, 24, -6, 3};
+        int[] array = {NUMBER_NINE, 0, NUMBER_TWENTY_FOUR, NUMBER_MINUS_SIX, 3};
         System.out.println(Arrays.toString(introduction.findEvenNumbersArray(array))); // [0, 24, -6]
 
         String result = introduction.findTheString("Good", "afternoon");
