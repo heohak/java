@@ -155,8 +155,20 @@
           int day = Integer.parseInt(idCodeValue.substring(5, 7));
           int month = Integer.parseInt(idCodeValue.substring(3, 5));
           int year = Integer.parseInt(idCodeValue.substring(1, 3));
+          int genderNumber = Integer.parseInt(idCodeValue.substring(0, 1));
+          int century;
+          int finalYear;
+          if (genderNumber == 1 || genderNumber == 2) {
+              century = 1800;
+          } else if (genderNumber == 3 || genderNumber == 4) {
+              century = 1900;
+          } else {
+              century = 2000;
+          }
+          finalYear =  century + year;
 
-          if (month == 2 && isLeapYear(1900 + year)) {
+
+          if (month == 2 && isLeapYear(finalYear)) {
               return day >= 1 && day <= 29;
           } else if (month == 2) {
               return day >= 1 && day <= 28;
@@ -214,7 +226,7 @@
        * @param args info.
        */
       public static void main(String[] args) {
-          IdCode validMaleIdCode = new IdCode("47605037779");
+          IdCode validMaleIdCode = new IdCode("50002290231");
           System.out.println(validMaleIdCode.isCorrect());
           System.out.println(validMaleIdCode.getInformation());
           System.out.println(validMaleIdCode.getGender());
