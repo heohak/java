@@ -119,14 +119,22 @@ public class Introduction {
      * @param word String
      * @return The number of triples
      */
-    public int countTripleChars(String word){
+    public int countTripleChars(String word) {
 
-
-
-
-        return 0;
+        int counter = 0;
+        for (int i = 0; i < word.length() - 2; i++) {
+            if (word.charAt(i) == word.charAt(i + 1) && word.charAt(i + 1) == word.charAt(i + 2)) {
+                if (i == 0 || word.charAt(i - 1) != word.charAt(i)) {
+                    if (i == word.length() - 3) {
+                        counter++;
+                    } else if (word.charAt(i + 3) != word.charAt(i + 2)) {
+                        counter++;
+                    }
+                }
             }
-
+        }
+        return counter;
+    }
     
     /**
      * Run tests.
