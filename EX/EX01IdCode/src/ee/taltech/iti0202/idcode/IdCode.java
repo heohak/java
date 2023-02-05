@@ -26,7 +26,7 @@
           && isYearNumberCorrect()
           && isMonthNumberCorrect()
           && isDayNumberCorrect()
-          && isControlNumberCorrect());
+          && isControlNumberCorrect()) && idCodeValue.length() == 11;
       }
 
       /**
