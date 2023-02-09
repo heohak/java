@@ -24,7 +24,8 @@ public class DataStructures {
      */
     public static String findLongestWord(String sentence) {
         String[] splittedString = sentence.split(" ");
-        Arrays.sort(splittedString, Comparator.comparingInt(String::length).reversed().thenComparing(Comparator.naturalOrder()));
+        Arrays.sort(splittedString,
+                Comparator.comparingInt(String::length).reversed().thenComparing(Comparator.naturalOrder()));
 
         return splittedString[0];
     }
@@ -61,9 +62,12 @@ public class DataStructures {
         Map<String, Integer> map1 = wordCount(arr);
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : map1.entrySet()) {
-            if (entry.getValue() >= 2) {
-                result.add(entry.getKey());
-            }
+            int value = entry.getValue();
+            int calc = value / 2;
+            List<String> list = Collections.nCopies(calc, entry.getKey());
+            result.addAll(list);
+
+
         }
         return result;
     }
@@ -78,7 +82,8 @@ public class DataStructures {
         String[] splittedStringNew = studentInfo.split(":");
         if (!(Integer.parseInt(splittedStringNew[1]) >= 0 && Integer.parseInt(splittedStringNew[1]) <= 5)) {
             splittedStringNew[1] = "-1";
-        } String name = splittedStringNew[0];
+        }
+        String name = splittedStringNew[0];
         int grade = Integer.parseInt(splittedStringNew[1]);
         students.put(name, grade);
 
