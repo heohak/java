@@ -61,7 +61,7 @@ public class DataStructures {
         Map<String, Integer> map1 = wordCount(arr);
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : map1.entrySet()) {
-            if (entry.getValue() % 2 == 0) {
+            if (entry.getValue() >= 2) {
                 result.add(entry.getKey());
             }
         }
