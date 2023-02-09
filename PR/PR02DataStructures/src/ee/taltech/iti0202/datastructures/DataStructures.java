@@ -75,6 +75,12 @@ public class DataStructures {
      * @param studentInfo String with a pattern (name:grade)
      */
     public void addStudent(String studentInfo) {
+        String[] splittedStringNew = studentInfo.split(":");
+        if (!(Integer.parseInt(splittedStringNew[1]) >= 0 && Integer.parseInt(splittedStringNew[1]) <= 5)) {
+            splittedStringNew[1] = "-1";
+        } String name = splittedStringNew[0];
+        int grade = Integer.parseInt(splittedStringNew[1]);
+        students.put(name, grade);
 
     }
 
@@ -87,7 +93,14 @@ public class DataStructures {
      * @return int student's grade.
      */
     public int getStudentGrade(String name) {
-        return 0;
+        int studentGrade = 0;
+        for (Map.Entry<String, Integer> entry : students.entrySet()) {
+            if (Objects.equals(entry.getKey(), name)) {
+                studentGrade = entry.getValue();
+
+            }
+        }
+        return studentGrade;
     }
 
     /**
