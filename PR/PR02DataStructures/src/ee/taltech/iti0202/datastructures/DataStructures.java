@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class DataStructures {
 
@@ -105,14 +104,8 @@ public class DataStructures {
      * @return int student's grade.
      */
     public int getStudentGrade(String name) {
-        int studentGrade = 0;
-        for (Map.Entry<String, Integer> entry : students.entrySet()) {
-            if (Objects.equals(entry.getKey(), name)) {
-                studentGrade = entry.getValue();
 
-            }
-        }
-        return studentGrade;
+        return students.get(name);
     }
 
     /**
