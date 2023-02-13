@@ -1,11 +1,11 @@
 package ee.taltech.iti0202.webbrowser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WebBrowser {
     private String homePage;
@@ -109,7 +109,8 @@ public class WebBrowser {
         List<Map.Entry<String, Integer>> entries = new ArrayList<>(map1.entrySet());
         entries.sort((o1, o2) -> {
             int valueCompare = o2.getValue().compareTo(o1.getValue());
-            return valueCompare != 0 ? valueCompare : getHistory().indexOf(o1.getKey()) - getHistory().indexOf(o2.getKey());
+            return valueCompare != 0 ? valueCompare : getHistory().indexOf(o1.getKey()) - getHistory()
+                    .indexOf(o2.getKey());
         });
 
         // Put the sorted entries back into a map

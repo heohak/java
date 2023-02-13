@@ -128,6 +128,16 @@ class WebBrowserTest {
         assertEquals("neti.ee - 2 visits\nfacebook.com - 2 visits\ngoogle.com - 1 visit",
                 example6.getTop3VisitedPages());
     }
+    @Test
+    public void addSameBookmarkTwice() {
+        WebBrowser twoBookmarks = new WebBrowser();
+        twoBookmarks.goTo("yt.com");
+        twoBookmarks.addAsBookmark();
+        twoBookmarks.addAsBookmark();
+        assertEquals(1, twoBookmarks.getBookmarks().size());
+
+
+    }
 
 
 
