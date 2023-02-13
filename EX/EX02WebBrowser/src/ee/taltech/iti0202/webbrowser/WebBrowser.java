@@ -1,18 +1,21 @@
 package ee.taltech.iti0202.webbrowser;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WebBrowser {
     private String homePage;
     private List<String> history;
-    private List<String> backHistory;
     private List<String> bookmarks;
     private String currentUrl;
     private int currentIndex;
     public WebBrowser() {
         this.homePage = "google.com";
         this.history = new ArrayList<>();
-        this.backHistory = new ArrayList<>();
         this.bookmarks = new ArrayList<>();
         this.currentUrl = homePage;
         this.currentIndex = 0;
@@ -24,7 +27,6 @@ public class WebBrowser {
      */
     public void homePage() {
         goTo(homePage);
-        //TODO: implement
     }
 
     /**
@@ -36,9 +38,8 @@ public class WebBrowser {
                 history.add(getHistory().get(currentIndex - 1));
                 currentIndex--;
             }
-        } currentUrl = getHistory().get(currentIndex);
-
-        //TODO: implement
+        }
+        currentUrl = getHistory().get(currentIndex);
     }
 
     /**
@@ -48,12 +49,11 @@ public class WebBrowser {
         if (currentIndex < getHistory().size() - 1) {
             if (currentUrl != getHistory().get(currentIndex + 1)) {
                 history.add(getHistory().get(currentIndex + 1));
-            } currentIndex++;
+            }
+            currentIndex++;
 
-        } currentUrl = getHistory().get(currentIndex);
-
-
-        //TODO: implement
+        }
+        currentUrl = getHistory().get(currentIndex);
     }
 
     /**
@@ -67,15 +67,15 @@ public class WebBrowser {
             currentIndex = getHistory().size() - 1;
         }
         currentUrl = url;
-        //TODO: implement
     }
 
     /**
      * Add the current webpage as a bookmark.
      */
     public void addAsBookmark() {
-        bookmarks.add(currentUrl);
-        //TODO: implement
+        if (!bookmarks.contains(currentUrl)) {
+            bookmarks.add(currentUrl);
+        }
     }
 
     /**
@@ -85,17 +85,14 @@ public class WebBrowser {
      */
     public void removeBookmark(String bookmark) {
         bookmarks.remove(bookmark);
-        //TODO: implement
     }
 
     public List<String> getBookmarks() {
-        //TODO: implement
         return bookmarks;
     }
 
     public void setHomePage(String homePage) {
         this.homePage = homePage;
-        //TODO: implement
     }
 
 
@@ -107,7 +104,7 @@ public class WebBrowser {
     public String getTop3VisitedPages() {
         Map<String, Integer> map1 = new HashMap<>();
         for (String site : getHistory()) {
-            map1.put(site, map1.getOrDefault(site, 0) + 1 );
+            map1.put(site, map1.getOrDefault(site, 0) + 1);
         } map1 = map1.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
@@ -118,12 +115,15 @@ public class WebBrowser {
         for (Map.Entry<String, Integer> entry : map1.entrySet()) {
             if (count >= 3) {
                 break;
-            } if (entry.getValue() == 1) {
+            }
+            if (entry.getValue() == 1) {
                 v1 = "visit";
-            } else
+            } else {
                 v1 = "visits";
+            }
             if ((count == 0 || count == 1) && map1.size() >= 3) {
-                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" ").append(v1).append("\n");
+                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" ").append(v1)
+                        .append("\n");
             } else {
                 result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" ").append(v1);
             }
@@ -131,7 +131,6 @@ public class WebBrowser {
 
 
         }
-        //TODO: implement
         return result.toString();
     }
 
@@ -145,7 +144,6 @@ public class WebBrowser {
      * @return list of all visited pages
      */
     public List<String> getHistory() {
-        //TODO: implement
         return history;
     }
 
@@ -156,7 +154,6 @@ public class WebBrowser {
      * @return active web page
      */
     public String getCurrentUrl() {
-        //TODO: implement
         return currentUrl;
     }
 }
