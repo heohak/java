@@ -105,14 +105,26 @@ public class WebBrowser {
         Map<String, Integer> map1 = new HashMap<>();
         for (String site : getHistory()) {
             map1.put(site, map1.getOrDefault(site, 0) + 1);
-        } map1 = map1.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        }
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(map1.entrySet());
+        entries.sort((o1, o2) -> {
+            int valueCompare = o2.getValue().compareTo(o1.getValue());
+            return valueCompare != 0 ? valueCompare : getHistory().indexOf(o1.getKey()) - getHistory().indexOf(o2.getKey());
+        });
+
+        // Put the sorted entries back into a map
+        Map<String, Integer> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> entry : entries) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+
+
 
         StringBuilder result = new StringBuilder();
         String v1;
         int count = 0;
-        for (Map.Entry<String, Integer> entry : map1.entrySet()) {
+        for (Map.Entry<String, Integer> entry : sortedMap.entrySet()) {
             if (count >= 3) {
                 break;
             }
