@@ -118,9 +118,6 @@ public class WebBrowser {
             sortedMap.put(entry.getKey(), entry.getValue());
         }
 
-
-
-
         StringBuilder result = new StringBuilder();
         String v1;
         int count = 0;
@@ -133,7 +130,7 @@ public class WebBrowser {
             } else {
                 v1 = "visits";
             }
-            if ((count == 0 || count == 1) && map1.size() >= 3) {
+            if ((count == 0 || count == 1) && map1.size() >= 2) {
                 result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" ").append(v1)
                         .append("\n");
             } else {
