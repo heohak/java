@@ -2,7 +2,7 @@ package ee.taltech.iti0202.webbrowser;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WebBrowserTest {
     @Test
@@ -18,7 +18,7 @@ class WebBrowserTest {
         assertEquals("google.com", onlyGooglePage.getCurrentUrl());
         assertEquals(1, onlyGooglePage.getHistory().size());
         onlyGooglePage.forward();
-        assertEquals("google.com",onlyGooglePage.getCurrentUrl());
+        assertEquals("google.com", onlyGooglePage.getCurrentUrl());
         onlyGooglePage.back();
         assertEquals("google.com", onlyGooglePage.getCurrentUrl());
     }
@@ -78,6 +78,7 @@ class WebBrowserTest {
 
     @Test
     public void example4Moodle() {
+        final int SIX = 6;
         WebBrowser example4 = new WebBrowser();
         assertEquals("google.com", example4.getCurrentUrl());
         example4.setHomePage("neti.ee");
@@ -94,7 +95,7 @@ class WebBrowserTest {
         assertEquals("neti.ee", example4.getCurrentUrl());
         example4.addAsBookmark();
         assertEquals(2, example4.getBookmarks().size());
-        assertEquals(6, example4.getHistory().size());
+        assertEquals(SIX, example4.getHistory().size());
         assertEquals("google.com", example4.getHistory().get(0));
         assertEquals("facebook.com", example4.getHistory().get(1));
         assertEquals("google.com", example4.getHistory().get(2));
@@ -124,7 +125,8 @@ class WebBrowserTest {
         assertEquals("facebook.com", example6.getHistory().get(2));
         assertEquals("neti.ee", example6.getHistory().get(3));
         assertEquals("facebook.com", example6.getHistory().get(4));
-        assertEquals("neti.ee - 2 visits\nfacebook.com - 2 visits\ngoogle.com - 1 visit", example6.getTop3VisitedPages());
+        assertEquals("neti.ee - 2 visits\nfacebook.com - 2 visits\ngoogle.com - 1 visit",
+                example6.getTop3VisitedPages());
     }
 
 
