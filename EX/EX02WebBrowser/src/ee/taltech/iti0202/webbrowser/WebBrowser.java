@@ -1,11 +1,6 @@
 package ee.taltech.iti0202.webbrowser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class WebBrowser {
     private String homePage;
@@ -13,6 +8,8 @@ public class WebBrowser {
     private List<String> bookmarks;
     private String currentUrl;
     private int currentIndex;
+    private Deque<String> backStack = new ArrayDeque();
+    private Deque<String> forwardStack = new ArrayDeque();
     public WebBrowser() {
         this.homePage = "google.com";
         this.history = new ArrayList<>();
@@ -33,27 +30,22 @@ public class WebBrowser {
      * Goes back to previous page.
      */
     public void back() {
-        if (currentIndex > 0) {
-            if (currentUrl != getHistory().get(currentIndex - 1)) {
-                history.add(getHistory().get(currentIndex - 1));
-                currentIndex--;
-            }
+        if (!backStack.isEmpty()) {
+            backStack.push(currentUrl);
+            currentUrl = backStack.pop();
+            history.add(currentUrl);
         }
-        currentUrl = getHistory().get(currentIndex);
     }
 
     /**
      * Goes forward to next page.
      */
     public void forward() {
-        if (currentIndex < getHistory().size() - 1) {
-            if (currentUrl != getHistory().get(currentIndex + 1)) {
-                history.add(getHistory().get(currentIndex + 1));
-            }
-            currentIndex++;
-
+        if (!forwardStack.isEmpty()) {
+            backStack.push(currentUrl);
+            currentUrl = forwardStack.pop();
+            history.add(currentUrl);
         }
-        currentUrl = getHistory().get(currentIndex);
     }
 
     /**
@@ -63,10 +55,11 @@ public class WebBrowser {
      */
     public void goTo(String url) {
         if (!Objects.equals(url, getCurrentUrl())) {
-            history.add(url);
-            currentIndex = getHistory().size() - 1;
+            forwardStack.clear();
+            backStack.push(currentUrl);
+            currentUrl = url;
+            history.add(currentUrl);
         }
-        currentUrl = url;
     }
 
     /**
