@@ -7,7 +7,6 @@ public class WebBrowser {
     private List<String> history;
     private List<String> bookmarks;
     private String currentUrl;
-    private int currentIndex;
     private Deque<String> backStack = new ArrayDeque();
     private Deque<String> forwardStack = new ArrayDeque();
     public WebBrowser() {
@@ -15,7 +14,6 @@ public class WebBrowser {
         this.history = new ArrayList<>();
         this.bookmarks = new ArrayList<>();
         this.currentUrl = homePage;
-        this.currentIndex = 0;
         history.add("google.com");
     }
 
@@ -23,7 +21,12 @@ public class WebBrowser {
      * Goes to homepage.
      */
     public void homePage() {
-        goTo(homePage);
+        if (!homePage.equals(currentUrl)) {
+            history.add(currentUrl);
+            forwardStack.clear();
+            history.add(homePage);
+            currentUrl = homePage;
+        }
     }
 
     /**
@@ -56,7 +59,7 @@ public class WebBrowser {
     public void goTo(String url) {
         if (!Objects.equals(url, getCurrentUrl())) {
             forwardStack.clear();
-            backStack.push(currentUrl);
+            backStack.add(currentUrl);
             currentUrl = url;
             history.add(currentUrl);
         }
