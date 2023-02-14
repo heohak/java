@@ -31,7 +31,7 @@ public class WebBrowser {
      */
     public void back() {
         if (!backStack.isEmpty()) {
-            backStack.push(currentUrl);
+            forwardStack.add(currentUrl);
             currentUrl = backStack.pop();
             history.add(currentUrl);
         }
@@ -42,7 +42,7 @@ public class WebBrowser {
      */
     public void forward() {
         if (!forwardStack.isEmpty()) {
-            backStack.push(currentUrl);
+            backStack.add(currentUrl);
             currentUrl = forwardStack.pop();
             history.add(currentUrl);
         }
