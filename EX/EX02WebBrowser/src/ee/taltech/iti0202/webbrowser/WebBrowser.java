@@ -3,17 +3,13 @@ package ee.taltech.iti0202.webbrowser;
 import java.util.*;
 
 public class WebBrowser {
-    private String homePage;
-    private List<String> history;
-    private List<String> bookmarks;
-    private String currentUrl;
-    private Deque<String> backStack = new ArrayDeque();
-    private Deque<String> forwardStack = new ArrayDeque();
+    private String homePage = "google.com";
+    private List<String> history = new ArrayList<>();
+    private List<String> bookmarks = new ArrayList<>();
+    private String currentUrl = "google.com";
+    private Stack<String> backStack = new Stack<>();
+    private Stack<String> forwardStack = new Stack<>();
     public WebBrowser() {
-        this.homePage = "google.com";
-        this.history = new ArrayList<>();
-        this.bookmarks = new ArrayList<>();
-        this.currentUrl = homePage;
         history.add("google.com");
     }
 
@@ -22,9 +18,9 @@ public class WebBrowser {
      */
     public void homePage() {
         if (!homePage.equals(currentUrl)) {
-            history.add(currentUrl);
-            forwardStack.clear();
             history.add(homePage);
+            backStack.add(currentUrl);
+            forwardStack.clear();
             currentUrl = homePage;
         }
     }
@@ -57,7 +53,7 @@ public class WebBrowser {
      * @param url where to go
      */
     public void goTo(String url) {
-        if (!Objects.equals(url, getCurrentUrl())) {
+        if (!currentUrl.equals(url)) {
             forwardStack.clear();
             backStack.add(currentUrl);
             currentUrl = url;
