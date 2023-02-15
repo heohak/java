@@ -14,6 +14,11 @@ public class Ring {
         GOLD, SILVER, BRONZE, PLASTIC, DIAMOND
     }
 
+    /**
+     *
+     * @param type
+     * @param material
+     */
     public Ring(Type type, Material material) {
 
         this.type = type;
@@ -21,11 +26,19 @@ public class Ring {
 
     }
 
+    /**
+     *
+     * @return Type
+     */
     public Type getType() {
 
         return this.type;
     }
 
+    /**
+     *
+     * @return Material
+     */
     public Material getMaterial() {
 
         return this.material;
