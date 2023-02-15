@@ -2,8 +2,8 @@ package ee.taltech.iti0202.lotr;
 
 public class Ring {
 
-    Type type;
-    Material material;
+     private Type type;
+     private Material material;
 
     enum Type {
 
