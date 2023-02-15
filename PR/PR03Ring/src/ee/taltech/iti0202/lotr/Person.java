@@ -33,7 +33,7 @@ public class Person {
         } else if (!(getName().equals("Sauron")) && getRing().getType().equals(Ring.Type.THE_ONE) && getRing().getMaterial().equals(Ring.Material.GOLD)) {
             return "No, he just stole the ring";
         } else if (getName().equals("Sauron") && !getRing().getType().equals(Ring.Type.THE_ONE)) {
-            return "No, but he's claiming to be.";
+            return "No, but he's claiming to be";
         } else {
             return "No";
         }
