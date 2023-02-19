@@ -99,7 +99,6 @@ public class Book {
             }
         } else if (owner == null) {
             if (buyer.buyBook(this)) {
-                buyer.takeMoney(this.price);
                 this.setOwner(buyer);
                 return true;
             }
