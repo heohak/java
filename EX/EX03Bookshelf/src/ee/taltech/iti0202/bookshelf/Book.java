@@ -58,6 +58,14 @@ public class Book {
                 return true;
             }
         }
+
+        else if (owner == null) {
+            if (buyer.buyBook(this)) {
+                buyer.takeMoney(this.price);
+                this.setOwner(buyer);
+                return true;
+            }
+        }
         else if (buyer == this.owner || buyer.getMoney() < this.price) {
             return false;
         }
