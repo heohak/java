@@ -79,8 +79,9 @@ public class Book {
 
             book.owner = null;
         }
-            allBooks.remove(book);
-            return true;
+        allBooks.remove(book);
+        booksByAuthor.remove(booksByAuthor.get(book.author).remove(book));
+        return true;
 
     }
 
