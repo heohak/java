@@ -14,7 +14,7 @@ public class Book {
     private Person owner;
     private int id;
 
-    private static Map<String, Book> booksByTitleAuthorYear = new HashMap<>();
+    private static Map<String, List<Book>> booksByAuthor = new HashMap<>();
     private static List<Book> allBooks = new ArrayList<>();
 
     public static int getAndIncrementNextId() {
@@ -39,14 +39,19 @@ public class Book {
     }
 
     public static Book of(String title, String author, int yearOfPublishing, int price) {
-        Book existingBook = booksByTitleAuthorYear.get(title + author + yearOfPublishing);
-        if (existingBook != null) {
-            return existingBook;
+        for (Book book : allBooks) {
+            if (book.getTitle().equals(title) && book.getAuthor().equals(author) && book.getYearOfPublishing() == yearOfPublishing) {
+                return book;
+            }
         }
         Book newBook = new Book(title, author, yearOfPublishing, price);
-        booksByTitleAuthorYear.put(title + author + yearOfPublishing, newBook);
+        List<Book> authorBooks = booksByAuthor.getOrDefault(author.toLowerCase(), new ArrayList<>());
+        authorBooks.add(newBook);
+        booksByAuthor.put(author.toLowerCase(), authorBooks);
+
         allBooks.add(newBook);
         return newBook;
+
     }
 
     public static Book of(String title, int price) {
@@ -54,6 +59,8 @@ public class Book {
             return null;
         }
         Book lastBook = allBooks.get(allBooks.size() - 1);
+        List<Book> authorBooks = booksByAuthor.getOrDefault(lastBook.author.toLowerCase(), new ArrayList<>());
+        booksByAuthor.put(lastBook.author, authorBooks);
         return of(title, lastBook.getAuthor(), lastBook.getYearOfPublishing(), price);
     }
 
@@ -68,22 +75,17 @@ public class Book {
         }
         if (book.getOwner() != null) {
             book.getOwner().addMoney(book.getPrice());
+            book.getOwner().getBooks().remove(book);
+
             book.owner = null;
         }
-            booksByTitleAuthorYear.remove(book.getTitle() + book.getAuthor() + book.getYearOfPublishing());
             allBooks.remove(book);
             return true;
 
     }
 
     public static List<Book> getBooksByAuthor(String author) {
-        List<Book> result = new ArrayList<>();
-        for (Book book : allBooks) {
-            if (book.getAuthor().equalsIgnoreCase(author)) {
-                result.add(book);
-            }
-        }
-        return result;
+        return booksByAuthor.getOrDefault(author.toLowerCase(), new ArrayList<>());
     }
 
 
