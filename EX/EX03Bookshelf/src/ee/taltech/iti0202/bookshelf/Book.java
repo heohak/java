@@ -14,7 +14,8 @@ public class Book {
     private static int count = 0;
     private Person owner;
     private int id;
-    private static String current;
+    private static String currentAuthor;
+    private static int currentYear;
 
     private static Map<String, List<Book>> booksByAuthor = new HashMap<>();
     private static List<Book> allBooks = new ArrayList<>();
@@ -48,7 +49,8 @@ public class Book {
             }
         }
         Book newBook = new Book(title, author, yearOfPublishing, price);
-        current = author;
+        currentAuthor = author;
+        currentYear = yearOfPublishing;
         List<Book> authorBooks = booksByAuthor.getOrDefault(author.toLowerCase(), new ArrayList<>());
         authorBooks.add(newBook);
         booksByAuthor.put(author.toLowerCase(), authorBooks);
@@ -65,7 +67,7 @@ public class Book {
         Book lastBook = allBooks.get(allBooks.size() - 1);
         List<Book> authorBooks = booksByAuthor.getOrDefault(lastBook.author.toLowerCase(), new ArrayList<>());
         booksByAuthor.put(lastBook.author, authorBooks);
-        return of(title, current, lastBook.getYearOfPublishing(), price);
+        return of(title, currentAuthor, currentYear, price);
     }
 
     public static List<Book> getBooksByOwner(Person owner) {
