@@ -14,8 +14,8 @@ public class Book {
     private Person owner;
     private int id;
 
-    private static final Map<String, Book> booksByTitleAuthorYear = new HashMap<>();
-    private static final List<Book> allBooks = new ArrayList<>();
+    private static Map<String, Book> booksByTitleAuthorYear = new HashMap<>();
+    private static List<Book> allBooks = new ArrayList<>();
 
     public static int getAndIncrementNextId() {
         return count++;
@@ -58,13 +58,8 @@ public class Book {
     }
 
     public static List<Book> getBooksByOwner(Person owner) {
-        List<Book> result = new ArrayList<>();
-        for (Book book : allBooks) {
-            if (book.getOwner() == owner) {
-                result.add(book);
-            }
-        }
-        return result;
+
+        return owner.getBooks();
     }
 
     public static boolean removeBook(Book book) {
