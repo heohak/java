@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Book {
-    private String random;
     private String title;
     private String author;
     private int yearOfPublishing;
@@ -42,9 +41,18 @@ public class Book {
 
     }
 
+    /**
+     *
+     * @param title
+     * @param author
+     * @param yearOfPublishing
+     * @param price
+     * @return Book
+     */
     public static Book of(String title, String author, int yearOfPublishing, int price) {
         for (Book book : allBooks) {
-            if (book.getTitle().equals(title) && book.getAuthor().equals(author) && book.getYearOfPublishing() == yearOfPublishing) {
+            if (book.getTitle().equals(title) && book.getAuthor().equals(author) && book.getYearOfPublishing() ==
+                    yearOfPublishing) {
                 return book;
             }
         }
@@ -60,6 +68,12 @@ public class Book {
 
     }
 
+    /**
+     *
+     * @param title
+     * @param price
+     * @return Book
+     */
     public static Book of(String title, int price) {
         if (allBooks.isEmpty()) {
             return null;
@@ -70,11 +84,21 @@ public class Book {
         return of(title, currentAuthor, currentYear, price);
     }
 
+    /**
+     *
+     * @param owner
+     * @return List
+     */
     public static List<Book> getBooksByOwner(Person owner) {
 
         return owner.getBooks();
     }
 
+    /**
+     *
+     * @param book
+     * @return boolean
+     */
     public static boolean removeBook(Book book) {
         if (book == null || !allBooks.contains(book)) {
             return false;
@@ -92,6 +116,11 @@ public class Book {
 
     }
 
+    /**
+     *
+     * @param author
+     * @return List
+     */
     public static List<Book> getBooksByAuthor(String author) {
         return booksByAuthor.getOrDefault(author.toLowerCase(), new ArrayList<>());
     }
