@@ -64,6 +64,7 @@ public class Book {
         booksByAuthor.put(author.toLowerCase(), authorBooks);
 
         allBooks.add(newBook);
+        newBook.setOwner(null);
         return newBook;
 
     }
@@ -111,7 +112,6 @@ public class Book {
             return true;
         }
         allBooks.remove(book);
-
         return true;
 
     }
