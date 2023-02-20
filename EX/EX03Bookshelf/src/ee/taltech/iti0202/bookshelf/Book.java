@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Book {
+    private String random;
     private String title;
     private String author;
     private int yearOfPublishing;
@@ -13,6 +14,7 @@ public class Book {
     private static int count = 0;
     private Person owner;
     private int id;
+    private static String current;
 
     private static Map<String, List<Book>> booksByAuthor = new HashMap<>();
     private static List<Book> allBooks = new ArrayList<>();
@@ -36,6 +38,7 @@ public class Book {
         this.id = getAndIncrementNextId();
         this.owner = null;
 
+
     }
 
     public static Book of(String title, String author, int yearOfPublishing, int price) {
@@ -45,6 +48,7 @@ public class Book {
             }
         }
         Book newBook = new Book(title, author, yearOfPublishing, price);
+        current = author;
         List<Book> authorBooks = booksByAuthor.getOrDefault(author.toLowerCase(), new ArrayList<>());
         authorBooks.add(newBook);
         booksByAuthor.put(author.toLowerCase(), authorBooks);
@@ -61,7 +65,7 @@ public class Book {
         Book lastBook = allBooks.get(allBooks.size() - 1);
         List<Book> authorBooks = booksByAuthor.getOrDefault(lastBook.author.toLowerCase(), new ArrayList<>());
         booksByAuthor.put(lastBook.author, authorBooks);
-        return of(title, lastBook.getAuthor(), lastBook.getYearOfPublishing(), price);
+        return of(title, current, lastBook.getYearOfPublishing(), price);
     }
 
     public static List<Book> getBooksByOwner(Person owner) {
