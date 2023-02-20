@@ -1,4 +1,10 @@
 package ee.taltech.iti0202.bookshelf;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Book {
     private String title;
     private String author;
@@ -7,6 +13,9 @@ public class Book {
     private static int count = 0;
     private Person owner;
     private int id;
+
+    private static final Map<String, Book> booksByTitleAuthorYear = new HashMap<>();
+    private static final List<Book> allBooks = new ArrayList<>();
 
     public static int getAndIncrementNextId() {
         return count++;
@@ -28,6 +37,57 @@ public class Book {
         this.owner = null;
 
     }
+
+    public static Book of(String title, String author, int yearOfPublishing, int price) {
+        Book existingBook = booksByTitleAuthorYear.get(title + author + yearOfPublishing);
+        if (existingBook != null) {
+            return existingBook;
+        }
+        Book newBook = new Book(title, author, yearOfPublishing, price);
+        booksByTitleAuthorYear.put(title + author + yearOfPublishing, newBook);
+        allBooks.add(newBook);
+        return newBook;
+    }
+
+    public static Book of(String title, int price) {
+        if (allBooks.isEmpty()) {
+            return null;
+        }
+        Book lastBook = allBooks.get(allBooks.size() - 1);
+        return of(title, lastBook.getAuthor(), lastBook.getYearOfPublishing(), price);
+    }
+
+    public static List<Book> getBooksByOwner(Person owner) {
+        List<Book> result = new ArrayList<>();
+        for (Book book : allBooks) {
+            if (book.getOwner() == owner) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
+
+    public static boolean removeBook(Book book) {
+        if (book == null || !allBooks.contains(book)) {
+            return false;
+        }
+        book.getOwner().addMoney(book.getPrice());
+        book.owner = null;
+        booksByTitleAuthorYear.remove(book.getTitle() + book.getAuthor() + book.getYearOfPublishing());
+        allBooks.remove(book);
+        return true;
+    }
+
+    public static List<Book> getBooksByAuthor(String author) {
+        List<Book> result = new ArrayList<>();
+        for (Book book : allBooks) {
+            if (book.getAuthor().equalsIgnoreCase(author)) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
+
 
     /**
      *
