@@ -82,8 +82,9 @@ public class Book {
         if (book.getOwner() != null) {
             book.getOwner().addMoney(book.getPrice());
             book.getOwner().getBooks().remove(book);
-
+            allBooks.remove(book);
             book.owner = null;
+            return true;
         }
         allBooks.remove(book);
 
