@@ -66,11 +66,14 @@ public class Book {
         if (book == null || !allBooks.contains(book)) {
             return false;
         }
-        book.getOwner().addMoney(book.getPrice());
-        book.owner = null;
-        booksByTitleAuthorYear.remove(book.getTitle() + book.getAuthor() + book.getYearOfPublishing());
-        allBooks.remove(book);
-        return true;
+        if (book.getOwner() != null) {
+            book.getOwner().addMoney(book.getPrice());
+            book.owner = null;
+        }
+            booksByTitleAuthorYear.remove(book.getTitle() + book.getAuthor() + book.getYearOfPublishing());
+            allBooks.remove(book);
+            return true;
+
     }
 
     public static List<Book> getBooksByAuthor(String author) {
