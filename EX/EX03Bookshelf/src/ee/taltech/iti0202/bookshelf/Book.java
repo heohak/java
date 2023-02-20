@@ -166,8 +166,6 @@ public class Book {
             return false;
 
     } else if (owner.sellBook(this) && buyer.buyBook(this)) {
-        owner.addMoney(this.price);
-        buyer.takeMoney(this.price);
         this.setOwner(buyer);
         return true;
 
