@@ -80,7 +80,9 @@ public class Book {
             book.owner = null;
         }
         allBooks.remove(book);
-        booksByAuthor.remove(booksByAuthor.get(book.author).remove(book));
+        if (booksByAuthor.get(book.author).contains(book)) {
+            booksByAuthor.remove(booksByAuthor.get(book.author).remove(book));
+        }
         return true;
 
     }
