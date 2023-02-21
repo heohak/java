@@ -50,7 +50,7 @@ public class Book {
      * @return Book
      */
     public static Book of(String title, String author, int yearOfPublishing, int price) {
-        for (Book book : allBooks) {
+        for (Book book : booksByAuthor.getOrDefault(author, new ArrayList<>())) {
             if (book.getTitle().equals(title) && book.getAuthor().equals(author) && book.getYearOfPublishing()
                     == yearOfPublishing) {
                 return book;
