@@ -112,6 +112,7 @@ public class Book {
             return true;
         }
         allBooks.remove(book);
+        booksByAuthor.getOrDefault(book.author.toLowerCase(), new ArrayList<>()).remove(book);
         return true;
 
     }
