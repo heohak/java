@@ -5,7 +5,8 @@ public class Product {
 
     private final String name;
     private final int price;
-    private static int id = 0;
+    private static int nextId = 1;
+    private int id;
 
     /**
      * Create a new product with the given name and price.
@@ -38,7 +39,7 @@ public class Product {
      * @return The next id.
      */
     public static int getNextId() {
-        return ++id;
+        return nextId++;
     }
 
     /**
