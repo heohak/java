@@ -1,4 +1,5 @@
 package ee.taltech.iti0202.stock.stock;
+
 import ee.taltech.iti0202.stock.exceptions.StockException;
 import ee.taltech.iti0202.stock.product.Product;
 
@@ -7,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The stock class.
@@ -31,7 +31,6 @@ public class Stock {
 
     /**
      * Create a new stock with the given name and the max capacity for the products.
-     * 
      * @param name the name of the stock.
      * @param maxCapacity max amount of products allowed in the stock.
      */
@@ -81,9 +80,7 @@ public class Stock {
     /**
      * Remove a product from a stock, return the product that got removed
      * if stock has a given product.
-     *
      * Use getProduct() method to get the product.
-     * 
      * If there is nothing to remove, return Optional.empty()
      *
      * @param name Name of the product to be removed
