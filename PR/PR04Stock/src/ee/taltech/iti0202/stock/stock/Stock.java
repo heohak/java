@@ -142,7 +142,7 @@ public class Stock {
      * @return boolean
      */
     public boolean isFull() {
-        return allProducts.size() != this.maxCapacity;
+        return allProducts.size() >= this.maxCapacity;
     }
 
 }
