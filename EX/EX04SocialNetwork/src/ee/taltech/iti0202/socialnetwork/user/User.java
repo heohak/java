@@ -1,4 +1,4 @@
-package ee.taltech.iti0202.socialnetwork.user.User;
+package ee.taltech.iti0202.socialnetwork.user;
 public class User {
     private String name;
     private Integer age;

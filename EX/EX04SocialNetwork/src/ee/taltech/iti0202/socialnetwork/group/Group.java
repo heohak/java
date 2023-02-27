@@ -1,6 +1,6 @@
 package ee.taltech.iti0202.socialnetwork.group;
 import ee.taltech.iti0202.socialnetwork.message.Message;
-import ee.taltech.iti0202.socialnetwork.user.User.User;
+import ee.taltech.iti0202.socialnetwork.user.User;
 
 import java.util.*;
 

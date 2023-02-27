@@ -1,6 +1,6 @@
 package ee.taltech.iti0202.socialnetwork.message;
 
-import ee.taltech.iti0202.socialnetwork.user.User.User;
+import ee.taltech.iti0202.socialnetwork.user.User;
 
 public class Message {
     private String title;
