@@ -1,7 +1,7 @@
 package ee.taltech.iti0202.socialnetwork.SocialNetwork;
-    import ee.taltech.iti0202.socialnetwork.feed.Feed.Feed;
-    import ee.taltech.iti0202.socialnetwork.group.Group.Group;
-    import ee.taltech.iti0202.socialnetwork.message.Message.Message;
+    import ee.taltech.iti0202.socialnetwork.feed.Feed;
+    import ee.taltech.iti0202.socialnetwork.group.Group;
+    import ee.taltech.iti0202.socialnetwork.message.Message;
     import ee.taltech.iti0202.socialnetwork.user.User.User;
 
     import java.util.*;
