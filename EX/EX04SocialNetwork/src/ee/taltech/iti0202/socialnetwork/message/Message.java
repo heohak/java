@@ -13,14 +13,26 @@ public class Message {
         this.author = author;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     *
+     * @return User
+     */
     public User getAuthor() {
         return author;
     }

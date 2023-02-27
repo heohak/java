@@ -15,10 +15,18 @@ public class Feed {
         this.feedMessages = feedMessages;
     }
 
+    /**
+     *
+     * @return User
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @return Set
+     */
     public Set<Message> getMessages() {
         return feedMessages;
     }
