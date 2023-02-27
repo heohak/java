@@ -1,4 +1,4 @@
-package ee.taltech.iti0202.socialnetwork.SocialNetwork;
+package ee.taltech.iti0202.socialnetwork.socialnetwork;
     import ee.taltech.iti0202.socialnetwork.feed.Feed;
     import ee.taltech.iti0202.socialnetwork.group.Group;
     import ee.taltech.iti0202.socialnetwork.message.Message;
