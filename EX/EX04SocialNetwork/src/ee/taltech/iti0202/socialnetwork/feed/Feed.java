@@ -19,7 +19,7 @@ public class Feed {
         return user;
     }
 
-    public Set<Message> getFeedMessages() {
+    public Set<Message> getMessages() {
         return feedMessages;
     }
 }
