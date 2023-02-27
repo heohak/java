@@ -10,6 +10,11 @@ public class Feed {
     private User user;
     private Set<Message> feedMessages = new HashSet<>();
 
+    /**
+     *
+     * @param user
+     * @param feedMessages
+     */
     public Feed(User user, Set<Message> feedMessages) {
         this.user = user;
         this.feedMessages = feedMessages;
