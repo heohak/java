@@ -7,7 +7,7 @@ import ee.taltech.iti0202.socialnetwork.user.User;
 import java.util.*;
 
 public class SocialNetwork {
-    Set<Group> networkGroups = new HashSet<>();
+    private Set<Group> networkGroups = new HashSet<>();
 
     public void registerGroup(Group group) {
         networkGroups.add(group);
