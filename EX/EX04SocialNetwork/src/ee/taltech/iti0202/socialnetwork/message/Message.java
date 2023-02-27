@@ -20,7 +20,7 @@ public class Message {
     }
 
     /**
-     * This is.
+     * This is something.
      * @return String
      */
     public String getTitle() {
