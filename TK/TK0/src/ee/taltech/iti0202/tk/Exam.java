@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.tk;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Exam {
 
@@ -16,13 +17,19 @@ public class Exam {
      * centeredAverage([-10, -4, -2, -4, -2, 0]) → -3
      */
     public static int centeredAverage(List<Integer> nums) {
-        Collections.sort(nums);
-        nums.remove(0);
-        nums.remove(nums.size()-1);
-        int sumOfList = nums.stream().mapToInt(Integer::intValue).sum();
-        return sumOfList / nums.size();
+        int sum = nums.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        int min = nums.stream()
+                .mapToInt(Integer::intValue)
+                .min()
+                .getAsInt();
+        int max = nums.stream()
+                .mapToInt(Integer::intValue)
+                .max()
+                .getAsInt();
+        return (sum - min - max) / (nums.size() - 2);
     }
-
 
     /**
      * Given 3 ints, a b c, return the sum of their rounded values.
@@ -70,12 +77,7 @@ public class Exam {
 
 
     public static void main(String[] args) {
-        List<Integer> list1 = new ArrayList<>();
-        list1.add(2);
-        list1.add(3);
-        list1.add(1);
-        list1.add(6);
-        list1.add(5);
+        List<Integer> list1 = Arrays.asList(2, 3, 1, 6, 5);
         System.out.println(centeredAverage(list1));
     }
 }
