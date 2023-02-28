@@ -32,6 +32,20 @@ public class Exam {
     }
 
     /**
+     *
+     * @param num
+     * @return int
+     */
+    public static int round10(int num) {
+        int remainder = num % 10;
+        if (remainder >= 5) {
+            return num + (10 - remainder);
+        } else {
+            return num - remainder;
+        }
+    }
+
+    /**
      * Given 3 ints, a b c, return the sum of their rounded values.
      * We'll round an int value up to the next multiple of 10
      * if its rightmost digit is 5 or more, so 15 rounds up to 20.
@@ -43,7 +57,7 @@ public class Exam {
      * roundSum(6, 4, 4) => 10
      */
     public static int roundSum(int a, int b, int c) {
-        return -1;
+        return round10(a) + round10(b) + round10(c);
     }
 
 
@@ -77,7 +91,9 @@ public class Exam {
 
 
     public static void main(String[] args) {
-        List<Integer> list1 = Arrays.asList(2, 3, 1, 6, 5);
-        System.out.println(centeredAverage(list1));
+        int a = 16;
+        int b = 18;
+        int c = 12;
+        System.out.println(roundSum(a, b, c));
     }
 }
