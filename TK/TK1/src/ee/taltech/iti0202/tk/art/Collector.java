@@ -1,4 +1,4 @@
-package ee.taltech.iti0202.tk;
+package ee.taltech.iti0202.tk.art;
 
 
 import java.util.ArrayList;
