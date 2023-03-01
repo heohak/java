@@ -61,8 +61,8 @@ public class Exam {
      repeatEnd("Hello", 1) → "o"
      */
     public static String repeatEnd(String str, int n) {
-        return "";
-
+        String substring = str.substring(str.length() - n);
+        return substring.repeat(n);
     }
 
     /**
