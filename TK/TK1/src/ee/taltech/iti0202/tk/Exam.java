@@ -23,34 +23,14 @@ public class Exam {
      *
      */
     public static List<String> compileWords(List<String> parts, List<String> words) {
-        Set<String> uniqueWords = new HashSet<>();
-        for (int i = 0; i < words.size(); i++) {
-            for (int j = i + 1; j < words.size(); j++) {
-                String word1 = words.get(i);
-                String word2 = words.get(j);
-                boolean isValidWord = true;
-                Set<String> usedParts = new HashSet<>();
-                for (String part : parts) {
-                    int index1 = word1.indexOf(part);
-                    int index2 = word2.indexOf(part);
-                    if (index1 == -1 || index2 == -1) {
-                        isValidWord = false;
-                        break;
-                    }
-                    if (usedParts.contains(part)) {
-                        isValidWord = false;
-                        break;
-                    }
-                    usedParts.add(part);
-                    word1 = word1.substring(0, index1) + word1.substring(index1 + part.length());
-                    word2 = word2.substring(0, index2) + word2.substring(index2 + part.length());
-                }
-                if (isValidWord && word1.isEmpty() && word2.isEmpty()) {
-                    uniqueWords.add(words.get(i) + words.get(j));
-                }
+        Set<String> filteredWords = new HashSet<>();
+        for (String word : words) {
+            String[] partsOfWord = word.split("(?<=\\G.{2})"); // split the word into two parts
+            if (parts.contains(partsOfWord[0]) && parts.contains(partsOfWord[1])) {
+                filteredWords.add(word);
             }
         }
-        return new ArrayList<>(uniqueWords);
+        return new ArrayList<>(filteredWords);
     }
 
 
