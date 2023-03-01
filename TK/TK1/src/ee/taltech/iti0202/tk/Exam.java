@@ -1,6 +1,10 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Exam {
 
@@ -51,15 +55,16 @@ public class Exam {
      * blackjack(19, 22) → 19
      */
     public static int blackjack(int a, int b) {
-        if (a > 21 && b > 21) {
+        final int twenyOne = 21;
+        if (a > twenyOne && b > twenyOne) {
             return 0;
-        } else if (a > 21) {
+        } else if (a > twenyOne) {
             return b;
-        } else if (b > 21) {
+        } else if (b > twenyOne) {
             return a;
         } else {
-            int diffA = 21 - a;
-            int diffB = 21 - b;
+            int diffA = twenyOne - a;
+            int diffB = twenyOne - b;
             if (diffA < diffB) {
                 return a;
             } else {
