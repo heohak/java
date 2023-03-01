@@ -37,7 +37,13 @@ public class Exam {
         int secondNum = 21 - b;
         if (a > 21 && b > 21) {
             return 0;
-        } else if (firstNum < secondNum) {
+        } if (a > 21 && b <= 21) {
+            return b;
+
+        } if (b > 21 && a <= 21) {
+            return a;
+        }
+        else if (firstNum < secondNum) {
             return firstNum;
         } else {
             return secondNum;
