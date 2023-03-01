@@ -1,7 +1,6 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Exam {
 
@@ -20,7 +19,26 @@ public class Exam {
      *
      */
     public static List<String> compileWords(List<String> parts, List<String> words) {
-        return null;
+        List<String> result = new ArrayList<>();
+        for (String word : words) {
+            boolean isValid = true;
+            Set<String> usedParts = new HashSet<>();
+            for (String part : parts) {
+                if (word.contains(part)) {
+                    if (!usedParts.contains(part)) {
+                        usedParts.add(part);
+                    } else {
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            if (isValid && usedParts.size() == 2) {
+                result.add(word);
+            }
+        }
+        return result;
+
     }
 
 
