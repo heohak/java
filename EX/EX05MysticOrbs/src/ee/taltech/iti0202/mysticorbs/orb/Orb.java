@@ -12,7 +12,7 @@ public class Orb {
 
     public void charge(String resource, int amount) {
         int addedAmount = resource.length() * amount;
-        if (!resource.equals("dust") && !resource.isBlank()) {
+        if (!resource.equals("dust") && !resource.isBlank() && amount > 0) {
             this.energy += addedAmount;
 
         }
