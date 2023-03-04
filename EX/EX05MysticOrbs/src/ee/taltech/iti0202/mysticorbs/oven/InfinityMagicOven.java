@@ -8,15 +8,28 @@ import java.util.Optional;
 
 public class InfinityMagicOven extends MagicOven {
 
+    /**
+     *
+     * @param name
+     * @param resourceStorage
+     */
     public InfinityMagicOven(String name, ResourceStorage resourceStorage) {
         super(name, resourceStorage);
     }
 
+    /**
+     *
+     * @return boolean
+     */
     @Override
     public boolean isBroken() {
         return false;
     }
 
+    /**
+     *
+     * @return Optional
+     */
     @Override
     public Optional<Orb> craftOrb() {
         Orb someOrb = new Orb(this.name);

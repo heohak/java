@@ -17,17 +17,36 @@ public class OrbFactory {
     List<Optional<Orb>> orbs = new ArrayList<Optional<Orb>>();
 
 
+    /**
+     *
+     * @param resourceStorage
+     */
     public OrbFactory(ResourceStorage resourceStorage) {
         this.resourceStorage = resourceStorage;
     }
+
+    /**
+     *
+     * @param oven
+     */
     public void addOven(Oven oven) {
         if (!ovens.contains(oven) && this.resourceStorage == oven.getResourceStorage()) {
             ovens.add(oven);
         }
     }
+
+    /**
+     *
+     * @return List
+     */
     public List<Oven> getOvens() {
         return ovens;
     }
+
+    /**
+     *
+     * @return List
+     */
     public List<Orb> getAndClearProducedOrbsList() {
         currentList = new ArrayList<>();
         currentList.addAll(orbs.stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList()));
@@ -35,6 +54,10 @@ public class OrbFactory {
         return currentList;
     }
 
+    /**
+     *
+     * @return int
+     */
     public int produceOrbs() {
         int producedOrbs = 0;
         currentList = new ArrayList<>();
@@ -52,6 +75,11 @@ public class OrbFactory {
         return producedOrbs;
     }
 
+    /**
+     *
+     * @param cycles
+     * @return int
+     */
     public int produceOrbs(int cycles) {
         int totalProducedOrbs = 0;
         currentList = new ArrayList<>();

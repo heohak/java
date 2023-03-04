@@ -11,15 +11,28 @@ public class MagicOven extends Oven {
     Integer count = 0;
 
 
+    /**
+     *
+     * @param name
+     * @param resourceStorage
+     */
     public MagicOven(String name, ResourceStorage resourceStorage) {
         super(name, resourceStorage);
     }
 
+    /**
+     *
+     * @return boolean
+     */
     @Override
     public boolean isBroken() {
         return createdOrbs >= 5;
     }
 
+    /**
+     *
+     * @return Optional
+     */
     @Override
     public Optional<Orb> craftOrb() {
         Orb someOrb = new Orb(this.name);
