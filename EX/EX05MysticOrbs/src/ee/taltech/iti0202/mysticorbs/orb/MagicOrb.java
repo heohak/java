@@ -10,7 +10,7 @@ public class MagicOrb extends Orb {
     @Override
     public void charge(String resource, int amount) {
         int addedAmount = resource.length() * amount * 2;
-        if (!resource.equals("dust") && !resource.isBlank() && amount > 0) {
+        if (!resource.toLowerCase().equals("dust") && !resource.isBlank() && amount > 0) {
             this.energy += addedAmount;
 
         }
