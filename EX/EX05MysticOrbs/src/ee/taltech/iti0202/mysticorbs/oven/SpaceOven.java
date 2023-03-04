@@ -19,26 +19,25 @@ public class SpaceOven extends Oven {
 
     @Override
     public Optional<Orb> craftOrb() {
-        Orb orb1 = new Orb(this.name);
-        SpaceOrb space1 = new SpaceOrb(this.name);
+        int starFragments = resourceStorage.getResourceAmount("star fragment");
+        int meteoriteStones = resourceStorage.getResourceAmount("meteorite stone");
+        int pearls = resourceStorage.getResourceAmount("pearl");
+        int silver = resourceStorage.getResourceAmount("silver");
 
-        if (this.isBroken() || !resourceStorage.hasEnoughResource("meteorite stone", 1) || !resourceStorage.hasEnoughResource("star fragment", 15)) {
-            if (!this.isBroken() && resourceStorage.hasEnoughResource("pearl", 1) && resourceStorage.hasEnoughResource("silver", 1)) {
-                this.resourceStorage.takeResource("pearl", 1);
-                this.resourceStorage.takeResource("silver", 1);
-                orb1.charge("pearl", 1);
-                orb1.charge("silver", 1);
-                createdOrbs++;
-                return Optional.of(orb1);
-            }
-            else {
-                return Optional.empty();
-            }
+        if (starFragments >= 15 && meteoriteStones >= 1 && !this.isBroken()) {
+            resourceStorage.takeResource("star fragment", 15);
+            resourceStorage.takeResource("meteorite stone", 1);
+            createdOrbs++;
+            return Optional.of(new SpaceOrb(this.name));
+        } else if (pearls >= 1 && silver >= 1) {
+            resourceStorage.takeResource("pearl", 1);
+            resourceStorage.takeResource("silver", 1);
+            createdOrbs++;
+            return Optional.of(new Orb(this.name));
+        } else {
+            return Optional.empty();
         }
-        this.resourceStorage.takeResource("meteorite stone", 1);
-        this.resourceStorage.takeResource("star fragment", 15);
-        createdOrbs++;
-        return Optional.of(space1);
+
 
     }
 }
