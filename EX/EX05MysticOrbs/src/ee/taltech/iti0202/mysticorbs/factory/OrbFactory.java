@@ -20,7 +20,7 @@ public class OrbFactory {
         this.resourceStorage = resourceStorage;
     }
     public void addOven(Oven oven) {
-        if (!ovens.contains(oven) && this.resourceStorage.equals(oven.getResourceStorage())) {
+        if (!ovens.contains(oven) && this.resourceStorage == oven.getResourceStorage()) {
             ovens.add(oven);
         }
     }
@@ -34,15 +34,13 @@ public class OrbFactory {
     }
 
     public int produceOrbs() {
-        int producedOrbsCount = 0;
-        for (Oven oven : ovens) {
-            Optional<Orb> orb = oven.craftOrb();
-            if (orb != null) {
-                orbs.add(orb);
-                producedOrbsCount++;
-            }
+        if (ovens.size() > 0) {
+        for (Oven o: ovens) {
+            Optional<Orb> orb = o.craftOrb();
+            orbs.add(orb);
+            return orbs.size();
         }
-        return producedOrbsCount;
+    }return 0;
     }
 
     public int produceOrbs(int cycles) {
