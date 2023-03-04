@@ -7,8 +7,8 @@ import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 import java.util.Optional;
 
 public class SpaceOven extends Oven {
-    private final int MAX_25 = 25;
-    private final int FIFTEEN = 15;
+    private final int max_25 = 25;
+    private final int fifteen = 15;
 
     /**
      *
@@ -25,7 +25,7 @@ public class SpaceOven extends Oven {
      */
     @Override
     public boolean isBroken() {
-        return createdOrbs >= MAX_25;
+        return createdOrbs >= max_25;
     }
 
     /**
@@ -39,8 +39,8 @@ public class SpaceOven extends Oven {
         int pearls = resourceStorage.getResourceAmount("pearl");
         int silver = resourceStorage.getResourceAmount("silver");
 
-        if (starFragments >= FIFTEEN && meteoriteStones >= 1 && !this.isBroken()) {
-            resourceStorage.takeResource("star fragment", 15);
+        if (starFragments >= fifteen && meteoriteStones >= 1 && !this.isBroken()) {
+            resourceStorage.takeResource("star fragment", fifteen);
             resourceStorage.takeResource("meteorite stone", 1);
             createdOrbs++;
             return Optional.of(new SpaceOrb(this.name));

@@ -6,7 +6,7 @@ import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 import java.util.Optional;
 
 public class Oven {
-    private final int FIFTEEN = 15;
+    private final int fifteen = 15;
 
     protected String name;
     protected ResourceStorage resourceStorage;
@@ -52,7 +52,7 @@ public class Oven {
      * @return boolean
      */
     public boolean isBroken() {
-        return createdOrbs >= FIFTEEN;
+        return createdOrbs >= fifteen;
     }
 
     /**
