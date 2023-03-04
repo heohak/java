@@ -34,13 +34,13 @@ public class OrbFactory {
     }
 
     public int produceOrbs() {
-        if (ovens.size() > 0) {
-        for (Oven o: ovens) {
-            Optional<Orb> orb = o.craftOrb();
-            orbs.add(orb);
-            return orbs.size();
+        for (Oven oven : ovens) {
+            if (!oven.isBroken()) {
+                Optional<Orb> orb = oven.craftOrb();
+                orbs.add(orb);
+            }
         }
-    }return 0;
+        return orbs.size();
     }
 
     public int produceOrbs(int cycles) {
