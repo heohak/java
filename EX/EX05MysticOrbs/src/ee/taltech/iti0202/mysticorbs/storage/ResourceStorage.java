@@ -31,7 +31,11 @@ public class ResourceStorage {
     }
 
     public boolean hasEnoughResource(String resource, int amount) {
-        return resources.get(resource.toLowerCase()) >= amount;
+        if (amount < 1) {
+            return false;
+        }
+
+        return resources.getOrDefault(resource.toLowerCase(), 0) >= amount;
     }
 
     public boolean takeResource(String resource, int amount) {
