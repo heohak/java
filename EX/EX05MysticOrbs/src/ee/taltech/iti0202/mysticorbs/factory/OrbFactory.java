@@ -1,0 +1,55 @@
+package ee.taltech.iti0202.mysticorbs.factory;
+
+import ee.taltech.iti0202.mysticorbs.orb.Orb;
+import ee.taltech.iti0202.mysticorbs.oven.Oven;
+import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class OrbFactory {
+    private ResourceStorage resourceStorage;
+    private List<Oven> ovens = new ArrayList<>();
+    private List<Orb> currentList;
+
+    List<Optional<Orb>> orbs = new ArrayList<Optional<Orb>>();
+
+
+    public OrbFactory(ResourceStorage resourceStorage) {
+        this.resourceStorage = resourceStorage;
+    }
+    public void addOven(Oven oven) {
+        if (!ovens.contains(oven) && this.resourceStorage.equals(oven.getResourceStorage())) {
+            ovens.add(oven);
+        }
+    }
+    public List<Oven> getOvens() {
+        return ovens;
+    }
+    public List<Orb> getAndClearProducedOrbsList() {
+        currentList = new ArrayList<>();
+        orbs.clear();
+        return currentList;
+    }
+
+    public int produceOrbs() {
+        for (Oven o: ovens) {
+            Optional<Orb> orb = o.craftOrb();
+            orbs.add(orb);
+        }
+        return orbs.size();
+    }
+
+    public int produceOrbs(int cycles) {
+        int totalProducedOrbsCount = 0;
+        for (int i = 0; i < cycles; i++) {
+            totalProducedOrbsCount += produceOrbs();
+        }
+        return totalProducedOrbsCount;
+
+
+    }
+
+
+}
