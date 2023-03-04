@@ -47,11 +47,17 @@ public class OrbFactory {
     }
 
     public int produceOrbs(int cycles) {
-        int totalProducedOrbsCount = 0;
+        int totalProduced = 0;
         for (int i = 0; i < cycles; i++) {
-            totalProducedOrbsCount += produceOrbs();
+            int producedThisCycle = produceOrbs();
+            totalProduced += producedThisCycle;
+            if (producedThisCycle == 0) {
+                // If no orbs were produced this cycle, stop producing
+                break;
+            }
         }
-        return totalProducedOrbsCount;
+        return totalProduced;
+
 
 
     }
