@@ -7,7 +7,7 @@ public class ResourceStorage {
     private Map<String, Integer> resources = new HashMap<>();
 
     public boolean isEmpty() {
-        return resources.isEmpty();
+        return resources.isEmpty() || resources.values().stream().allMatch(amount -> amount == 0);
 
     }
 
