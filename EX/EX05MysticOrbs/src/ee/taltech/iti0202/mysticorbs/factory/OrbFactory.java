@@ -54,12 +54,23 @@ public class OrbFactory {
 
     public int produceOrbs(int cycles) {
         int totalProducedOrbs = 0;
+        currentList = new ArrayList<>();
         for (int i = 0; i < cycles; i++) {
-            totalProducedOrbs += produceOrbs();
+            int producedOrbs = 0;
+            for (Oven oven : ovens) {
+                if (!oven.isBroken()) {
+                    Optional<Orb> orb = oven.craftOrb();
+                    if (orb.isPresent()) {
+                        currentList.add(orb.get());
+                        producedOrbs++;
+                    }
+                }
+            }
+            totalProducedOrbs += producedOrbs;
         }
+        orbs.clear();
+        orbs.addAll(currentList.stream().map(Optional::of).collect(Collectors.toList()));
         return totalProducedOrbs;
-
-
 
     }
 
