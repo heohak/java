@@ -12,11 +12,11 @@ public class ResourceStorage {
     }
 
     public void addResource(String resource, int amount) {
-        if (resources.containsKey(resource.toLowerCase()) && !resource.toLowerCase().isBlank()) {
+        if (resources.containsKey(resource.toLowerCase()) && !resource.toLowerCase().isBlank() && amount > 0) {
             resources.merge(resource.toLowerCase(), amount, Integer::sum);
         }
         else {
-            if (!resource.isBlank()) {
+            if (!resource.toLowerCase().isBlank() && amount > 0) {
                 resources.put(resource.toLowerCase(), amount);
             }
         }
