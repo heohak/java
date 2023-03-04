@@ -36,29 +36,28 @@ public class OrbFactory {
     }
 
     public int produceOrbs() {
-        if (ovens.size() > 0) {
-            for (Oven oven : ovens) {
-                if (!oven.isBroken()) {
-                    Optional<Orb> orb = oven.craftOrb();
-                    orbs.add(orb);
+        int producedOrbs = 0;
+        currentList = new ArrayList<>();
+        for (Oven oven : ovens) {
+            if (!oven.isBroken()) {
+                Optional<Orb> orb = oven.craftOrb();
+                if (orb.isPresent()) {
+                    currentList.add(orb.get());
+                    producedOrbs++;
                 }
             }
-            return ovens.size();
         }
-        return 0;
+        orbs.clear();
+        orbs.addAll(currentList.stream().map(Optional::of).collect(Collectors.toList()));
+        return producedOrbs;
     }
 
     public int produceOrbs(int cycles) {
-        int totalProduced = 0;
+        int totalProducedOrbs = 0;
         for (int i = 0; i < cycles; i++) {
-            int producedThisCycle = produceOrbs();
-            totalProduced += producedThisCycle;
-            if (producedThisCycle == 0) {
-                // If no orbs were produced this cycle, stop producing
-                break;
-            }
+            totalProducedOrbs += produceOrbs();
         }
-        return totalProduced;
+        return totalProducedOrbs;
 
 
 
