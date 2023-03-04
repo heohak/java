@@ -7,7 +7,7 @@ import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 import java.util.Optional;
 
 public class SpaceOven extends Oven {
-    private final int max_25 = 25;
+    private final int max = 25;
     private final int fifteen = 15;
 
     /**
@@ -25,7 +25,7 @@ public class SpaceOven extends Oven {
      */
     @Override
     public boolean isBroken() {
-        return createdOrbs >= max_25;
+        return createdOrbs >= max;
     }
 
     /**
