@@ -1,4 +1,5 @@
 package ee.taltech.iti0202.tk.shop;
+import java.util.*;
 
 public class Product {
     private String name;

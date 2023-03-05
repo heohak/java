@@ -3,7 +3,7 @@ package ee.taltech.iti0202.tk.shop;
 import java.util.*;
 
 public class Shop {
-    private List<Product> products = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
 
     boolean addProduct(Product product) {
         if (product.getPrice() < 0) {
