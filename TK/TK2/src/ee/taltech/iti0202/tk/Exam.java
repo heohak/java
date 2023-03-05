@@ -72,7 +72,7 @@ public class Exam {
             map.put("a", "x");
             map.put("b", "x");
         }
-        return null;
+        return map;
     }
 
 
