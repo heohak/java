@@ -49,10 +49,6 @@ public class MagicOven extends Oven implements Fixable {
     public Optional<Orb> craftOrb() {
         Orb someOrb = new Orb(this.name);
         MagicOrb magic1 = new MagicOrb(this.name);
-        if (createdOrbs >= 5) {
-            setBroken(true);
-            return Optional.empty();
-        }
 
         if (count % 2 == 0) {
             if (resourceStorage.hasEnoughResource("gold", 1) && resourceStorage.hasEnoughResource("dust", 3)) {
