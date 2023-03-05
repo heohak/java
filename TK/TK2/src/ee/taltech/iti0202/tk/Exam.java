@@ -16,7 +16,19 @@ public class Exam {
      * closestInteger(new int[] {4}, 4) => -1
      */
     public static int closestInteger(int[] l, int n) {
-        return -1;
+        int closest = -1;
+        int closestDist = Integer.MAX_VALUE;
+        for (int i = 0; i < l.length; i++) {
+            int dist = Math.abs(l[i] - n);
+            if (dist < closestDist && dist != 0) {
+                closest = l[i];
+                closestDist = dist;
+            } else if (dist == closestDist && closest != -1) {
+                closest = l[i];
+            }
+        }
+        return closest;
+
     }
     
     /**
@@ -55,7 +67,14 @@ public class Exam {
      * oneTwo("a") => ""
      */
     public static String oneTwo(String str) {
-        return null;
+        StringBuilder result = new StringBuilder();
+        int len = str.length();
+        for (int i = 0; i < len - 2; i += 3) {
+            result.append(str.charAt(i + 1));
+            result.append(str.charAt(i + 2));
+            result.append(str.charAt(i));
+        }
+        return result.toString();
     }
 
     /**
@@ -77,6 +96,5 @@ public class Exam {
         }
         return map;
     }
-
 
 }
