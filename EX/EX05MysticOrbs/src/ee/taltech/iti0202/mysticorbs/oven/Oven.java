@@ -5,12 +5,15 @@ import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 
 import java.util.Optional;
 
-public class Oven {
+public class Oven implements Comparable<Oven>  {
+    public static final int MAX_REPAIRS = 3;
+    private boolean isBroken;
     private final int fifteen = 15;
 
     protected String name;
     protected ResourceStorage resourceStorage;
     protected Integer createdOrbs = 0;
+    protected int timesFixed = 0;
 
     /**
      *
@@ -20,6 +23,7 @@ public class Oven {
     public Oven(String name, ResourceStorage resourceStorage) {
         this.name = name;
         this.resourceStorage = resourceStorage;
+        this.isBroken = false;
     }
 
     /**
@@ -52,7 +56,10 @@ public class Oven {
      * @return boolean
      */
     public boolean isBroken() {
-        return createdOrbs >= fifteen;
+        return isBroken;
+    }
+    public void setBroken(boolean isBroken) {
+        this.isBroken = isBroken;
     }
 
     /**
@@ -70,6 +77,10 @@ public class Oven {
             orb1.charge("pearl", 1);
             orb1.charge("silver", 1);
             createdOrbs++;
+            if (createdOrbs >= 15) {
+                setBroken(true);
+
+            }
             return Optional.of(orb1);
 
     } else {
@@ -79,4 +90,67 @@ public class Oven {
     }
 
 
+    @Override
+    public int compareTo(Oven o) {
+        // Compare broken status
+        if (this.isBroken && !o.isBroken) {
+            return -1;
+        } else if (!this.isBroken && o.isBroken) {
+            return 1;
+        }
+
+        // Compare oven type
+        if (this instanceof SpaceOven && !(o instanceof SpaceOven)) {
+            return 1;
+        } else if (!(this instanceof SpaceOven) && o instanceof SpaceOven) {
+            return -1;
+        } else if (this instanceof MagicOven && !(o instanceof MagicOven)) {
+            return 1;
+        } else if (!(this instanceof MagicOven) && o instanceof MagicOven) {
+            return -1;
+        } else if (!(this instanceof SpaceOven) && !(this instanceof MagicOven)
+                && (o instanceof SpaceOven || o instanceof MagicOven)) {
+            return -1;
+        }
+
+        // Compare next magic ball
+        if (this instanceof MagicOven && o instanceof MagicOven) {
+            MagicOven m1 = (MagicOven) this;
+            MagicOven m2 = (MagicOven) o;
+            if (m1.getNextMagicBall() && !m2.getNextMagicBall()) {
+                return -1;
+            } else if (!m1.getNextMagicBall() && m2.getNextMagicBall()) {
+                return 1;
+            }
+        }
+
+        // Compare InfinityMagicOven
+        if (this instanceof InfinityMagicOven && !(o instanceof InfinityMagicOven)) {
+            return 1;
+        } else if (!(this instanceof InfinityMagicOven) && o instanceof InfinityMagicOven) {
+            return -1;
+        }
+
+        // Compare produced balls
+        if (this.createdOrbs < o.createdOrbs) {
+            return -1;
+        } else if (this.createdOrbs > o.createdOrbs) {
+            return 1;
+        }
+
+        // Compare names
+        return this.name.compareTo(o.name);
+
+    }
+
+    public boolean canBeRepaired() {
+        if (!(timesFixed >= MAX_REPAIRS)) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getTimesFixed() {
+        return timesFixed;
+    }
 }

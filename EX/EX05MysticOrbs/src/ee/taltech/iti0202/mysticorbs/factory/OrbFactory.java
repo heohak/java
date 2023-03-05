@@ -16,6 +16,8 @@ public class OrbFactory {
 
     List<Optional<Orb>> orbs = new ArrayList<Optional<Orb>>();
 
+    List<Oven> unrepairableOvens = new ArrayList<>();
+
 
     /**
      *
@@ -101,6 +103,19 @@ public class OrbFactory {
         return totalProducedOrbs;
 
     }
+    public List<Oven> getOvensThatCannotBeFixed() {
+        for (Oven oven : ovens) {
+            if (!oven.canBeRepaired() || oven.getTimesFixed() >= Oven.MAX_REPAIRS) {
+                unrepairableOvens.add(oven);
+            }
+        }
+        return unrepairableOvens;
+    }
+
+    public void getRidOfOvensThatCannotBeFixed() {
+        ovens.removeAll(getOvensThatCannotBeFixed());
+    }
+
 
 
 }
