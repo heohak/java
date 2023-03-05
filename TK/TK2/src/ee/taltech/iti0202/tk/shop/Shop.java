@@ -5,7 +5,7 @@ import java.util.*;
 public class Shop {
     List<Product> products = new ArrayList<>();
 
-    boolean addProduct(Product product) {
+    public boolean addProduct(Product product) {
         if (product.getPrice() < 0) {
             return false;
         }
@@ -18,7 +18,7 @@ public class Shop {
         return true;
     }
 
-    Optional<Product> sellProduct(String name, int maxPrice) {
+    public Optional<Product> sellProduct(String name, int maxPrice) {
         Optional<Product> optionalProduct = products.stream()
                 .filter(product -> product.getName() != null && product.getName().equals(name) && product.getPrice() <= maxPrice)
                 .max(Comparator.comparingInt(Product::getPrice));
@@ -28,7 +28,7 @@ public class Shop {
 
     }
 
-    List<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 }
