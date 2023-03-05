@@ -28,6 +28,9 @@ public class Exam {
      * loneSum(3, 3, 3) → 0
      */
     public static int loneSum(int a, int b, int c) {
+        if (a == b && b == c) {
+            return 0;
+        }
         if (a == b) {
             return c;
         } else if (a == c) {
