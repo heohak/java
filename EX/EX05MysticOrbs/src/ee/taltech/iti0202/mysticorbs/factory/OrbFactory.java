@@ -104,6 +104,11 @@ public class OrbFactory {
         return totalProducedOrbs;
 
     }
+
+    /**
+     *
+     * @return List
+     */
     public List<Oven> getOvensThatCannotBeFixed() {
         for (Oven oven : ovens) {
             if (!oven.canBeRepaired() || oven.getTimesFixed() >= Oven.MAX_REPAIRS) {
@@ -113,10 +118,16 @@ public class OrbFactory {
         return unrepairableOvens;
     }
 
+    /**
+     *
+     */
     public void getRidOfOvensThatCannotBeFixed() {
         ovens.removeAll(getOvensThatCannotBeFixed());
     }
 
+    /**
+     *
+     */
     public void optimizeOvensOrder() {
         Collections.sort(ovens);
     }

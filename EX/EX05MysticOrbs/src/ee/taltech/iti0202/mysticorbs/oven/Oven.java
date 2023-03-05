@@ -77,7 +77,7 @@ public class Oven implements Comparable<Oven>  {
             orb1.charge("pearl", 1);
             orb1.charge("silver", 1);
             createdOrbs++;
-            if (createdOrbs >= 15) {
+            if (createdOrbs >= fifteen) {
                 setBroken(true);
 
             }
@@ -90,6 +90,11 @@ public class Oven implements Comparable<Oven>  {
     }
 
 
+    /**
+     *
+     * @param o the object to be compared.
+     * @return int
+     */
     @Override
     public int compareTo(Oven o) {
         // Compare broken status
@@ -143,6 +148,10 @@ public class Oven implements Comparable<Oven>  {
 
     }
 
+    /**
+     *
+     * @return boolean
+     */
     public boolean canBeRepaired() {
         if (!(timesFixed >= MAX_REPAIRS)) {
             return true;
@@ -150,6 +159,10 @@ public class Oven implements Comparable<Oven>  {
         return false;
     }
 
+    /**
+     *
+     * @return int
+     */
     public int getTimesFixed() {
         return timesFixed;
     }

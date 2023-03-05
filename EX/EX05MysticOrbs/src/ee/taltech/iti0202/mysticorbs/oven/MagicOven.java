@@ -13,10 +13,10 @@ public class MagicOven extends Oven implements Fixable {
     Integer count = 0;
     private boolean isBroken;
     private int timesFixed = 0;
-    private final int INITIAL_CLAY_AMOUNT = 25;
-    private final int INITIAL_FREEZING_POWDER_AMOUNT = 100;
-    private int clayAmount = INITIAL_CLAY_AMOUNT;
-    private int freezingPowderAmount = INITIAL_FREEZING_POWDER_AMOUNT;
+    private final int initialClayAmount = 25;
+    private final int initialFreezingPowderAmount = 100;
+    private int clayAmount = initialClayAmount;
+    private int freezingPowderAmount = initialFreezingPowderAmount;
 
 
     /**
@@ -40,11 +40,16 @@ public class MagicOven extends Oven implements Fixable {
 
     /**
      *
-     * @return Optional
+     * @param isBroken
      */
     public void setBroken(boolean isBroken) {
         this.isBroken = isBroken;
     }
+
+    /**
+     *
+     * @return Optional
+     */
     @Override
     public Optional<Orb> craftOrb() {
         Orb someOrb = new Orb(this.name);
@@ -96,8 +101,8 @@ public class MagicOven extends Oven implements Fixable {
         getResourceStorage().takeResource("clay", clayAmount);
         getResourceStorage().takeResource("freezing powder", freezingPowderAmount);
         timesFixed++;
-        clayAmount += INITIAL_CLAY_AMOUNT;
-        freezingPowderAmount += INITIAL_FREEZING_POWDER_AMOUNT;
+        clayAmount += initialClayAmount;
+        freezingPowderAmount += initialFreezingPowderAmount;
         setBroken(false);
 
 
@@ -109,11 +114,6 @@ public class MagicOven extends Oven implements Fixable {
     }
 
     public boolean getNextMagicBall() {
-        if (count % 2 != 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return count % 2 != 0;
     }
 }
