@@ -48,11 +48,10 @@ public class Exam {
     }
 
     /**
-     * Given a string, compute a new string by moving the first char to come after the next two chars, 
+     * Given a string, compute a new string by moving the first char to come after the next two chars,
      * so "abc" yields "bca".
-     * Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd". 
+     * Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd".
      * Ignore any group of fewer than 3 chars at the end.
-     *
      * oneTwo("abc") => "bca"
      * oneTwo("tca") => "cat"
      * oneTwo("tcagdo") => "catdog"
@@ -72,7 +71,7 @@ public class Exam {
 
     /**
      * Modify and return the given map as follows:
-     * if exactly one of the keys "a" or "b" exists in the map (but not both), 
+     * if exactly one of the keys "a" or "b" exists in the map (but not both),
      * set the other to have that same value in the map.
      * mapAXorB({"a": "aaa", "c": "cake"}) => {"a": "aaa", "b": "aaa", "c": "cake"}
      * mapAXorB({"b": "bbb", "c": "cake"}) => {"a": "bbb", "b": "bbb", "c": "cake"}
