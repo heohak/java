@@ -1,19 +1,13 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.List;
 import java.util.Map;
 
 public class Exam {
+
     /**
-     * Given a list of positive integers, l and a positive integer, n, find from the list l, the integer that is closest to the
-     * integer n, but not exactly the same, as n.
-     * If there are multiple integers in the list that are closest to n, then return
-     * the one with the greatest index (the rightmost of the suitable integers).
-     * If no suitable integer is within the list (if the list is empty, or the only integer in the list == n), return -1
-     * 
-     * closestInteger(new int[] {4, 2, 7}, 3) => 2
-     * closestInteger(new int[] {4, 2, 7}, 2) => 4
-     * closestInteger(new int[] {4}, 4) => -1
+     * @param l
+     * @param n
+     * @return int
      */
     public static int closestInteger(int[] l, int n) {
         int closest = -1;
@@ -30,14 +24,13 @@ public class Exam {
         return closest;
 
     }
-    
+
     /**
-     * Given 3 int values, a b c, return their sum. However, if one of the values is the same as another of the values,
-     * it does not count towards the sum.
-     * <p>
-     * loneSum(1, 2, 3) → 6
-     * loneSum(3, 2, 3) → 2
-     * loneSum(3, 3, 3) → 0
+     *
+     * @param a
+     * @param b
+     * @param c
+     * @return int
      */
     public static int loneSum(int a, int b, int c) {
         if (a == b && b == c) {
@@ -81,7 +74,6 @@ public class Exam {
      * Modify and return the given map as follows:
      * if exactly one of the keys "a" or "b" exists in the map (but not both), 
      * set the other to have that same value in the map.
-     *
      * mapAXorB({"a": "aaa", "c": "cake"}) => {"a": "aaa", "b": "aaa", "c": "cake"}
      * mapAXorB({"b": "bbb", "c": "cake"}) => {"a": "bbb", "b": "bbb", "c": "cake"}
      * mapAXorB({"a": "aaa", "b": "bbb", "c": "cake"}) => {"a": "aaa", "b": "bbb", "c": "cake"}
@@ -90,7 +82,7 @@ public class Exam {
         if (map.containsKey("a") && !map.containsKey("b")) {
             map.put("a", map.get("a"));
             map.put("b", map.get("a"));
-        } else if ( map.containsKey("b") && !map.containsKey("a")) {
+        } else if (map.containsKey("b") && !map.containsKey("a")) {
             map.put("b", map.get("b"));
             map.put("a", map.get("b"));
         }
