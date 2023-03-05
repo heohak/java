@@ -5,6 +5,7 @@ import ee.taltech.iti0202.mysticorbs.oven.Oven;
 import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -114,6 +115,10 @@ public class OrbFactory {
 
     public void getRidOfOvensThatCannotBeFixed() {
         ovens.removeAll(getOvensThatCannotBeFixed());
+    }
+
+    public void optimizeOvensOrder() {
+        Collections.sort(ovens);
     }
 
 
