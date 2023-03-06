@@ -12,9 +12,8 @@ public class CannotFixException extends Exception {
         NOT_ENOUGH_RESOURCES,
 
     }
-
     /**
-     *
+     * This is shit.
      * @param oven
      * @param reason
      */
