@@ -13,6 +13,11 @@ public class CannotFixException extends Exception {
 
     }
 
+    /**
+     *
+     * @param oven
+     * @param reason
+     */
     public CannotFixException(Oven oven, Reason reason) {
         this.oven = oven;
         this.reason = reason;
