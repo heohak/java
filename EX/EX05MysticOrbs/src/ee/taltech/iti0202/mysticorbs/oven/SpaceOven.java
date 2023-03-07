@@ -55,7 +55,7 @@ public class SpaceOven extends Oven implements Fixable {
             resourceStorage.takeResource("star fragment", fifteen);
             resourceStorage.takeResource("meteorite stone", 1);
             createdOrbs++;
-            if (createdOrbs >= max) {
+            if (createdOrbs > 0 && createdOrbs % max == 0 && timesFixed < 5) {
                 setBroken(true);
             }
             return Optional.of(new SpaceOrb(this.name));
@@ -63,7 +63,7 @@ public class SpaceOven extends Oven implements Fixable {
             resourceStorage.takeResource("pearl", 1);
             resourceStorage.takeResource("silver", 1);
             createdOrbs++;
-            if (createdOrbs >= max) {
+            if (createdOrbs > 0 && createdOrbs % max == 0 && timesFixed < 5) {
                 setBroken(true);
             }
             return Optional.of(new Orb(this.name));
@@ -90,11 +90,11 @@ public class SpaceOven extends Oven implements Fixable {
             throw new CannotFixException(this, CannotFixException.Reason.NOT_ENOUGH_RESOURCES);
         }
         timesFixed++;
-        if (timesFixed >= 5) {
-            setBroken(false);
+        setBroken(false);
+
         }
 
-    }
+
 
     @Override
     public int getTimesFixed() {

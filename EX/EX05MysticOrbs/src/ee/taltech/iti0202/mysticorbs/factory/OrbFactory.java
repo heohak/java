@@ -16,9 +16,8 @@ import java.util.stream.Collectors;
 public class OrbFactory {
     private ResourceStorage resourceStorage;
     private List<Oven> ovens = new ArrayList<>();
-    private List<Orb> currentList;
 
-    List<Optional<Orb>> orbs = new ArrayList<Optional<Orb>>();
+    List<Orb> orbs = new ArrayList<>();
 
     List<Oven> unrepairableOvens = new ArrayList<>();
      private int orbCount = 0;
@@ -37,7 +36,7 @@ public class OrbFactory {
      * @param oven
      */
     public void addOven(Oven oven) {
-        if (!ovens.contains(oven) && this.resourceStorage == oven.getResourceStorage()) {
+        if (!ovens.contains(oven) && this.resourceStorage.equals(oven.getResourceStorage())) {
             ovens.add(oven);
         }
     }
@@ -55,10 +54,10 @@ public class OrbFactory {
      * @return List
      */
     public List<Orb> getAndClearProducedOrbsList() {
-        currentList = new ArrayList<>();
-        currentList.addAll(orbs.stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList()));
+        List<Orb> currentList = new ArrayList<>(orbs);
         orbs.clear();
         return currentList;
+
     }
 
     /**
@@ -66,7 +65,6 @@ public class OrbFactory {
      * @return int
      */
     public int produceOrbs() {
-        currentList = new ArrayList<>();
         for (Oven oven : ovens) {
             if (oven.isBroken()) {
                 if (oven instanceof SpaceOven || oven instanceof MagicOven) {
@@ -85,13 +83,11 @@ public class OrbFactory {
             if (!oven.isBroken()) {
                 Optional<Orb> orb = oven.craftOrb();
                 if (orb.isPresent()) {
-                    currentList.add(orb.get());
+                    orbs.add(orb.get());
                     orbCount++;
                 }
             }
         }
-        orbs.clear();
-        orbs.addAll(currentList.stream().map(Optional::of).collect(Collectors.toList()));
 
         ovens.removeAll(unrepairableOvens);
         return orbCount;
