@@ -113,11 +113,6 @@ public class OrbFactory {
      * @return List
      */
     public List<Oven> getOvensThatCannotBeFixed() {
-        for (Oven oven : ovens) {
-            if (!oven.canBeRepaired() || oven.getTimesFixed() >= Oven.MAX_REPAIRS) {
-                unrepairableOvens.add(oven);
-            }
-        }
         return unrepairableOvens;
     }
 
