@@ -125,14 +125,14 @@ public class OrbFactory {
      *
      */
     public void getRidOfOvensThatCannotBeFixed() {
-        ovens.removeAll(getOvensThatCannotBeFixed());
+        unrepairableOvens.clear();
     }
 
     /**
      *
      */
     public void optimizeOvensOrder() {
-        Collections.sort(ovens);
+        ovens.sort(((o1, o2) -> o2.compareTo(o1)));
     }
 
 
