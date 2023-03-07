@@ -92,6 +92,8 @@ public class OrbFactory {
         }
         orbs.clear();
         orbs.addAll(currentList.stream().map(Optional::of).collect(Collectors.toList()));
+
+        ovens.removeAll(unrepairableOvens);
         return orbCount;
     }
 
