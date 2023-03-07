@@ -1,7 +1,10 @@
 package ee.taltech.iti0202.mysticorbs.factory;
 
+import ee.taltech.iti0202.mysticorbs.exceptions.CannotFixException;
 import ee.taltech.iti0202.mysticorbs.orb.Orb;
+import ee.taltech.iti0202.mysticorbs.oven.MagicOven;
 import ee.taltech.iti0202.mysticorbs.oven.Oven;
+import ee.taltech.iti0202.mysticorbs.oven.SpaceOven;
 import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ public class OrbFactory {
     List<Optional<Orb>> orbs = new ArrayList<Optional<Orb>>();
 
     List<Oven> unrepairableOvens = new ArrayList<>();
+     private int orbCount = 0;
 
 
     /**
@@ -62,20 +66,33 @@ public class OrbFactory {
      * @return int
      */
     public int produceOrbs() {
-        int producedOrbs = 0;
         currentList = new ArrayList<>();
         for (Oven oven : ovens) {
+            if (oven.isBroken()) {
+                if (oven instanceof SpaceOven || oven instanceof MagicOven) {
+                    try {
+                        oven.fix();
+                    } catch (CannotFixException e) {
+                        if (e.getReason() == CannotFixException.Reason.FIXED_MAXIMUM_TIMES) {
+                            unrepairableOvens.add(oven);
+                        }
+                    }
+                } else {
+                    unrepairableOvens.add(oven);
+                    continue;
+                }
+            }
             if (!oven.isBroken()) {
                 Optional<Orb> orb = oven.craftOrb();
                 if (orb.isPresent()) {
                     currentList.add(orb.get());
-                    producedOrbs++;
+                    orbCount++;
                 }
             }
         }
         orbs.clear();
         orbs.addAll(currentList.stream().map(Optional::of).collect(Collectors.toList()));
-        return producedOrbs;
+        return orbCount;
     }
 
     /**
@@ -84,24 +101,12 @@ public class OrbFactory {
      * @return int
      */
     public int produceOrbs(int cycles) {
-        int totalProducedOrbs = 0;
-        currentList = new ArrayList<>();
-        for (int i = 0; i < cycles; i++) {
-            int producedOrbs = 0;
-            for (Oven oven : ovens) {
-                if (!oven.isBroken()) {
-                    Optional<Orb> orb = oven.craftOrb();
-                    if (orb.isPresent()) {
-                        currentList.add(orb.get());
-                        producedOrbs++;
-                    }
-                }
-            }
-            totalProducedOrbs += producedOrbs;
+        int i = 0;
+        while (i < cycles) {
+            produceOrbs();
+            i++;
         }
-        orbs.clear();
-        orbs.addAll(currentList.stream().map(Optional::of).collect(Collectors.toList()));
-        return totalProducedOrbs;
+        return orbCount;
 
     }
 
