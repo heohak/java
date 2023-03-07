@@ -159,6 +159,10 @@ public class Oven implements Comparable<Oven>  {
     }
 
 
+    /**
+     *
+     * @throws CannotFixException
+     */
     public void fix() throws CannotFixException {
 
     }
