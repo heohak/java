@@ -33,24 +33,16 @@ public class AnimalShelter implements AnimalProvider{
      */
     public List<Animal> getAnimals(Animal.Type animalType, String color, int count) {
         List<Animal> result = new ArrayList<>();
-        Set<String> uniqueAnimals = new HashSet<>();
-
-        // loop until we have enough results or provider returns an empty list
+        Set<Animal> uniqueAnimals = new HashSet<>();
         while (result.size() < count) {
             List<Animal> animals = animalProvider.provide(animalType);
-
-            // if provider returned an empty list, stop calling it and return whatever we have
             if (animals.isEmpty()) {
                 break;
             }
-
-            // filter animals by color and add only unique animals to the result list
             for (Animal animal : animals) {
-                if (animal.getColor().equals(color) && !uniqueAnimals.contains(animal.toString())) {
-                    uniqueAnimals.add(animal.toString());
+                if (animal.getColor().equals(color) && !uniqueAnimals.contains(animal)) {
+                    uniqueAnimals.add(animal);
                     result.add(animal);
-
-                    // if we have enough results, stop adding animals
                     if (result.size() == count) {
                         break;
                     }
