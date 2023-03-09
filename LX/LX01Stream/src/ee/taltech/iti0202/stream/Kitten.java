@@ -42,4 +42,13 @@ public class Kitten {
     public Gender getGender() {
         return gender;
     }
+
+    @Override
+    public String toString() {
+        return "Kitten{" +
+                "gender=" + gender +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
