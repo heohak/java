@@ -1,6 +1,10 @@
 package ee.taltech.iti0202.stream;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 public class KittenStatistics {
@@ -72,7 +76,7 @@ public class KittenStatistics {
     public List<Kitten> findKittensBetweenAges(int minAge, int maxAge) {
         return kittens
                 .stream()
-                .filter(kitten -> maxAge > kitten.getAge() && kitten.getAge() > minAge)
+                .filter(kitten -> maxAge >= kitten.getAge() && kitten.getAge() >= minAge)
                 .collect(Collectors.toList());
     }
 
@@ -109,5 +113,4 @@ public class KittenStatistics {
                 .sorted(Comparator.comparing(Kitten::getAge).reversed())
                 .collect(Collectors.toList());
     }
-    
 }
