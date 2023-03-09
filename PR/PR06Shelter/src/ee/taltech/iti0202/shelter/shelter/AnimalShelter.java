@@ -8,9 +8,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AnimalShelter implements AnimalProvider{
+public class AnimalShelter implements AnimalProvider {
     private final AnimalProvider animalProvider;
 
+    /**
+     *
+     * @param animalProvider
+     */
     public AnimalShelter(AnimalProvider animalProvider) {
         this.animalProvider = animalProvider;
     }
