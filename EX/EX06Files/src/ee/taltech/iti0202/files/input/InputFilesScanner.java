@@ -22,7 +22,7 @@ public class InputFilesScanner implements InputFilesReader {
             }
             scanner.close();
         } catch (IOException e) {
-            throw new FileReaderException("No such file.", e);
+            throw new FileReaderException("No such file", e);
         }
 
         return lines;
