@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.files.input;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,18 +15,15 @@ public class InputFilesBufferReader implements InputFilesReader {
 
     @Override
     public List<String> readTextFromFile(String filename) {
-        List<String> result = new ArrayList<>();
-        Path path = Paths.get("path", "to", filename);
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            while (true) {
-                String line = reader.readLine();
-                result.add(line);
-                if (line == null) break;
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println("Error reading file:" + e.getMessage());
-            e.printStackTrace();
+            throw new FileReaderException("No such file.", e);
         }
-        return result;
+        return lines;
     }
 }
