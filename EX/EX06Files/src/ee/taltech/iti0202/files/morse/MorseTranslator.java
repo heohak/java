@@ -35,18 +35,18 @@ public class MorseTranslator {
     }
 
     public String translateLineToMorse(String line) {
-        StringBuilder morseBuilder = new StringBuilder();
+        StringBuilder morse = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
-            String letter = Character.toString(line.charAt(i)).toLowerCase();
-            String code = morseCodes.get(letter);
-            if (code != null) {
-                morseBuilder.append(code).append(" ");
-            } else {
-                morseBuilder.append(" ");
+            char c = Character.toLowerCase(line.charAt(i));
+            if (c == ' ') {  // Space character
+                morse.append('\t');  // Add tab
+            } else if (morseCodes.containsKey(c)) {  // Valid Morse character
+                morse.append(morseCodes.get(c));  // Add Morse code
+                morse.append(' ');  // Add space
             }
         }
-        String morseLine = morseBuilder.toString().replaceAll("\\s+", " ");
-        return morseLine.replaceAll("(\\.|\\-| )", "$1 ").replaceAll(" +", "   ").replaceAll("   ", "  \t").trim();
+        return morse.toString();
+
     }
 
 
