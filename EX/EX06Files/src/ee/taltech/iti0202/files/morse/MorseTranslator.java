@@ -34,10 +34,10 @@ public class MorseTranslator {
         return result;
     }
 
-    private String translateLineToMorse(String line) {
+    public String translateLineToMorse(String line) {
         StringBuilder sb = new StringBuilder();
         for (char c : line.toLowerCase().toCharArray()) {
-            String morseCode = morseCodes.get(String.valueOf(c));
+            String morseCode = morseCodes.get(c);
             if (morseCode != null) {
                 sb.append(morseCode).append(" ");
             }
