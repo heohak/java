@@ -35,16 +35,20 @@ public class MorseTranslator {
     }
 
     public String translateLineToMorse(String line) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : line.toLowerCase().toCharArray()) {
-            String morseCode = morseCodes.get(c);
-            if (morseCode != null) {
-                sb.append(morseCode).append(" ");
+        StringBuilder morseBuilder = new StringBuilder();
+        for (int i = 0; i < line.length(); i++) {
+            String letter = Character.toString(line.charAt(i)).toLowerCase();
+            String code = morseCodes.get(letter);
+            if (code != null) {
+                morseBuilder.append(code).append(" ");
+            } else {
+                morseBuilder.append(" ");
             }
         }
-        return sb.toString().trim();
-
+        return morseBuilder.toString().trim().replaceAll(" ", "   ");
     }
+
+
 
     private String translateLineFromMorse(String line) {
         StringBuilder sb = new StringBuilder();
