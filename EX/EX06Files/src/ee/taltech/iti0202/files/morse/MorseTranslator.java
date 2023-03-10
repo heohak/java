@@ -10,60 +10,62 @@ public class MorseTranslator {
 
     public Map<String, String> addMorseCodes(List<String> lines) {
         for (String line : lines) {
-            String[] parts = line.split("\\s+", 2);
-            morseCodes.put(parts[0].toLowerCase(), parts[1].toLowerCase());
+            String[] parts = line.split(" ");
+            String character = parts[0].toLowerCase();
+            String morseCode = parts[1];
+            morseCodes.put(character, morseCode);
         }
         return morseCodes;
     }
 
     public List<String> translateLinesToMorse(List<String> lines) {
-        List<String> result = new ArrayList<>();
+        List<String> morseLines = new ArrayList<>();
         for (String line : lines) {
-            String translatedLine = translateLineToMorse(line);
-            result.add(translatedLine);
+            String morseLine = translateLineToMorse(line);
+            morseLines.add(morseLine);
         }
-        return result;
+        return morseLines;
     }
 
     public List<String> translateLinesFromMorse(List<String> lines) {
-        List<String> result = new ArrayList<>();
+        List<String> textLines = new ArrayList<>();
         for (String line : lines) {
-            String translatedLine = translateLineFromMorse(line);
-            result.add(translatedLine.toLowerCase());
+            String textLine = translateLineFromMorse(line);
+            textLines.add(textLine);
         }
-        return result;
+        return textLines;
     }
 
     public String translateLineToMorse(String line) {
-        StringBuilder morse = new StringBuilder();
-        for (int i = 0; i < line.length(); i++) {
-            char c = Character.toLowerCase(line.charAt(i));
-            if (c == ' ') {  // Space character
-                morse.append('\t');  // Add tab
-            } else if (morseCodes.containsKey(c)) {  // Valid Morse character
-                morse.append(morseCodes.get(c));  // Add Morse code
-                morse.append(' ');  // Add space
+        StringBuilder morseLine = new StringBuilder();
+        for (char c : line.toLowerCase().toCharArray()) {
+            if (c == ' ') {
+                morseLine.append("\t");
+            } else {
+                String morseCode = morseCodes.get(Character.toString(c));
+                morseLine.append(morseCode).append(" ");
             }
         }
-        return morse.toString();
+        return morseLine.toString().trim();
 
     }
 
 
 
     private String translateLineFromMorse(String line) {
-        StringBuilder sb = new StringBuilder();
-        String[] morseWords = line.split("\t");
-        for (String morseWord : morseWords) {
-            String[] morseLetters = morseWord.split(" ");
-            for (String morseLetter : morseLetters) {
-                String letter = morseCodes.get(morseLetter);
-                if (letter != null) {
-                    sb.append(letter);
+        StringBuilder textLine = new StringBuilder();
+        for (String morseCode : line.split("\\s+")) {
+            if (morseCode.equals("\t")) {
+                textLine.append(" ");
+            } else {
+                for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
+                    if (entry.getValue().equals(morseCode)) {
+                        textLine.append(entry.getKey());
+                        break;
+                    }
                 }
             }
-            sb.append(" ");
         }
-        return sb.toString().trim();
+        return textLine.toString();
     }
 }
