@@ -9,12 +9,9 @@ public class MorseTranslator {
     private Map<String, String> morseCodes = new HashMap<>();
 
     public Map<String, String> addMorseCodes(List<String> lines) {
-        Map<String, String> morseCodes = new HashMap<>();
         for (String line : lines) {
-            String[] parts = line.split(" ");
-            String letter = parts[0].toLowerCase();
-            String code = line.substring(letter.length() + 1);
-            morseCodes.put(letter, code);
+            String[] parts = line.split("\\s+", 2);
+            morseCodes.put(parts[1].toLowerCase(), parts[0]);
         }
         return morseCodes;
     }
