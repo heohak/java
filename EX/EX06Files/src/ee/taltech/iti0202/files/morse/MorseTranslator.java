@@ -45,7 +45,7 @@ public class MorseTranslator {
                 morseBuilder.append(" ");
             }
         }
-        return morseBuilder.toString().trim().replaceAll(" ", "   ");
+        return morseBuilder.toString().trim().replaceAll(" ", " ");
     }
 
 
