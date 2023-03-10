@@ -29,7 +29,7 @@ public class MorseTranslator {
         List<String> result = new ArrayList<>();
         for (String line : lines) {
             String translatedLine = translateLineFromMorse(line);
-            result.add(translatedLine);
+            result.add(translatedLine.toLowerCase());
         }
         return result;
     }
