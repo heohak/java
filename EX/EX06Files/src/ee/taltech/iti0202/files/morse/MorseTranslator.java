@@ -10,8 +10,10 @@ public class MorseTranslator {
 
     public Map<String, String> addMorseCodes(List<String> lines) {
         for (String line : lines) {
-            String[] parts = line.split("\\s+", 2);
-            morseCodes.put(parts[1].toLowerCase(), parts[0]);
+            String[] parts = line.split(" ");
+            String letter = parts[0].toLowerCase();
+            String code = parts[1];
+            morseCodes.put(letter, code);
         }
         return morseCodes;
     }
