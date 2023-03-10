@@ -4,5 +4,10 @@ import java.util.List;
 
 public interface InputFilesReader {
 
+    /**
+     *
+     * @param filename
+     * @return
+     */
     List<String> readTextFromFile(String filename);
 }
