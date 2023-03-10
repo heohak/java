@@ -89,6 +89,7 @@ public class MorseTranslator {
                     }
                 }
             }
+            textLine.append(" ");
         }
         return textLine.toString().trim();
     }
