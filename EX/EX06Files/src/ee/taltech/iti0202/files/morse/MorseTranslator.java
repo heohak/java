@@ -50,8 +50,8 @@ public class MorseTranslator {
         StringBuilder sb = new StringBuilder();
         String[] morseWords = line.split("\t");
         for (String morseWord : morseWords) {
-            String[] morseletters = morseWord.split(" ");
-            for (String morseLetter : morseletters) {
+            String[] morseLetters = morseWord.split(" ");
+            for (String morseLetter : morseLetters) {
                 String letter = morseCodes.get(morseLetter);
                 if (letter != null) {
                     sb.append(letter);
