@@ -45,7 +45,8 @@ public class MorseTranslator {
                 morseBuilder.append(" ");
             }
         }
-        return morseBuilder.toString().trim().replaceAll(" ", "\t");
+        String morseLine = morseBuilder.toString().replaceAll("\\s+", " ");
+        return morseLine.replaceAll("(\\.|\\-| )", "$1 ").replaceAll(" +", "   ").replaceAll("   ", "  \t").trim();
     }
 
 
