@@ -77,7 +77,13 @@ public class MorseTranslator {
         for (String morseWord : morseWords) {
             String[] morseLetters = morseWord.split(" "); // split by space to get individual letters
             for (String morseLetter : morseLetters) {
-                String character = morseCodes.get(morseLetter);
+                String character = null;
+                for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
+                    if (entry.getValue().equals(morseLetter)) {
+                        character = entry.getKey();
+                        break;
+                    }
+                }
                 if (character != null) {
                     textLine.append(character);
                 }
