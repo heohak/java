@@ -73,20 +73,18 @@ public class MorseTranslator {
      */
     public String translateLineFromMorse(String line) {
         StringBuilder textLine = new StringBuilder();
-        boolean firstWord = true;
+        boolean prevSpace = false;
         for (String morseCode : line.split("\\s+")) {
-            morseCode = morseCode.trim(); // remove leading/trailing whitespace
             if (morseCode.equals("\t")) {
-                textLine.append(" ");
+                if (!prevSpace) {
+                    textLine.append(" ");
+                    prevSpace = true;
+                }
             } else {
                 for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
                     if (entry.getValue().equals(morseCode)) {
-                        if (!firstWord) {
-                            textLine.append(" ");
-                        } else {
-                            firstWord = false;
-                        }
                         textLine.append(entry.getKey());
+                        prevSpace = false;
                         break;
                     }
                 }
