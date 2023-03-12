@@ -76,7 +76,7 @@ public class MorseTranslator {
      * @param line
      * @return String
      */
-    private String translateLineFromMorse(String line) {
+    public String translateLineFromMorse(String line) {
         StringBuilder textLine = new StringBuilder();
         for (String morseCode : line.split("\\s+")) {
             if (morseCode.equals("\t")) {
@@ -84,12 +84,11 @@ public class MorseTranslator {
             } else {
                 for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
                     if (entry.getValue().equals(morseCode)) {
-                        textLine.append(entry.getKey());
+                        textLine.append(entry.getKey()).append(" ");
                         break;
                     }
                 }
             }
-            textLine.append(" ");
         }
         return textLine.toString().trim();
     }
