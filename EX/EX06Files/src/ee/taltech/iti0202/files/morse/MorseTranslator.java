@@ -59,7 +59,9 @@ public class MorseTranslator {
                 morseLine.append("\t");
             } else {
                 String morseCode = morseCodes.get(Character.toString(c));
-                morseLine.append(morseCode).append(" ");
+                if (morseCode != null) {
+                    morseLine.append(morseCode).append(" ");
+                }
             }
         }
         return morseLine.toString().trim();
@@ -73,9 +75,9 @@ public class MorseTranslator {
      */
     private String translateLineFromMorse(String line) {
         StringBuilder textLine = new StringBuilder();
-        String[] morseWords = line.split("\t"); // split by tab to get individual words
+        String[] morseWords = line.split("\t");
         for (String morseWord : morseWords) {
-            String[] morseLetters = morseWord.split(" "); // split by space to get individual letters
+            String[] morseLetters = morseWord.split(" ");
             for (String morseLetter : morseLetters) {
                 String character = null;
                 for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
@@ -88,8 +90,8 @@ public class MorseTranslator {
                     textLine.append(character);
                 }
             }
-            textLine.append(" "); // add space between words
+            textLine.append(" ");
         }
-        return textLine.toString().trim(); // trim leading/trailing whitespace
+        return textLine.toString().trim();
     }
 }
