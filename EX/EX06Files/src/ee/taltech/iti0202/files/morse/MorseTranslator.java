@@ -9,7 +9,6 @@ public class MorseTranslator {
     private Map<String, String> morseCodes = new HashMap<>();
 
     /**
-     *
      * @param lines
      * @return Map
      */
@@ -24,7 +23,6 @@ public class MorseTranslator {
     }
 
     /**
-     *
      * @param lines
      * @return List
      */
@@ -38,7 +36,6 @@ public class MorseTranslator {
     }
 
     /**
-     *
      * @param lines
      * @return List
      */
@@ -52,7 +49,6 @@ public class MorseTranslator {
     }
 
     /**
-     *
      * @param line
      * @return String
      */
@@ -72,19 +68,25 @@ public class MorseTranslator {
 
 
     /**
-     *
      * @param line
      * @return String
      */
     public String translateLineFromMorse(String line) {
         StringBuilder textLine = new StringBuilder();
+        boolean firstWord = true;
         for (String morseCode : line.split("\\s+")) {
+            morseCode = morseCode.trim(); // remove leading/trailing whitespace
             if (morseCode.equals("\t")) {
                 textLine.append(" ");
             } else {
                 for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
                     if (entry.getValue().equals(morseCode)) {
-                        textLine.append(entry.getKey()).append(" ");
+                        if (!firstWord) {
+                            textLine.append(" ");
+                        } else {
+                            firstWord = false;
+                        }
+                        textLine.append(entry.getKey());
                         break;
                     }
                 }
