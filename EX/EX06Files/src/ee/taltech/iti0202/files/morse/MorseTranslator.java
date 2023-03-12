@@ -71,25 +71,20 @@ public class MorseTranslator {
      * @param line
      * @return String
      */
-    public String translateLineFromMorse(String line) {
+    private String translateLineFromMorse(String line) {
         StringBuilder textLine = new StringBuilder();
-        boolean prevSpace = false;
         for (String morseCode : line.split("\\s+")) {
             if (morseCode.equals("\t")) {
-                if (!prevSpace) {
-                    textLine.append(" ");
-                    prevSpace = true;
-                }
+                textLine.append(" ");
             } else {
                 for (Map.Entry<String, String> entry : morseCodes.entrySet()) {
                     if (entry.getValue().equals(morseCode)) {
                         textLine.append(entry.getKey());
-                        prevSpace = false;
                         break;
                     }
                 }
             }
         }
-        return textLine.toString().trim();
+        return textLine.toString();
     }
 }
