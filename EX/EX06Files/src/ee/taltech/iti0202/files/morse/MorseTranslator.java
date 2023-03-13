@@ -64,7 +64,7 @@ public class MorseTranslator {
             sb.delete(sb.length() - 1, sb.length());
             sb.append("\t");
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
 
