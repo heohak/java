@@ -53,18 +53,18 @@ public class MorseTranslator {
      * @return String
      */
     private String translateLineToMorse(String line) {
-        StringBuilder morseLine = new StringBuilder();
-        for (char c : line.toLowerCase().toCharArray()) {
-            if (c == ' ') {
-                morseLine.append("\t");
-            } else {
-                String morseCode = morseCodes.get(Character.toString(c));
-                if (morseCode != null) {
-                    morseLine.append(morseCode).append(" ");
-                }
+        StringBuilder sb = new StringBuilder();
+        String[] res = line.toLowerCase().split(" ");
+        for (String word : res) {
+            for (char c : word.toCharArray()) {
+                String morseWord = morseCodes.get(String.valueOf(c));
+                sb.append(morseWord);
+                sb.append(" ");
             }
+            sb.delete(sb.length() - 1, sb.length());
+            sb.append("\t");
         }
-        return morseLine.toString().trim();
+        return sb.toString();
     }
 
 
