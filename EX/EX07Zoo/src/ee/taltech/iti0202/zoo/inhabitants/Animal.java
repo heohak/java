@@ -2,9 +2,8 @@ package ee.taltech.iti0202.zoo.inhabitants;
 
 import java.util.Random;
 
-;
 
-public class Animal {
+public final class Animal {
     //All final attributes
     private String name;
 
@@ -22,7 +21,7 @@ public class Animal {
         this.type = builder.type;
     }
 
-    public enum Type{
+    public enum Type {
         MAMMAL,
         BIRD,
         FISH,
@@ -31,38 +30,50 @@ public class Animal {
 
     }
 
-    //All getter, and NO setter to provde immutability
+    /**
+     *
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return int
+     */
     public int getDaysToHungry() {
         return daysToHungry;
     }
 
+    /**
+     *
+     * @return boolean
+     */
     public boolean isHungry() {
-        if (daysToHungry > 0 || this.name.equals("lamb")) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return daysToHungry <= 0 && !this.name.equals("lamb");
     }
 
+    /**
+     *
+     * @return Type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getSound() {
         if (this.name.equals("turtle")) {
             this.sound = "";
             return sound;
-        }
-        else if (this.name.equals("lamb")) {
+        } else if (this.name.equals("lamb")) {
             this.sound = "Mää";
             return this.sound;
-        }
-        else if (this.name.equals("monkey")) {
+        } else if (this.name.equals("monkey")) {
             if (this.isHungry) {
                 this.sound = "BANANA";
                 return this.sound;
@@ -73,34 +84,55 @@ public class Animal {
             int randomIndex = rand.nextInt(sounds.length);
             return sounds[randomIndex];
             }
-        }
-        else {
+        } else {
             return sound;
         }
     }
 
+    /**
+     * Void.
+     */
     public void decrementHunger() {
         this.daysToHungry = this.daysToHungry - 1;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @param sound
+     */
     public void setSound(String sound) {
         this.sound = sound;
     }
 
+    /**
+     *
+     * @param daysToHungry
+     */
     public void setDaysToHungry(int daysToHungry) {
         this.daysToHungry = daysToHungry;
     }
 
+    /**
+     *
+     * @param hungry
+     */
     public void setHungry(boolean hungry) {
         isHungry = hungry;
     }
 
 
-
+    /**
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         return "Animal: " + this.name;
@@ -114,47 +146,71 @@ public class Animal {
         private boolean isHungry;
         private Animal.Type type;
 
+        /**
+         *
+         * @param name
+         */
         public AnimalBuilder(String name) {
             this.name = name;
 
         }
 
+        /**
+         *
+         * @param name
+         * @return this
+         */
         public AnimalBuilder setName(String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         *
+         * @param sound
+         * @return this
+         */
         public AnimalBuilder setSound(String sound) {
-
-
                 this.sound = sound;
-
             return this;
         }
 
+        /**
+         *
+         * @param daysToHungry
+         * @return this
+         */
         public AnimalBuilder setDaysToHungry(int daysToHungry) {
             this.daysToHungry = daysToHungry;
             return this;
         }
 
+        /**
+         *
+         * @param type
+         * @return this
+         */
         public AnimalBuilder setType(Animal.Type type) {
-
             this.type = type;
-
             return this;
         }
 
+        /**
+         *
+         * @param hungry
+         * @return this
+         */
         public AnimalBuilder setHungry(boolean hungry) {
-
             this.isHungry = hungry;
             return this;
         }
 
+        /**
+         *
+         * @return Animal
+         */
         public Animal build() {
             return new Animal(this);
         }
-
     }
-
-
     }

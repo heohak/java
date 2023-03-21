@@ -1,6 +1,5 @@
 package ee.taltech.iti0202.zoo.inhabitants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Caretaker {
@@ -14,20 +13,35 @@ public class Caretaker {
         this.speciality = speciality;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return List
+     */
     public List<Animal.Type> getSpeciality() {
         return speciality;
     }
 
-
-
+    /**
+     *
+     * @param animal
+     * @return boolean
+     */
     public boolean canFeedAnimal(Animal animal) {
         if (speciality.contains(animal.getType()) && animal.isHungry()) {
             return true;

@@ -20,22 +20,42 @@ public class Zoo {
     }
 
 
+    /**
+     *
+     * @return List
+     */
     public List<Caretaker> getCaretakers() {
         return caretakers;
     }
 
-
+    /**
+     *
+     * @return List
+     */
     public List<Animal> getAnimals() {
         return animals;
     }
+
+    /**
+     *
+     * @param animal
+     */
     public void addAnimal(Animal animal) {
         this.animals.add(animal);
     }
 
+    /**
+     *
+     * @param caretaker
+     */
     public void addCaretaker(Caretaker caretaker) {
         this.caretakers.add(caretaker);
     }
 
+    /**
+     *
+     * @return List
+     */
     public List<Animal> getUnfedAnimals() {
         List<Animal> unfedAnimals = new ArrayList<>();
         for (Animal animal : this.animals) {
@@ -46,6 +66,10 @@ public class Zoo {
         return unfedAnimals;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String reportAnimalSounds() {
         String result = "";
         for (Animal animal : this.animals) {
@@ -54,6 +78,10 @@ public class Zoo {
         return result;
     }
 
+    /**
+     *
+     * @return Caretaker
+     */
     public Caretaker getMostEffectiveCaretaker() {
         Caretaker mostEffectiveCaretaker = null;
         int maxFedAnimals = 0;
@@ -67,6 +95,9 @@ public class Zoo {
         return mostEffectiveCaretaker;
     }
 
+    /**
+     *
+     */
     public void startNextDay() {
         for (Animal animal : this.animals) {
             animal.decrementHunger();
@@ -76,4 +107,3 @@ public class Zoo {
 
 
 }
-
