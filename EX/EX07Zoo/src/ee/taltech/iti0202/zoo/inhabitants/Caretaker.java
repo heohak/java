@@ -8,6 +8,11 @@ public class Caretaker {
     private List<Animal.Type> speciality;
 
 
+    /**
+     *
+     * @param name
+     * @param speciality
+     */
     public Caretaker(String name, List<Animal.Type> speciality) {
         this.name = name;
         this.speciality = speciality;
@@ -49,6 +54,11 @@ public class Caretaker {
         return false;
     }
 
+    /**
+     *
+     * @param animalsToFeed
+     * @return
+     */
     public int feedAnimals(List<Animal> animalsToFeed) {
         int result = 0;
         for (Animal animal : animalsToFeed) {
