@@ -53,7 +53,6 @@ public class AnimalShelter implements AnimalProvider {
                 }
             }
         }
-
         return result;
     }
 

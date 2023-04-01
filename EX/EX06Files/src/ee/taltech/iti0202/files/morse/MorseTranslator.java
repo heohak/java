@@ -94,5 +94,11 @@ public class MorseTranslator {
         return textLine.toString().trim();
     }
 
+    public static void main(String[] args) {
+        MorseTranslator morse1 = new MorseTranslator();
+        List<String> list1 = morse1.translateLinesToMorse(List.of("Mis teed", "Ago püüton"));
+        System.out.println(list1);
+    }
+
 
 }
