@@ -32,7 +32,8 @@ public class Kitchen {
         return machines;
     }
 
-    public Drink.DrinkType makeCoffee(Machine machine, Drink drink) throws NoBeansException, TankEmptyException, TrashIsFullException {
+    public Drink.DrinkType makeCoffee(Machine machine, Drink drink) throws NoBeansException, TankEmptyException,
+            TrashIsFullException {
         return machine.makeDrink(drink);
 
 
