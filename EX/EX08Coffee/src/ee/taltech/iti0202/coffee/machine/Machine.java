@@ -11,7 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 public class Machine {
-    protected static final Logger logger = Logger.getLogger(Machine.class.getName());
+    protected static final Logger LOGGER = Logger.getLogger(Machine.class.getName());
     protected Integer wasteCapacity;
     protected int currentWaste;
 
@@ -22,15 +22,14 @@ public class Machine {
     public Machine(Integer wasteCapacity, WaterTank waterTank, int beans) throws IOException {
         if (wasteCapacity == null) {
             this.wasteCapacity = 5;
-        }
-        else {
+        } else {
             this.wasteCapacity = wasteCapacity;
         }
         this.waterTank = waterTank;
         this.currentWaste = 0;
         this.beans = beans;
         FileHandler fileName = new FileHandler("logs.txt");
-        logger.addHandler(fileName);
+        LOGGER.addHandler(fileName);
     }
 
     public boolean machineHaveWater() {
@@ -54,17 +53,14 @@ public class Machine {
         }
         if (!machineHaveWater()) {
             throw new TankEmptyException("No water in tank!");
-        }
-
-        else if (machineHaveBeans() && machineHaveWater() && !trashisFull()) {
+        } else if (machineHaveBeans() && machineHaveWater() && !trashisFull()) {
             currentWaste++;
             beans--;
             waterTank.takeWater();
-            logger.info("Drink has been made.");
+            LOGGER.info("Drink has been made.");
             return drink.getDrinkType();
-        }
-        else {
-            logger.info("Cannot make a drink!");
+        } else {
+            LOGGER.info("Cannot make a drink!");
             return null;
         }
 

@@ -20,15 +20,13 @@ public class AutomaticMachine extends Machine {
         }
         if (!machineHaveWater()) {
             throw new TankEmptyException("No water in tank!");
-        }
-        else if (machineHaveWater() && !trashisFull()) {
+        } else if (machineHaveWater() && !trashisFull()) {
             currentWaste++;
             waterTank.takeWater();
-            logger.info("Drink has been made.");
+            LOGGER.info("Drink has been made.");
             return drink.getDrinkType();
-        }
-        else {
-            logger.info("Cannot make a drink!");
+        } else {
+            LOGGER.info("Cannot make a drink!");
             return null;
         }
     }

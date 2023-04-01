@@ -4,7 +4,7 @@ package ee.taltech.iti0202.coffee.tank;
 import java.util.logging.Logger;
 
 public class WaterTank {
-    private static final Logger logger = Logger.getLogger(WaterTank.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(WaterTank.class.getName());
 
     private int capacity;
     private int currentWater;
@@ -20,12 +20,12 @@ public class WaterTank {
 
     public  void takeWater() {
         currentWater--;
-        logger.info("Water is taken from the water tank.");
+        LOGGER.info("Water is taken from the water tank.");
 
     }
 
     public void reFillTank() {
         currentWater = capacity;
-        logger.info("Water tank has been refilled.");
+        LOGGER.info("Water tank has been refilled.");
     }
 }

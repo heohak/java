@@ -36,20 +36,18 @@ public class CapsuleMachine extends Machine {
         }
         if (trashisFull()) {
             throw new TrashIsFullException("Trash is full!");
-        }
-        else if (!machineCapsuleIn() || (machineCapsuleIn() && capsuleIsEmpty())) {
-            logger.info("Water comes out.");
+        } else if (!machineCapsuleIn() || (machineCapsuleIn() && capsuleIsEmpty())) {
+            LOGGER.info("Water comes out.");
             return null;
         } else if (machineHaveWater() && !trashisFull()) {
             isCapsuleIn = true;
             currentWaste++;
             waterTank.takeWater();
             isCapsuleEmpty = true;
-            logger.info("Drink has been made.");
+            LOGGER.info("Drink has been made.");
             return capsule.getDrinkType();
-        }
-        else {
-            logger.info("Cannot make a drink!");
+        } else {
+            LOGGER.info("Cannot make a drink!");
             return null;
         }
 
