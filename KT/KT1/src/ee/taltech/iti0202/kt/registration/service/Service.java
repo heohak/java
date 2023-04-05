@@ -70,37 +70,12 @@ public class Service {
     public String getName() {
         return name;
     }
-
-    /**
-     *
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
     /**
      *
      * @return ServiceType
      */
     public ServiceType getType() {
         return type;
-    }
-
-    /**
-     *
-     * @return LocalDateTime
-     */
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    /**
-     *
-     * @param startTime
-     */
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
     }
 
     /**
@@ -145,13 +120,6 @@ public class Service {
         return price;
     }
 
-    /**
-     *
-     * @param price
-     */
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
 
     /**
      *
@@ -161,11 +129,4 @@ public class Service {
         return serviceStatus;
     }
 
-    /**
-     *
-     * @param serviceStatus
-     */
-    public void setServiceStatus(ServiceStatus serviceStatus) {
-        this.serviceStatus = serviceStatus;
-    }
 }
