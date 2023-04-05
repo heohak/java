@@ -7,9 +7,6 @@ class World {
     private Map<String, Courier> couriers = new HashMap<>();
 
     Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
-        if (distances == null) {
-            return Optional.empty();
-        }
         if (locations.containsKey(name) || otherLocations.size() > locations.size() || otherLocations.size() != distances.size()) {
             return Optional.empty();
         }
@@ -38,16 +35,19 @@ class World {
             return Optional.empty();
         }
 
-        Courier newCourier = new Courier(name, locations.get(to));
-        couriers.put(name, newCourier);
-        return Optional.of(newCourier);
+        Location location = locations.get(to);
+        Courier courier = new Courier(name, location);
+        couriers.put(name, courier);
+        return Optional.of(courier);
     }
 
     boolean giveStrategy(String name, Strategy strategy) {
         Courier courier = couriers.get(name);
+
         if (courier == null) {
             return false;
         }
+
         courier.setStrategy(strategy);
         return true;
     }
