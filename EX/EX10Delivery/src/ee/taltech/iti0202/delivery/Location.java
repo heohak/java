@@ -18,7 +18,10 @@ class Location {
     }
 
     Integer getDistanceTo(String name) {
-        return distances.getOrDefault(name, Integer.MAX_VALUE);
+        if (distances.containsKey(name)) {
+            return distances.get(name);
+        }
+        return Integer.MAX_VALUE;
     }
 
     void addPacket(Packet packet) {

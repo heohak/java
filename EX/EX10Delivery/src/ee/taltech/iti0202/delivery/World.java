@@ -13,7 +13,7 @@ class World {
         Set<String> existingLocationsSet = new HashSet<>(locations);
 
         if (locationsMap.containsKey(name) || otherLocations.size() != distances.size()
-                || locations.size() > otherLocations.size() || !existingLocationsSet.containsAll(otherLocationSet)) {
+                || otherLocations.size() > locations.size() || !existingLocationsSet.containsAll(otherLocationSet)) {
             return Optional.empty();
         } else {
             Location location = new Location(name);
