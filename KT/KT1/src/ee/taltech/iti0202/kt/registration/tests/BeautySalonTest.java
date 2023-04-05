@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class BeautySalonTest {
     Salon salon1;
@@ -31,12 +32,17 @@ class BeautySalonTest {
     void setup() {
         LocalDateTime time1 = LocalDateTime.of(2023, Month.JANUARY, 10, 10, 0);
         salon1 = new Salon();
-        cosmetic1 = new Cosmetic(List.of(Service.ServiceType.MAKEUP, Service.ServiceType.HAIR_CUT, Service.ServiceType.HAIR_COLOR, Service.ServiceType.FACIAL_CARE));
+        cosmetic1 = new Cosmetic(List.of(Service.ServiceType.MAKEUP, Service.ServiceType.HAIR_CUT,
+                Service.ServiceType.HAIR_COLOR, Service.ServiceType.FACIAL_CARE));
         client1 = new Client(100);
-        service1 = new Service("cheapFaceCleaning", Service.ServiceType.FACIAL_CARE,time1,2, cosmetic1, 50, Service.ServiceStatus.REGULAR);
-        service2 = new Service("SpecialMakeUp", Service.ServiceType.MAKEUP, time1, 1, cosmetic1,140, Service.ServiceStatus.VIP);
-        service3 = new Service("EvenMoreCheaperFaceCleaning", Service.ServiceType.FACIAL_CARE,time1,2, cosmetic1, 20, Service.ServiceStatus.REGULAR);
-        service4 = new Service("HairColor", Service.ServiceType.HAIR_COLOR, time1, 1, cosmetic1,60, Service.ServiceStatus.VIP);
+        service1 = new Service("cheapFaceCleaning", Service.ServiceType.FACIAL_CARE, time1, 2, cosmetic1,
+                50, Service.ServiceStatus.REGULAR);
+        service2 = new Service("SpecialMakeUp", Service.ServiceType.MAKEUP, time1, 1, cosmetic1, 140,
+                Service.ServiceStatus.VIP);
+        service3 = new Service("EvenMoreCheaperFaceCleaning", Service.ServiceType.FACIAL_CARE, time1,
+                2, cosmetic1, 20, Service.ServiceStatus.REGULAR);
+        service4 = new Service("HairColor", Service.ServiceType.HAIR_COLOR, time1, 1, cosmetic1, 60,
+                Service.ServiceStatus.VIP);
     }
 
     @Test
@@ -72,7 +78,7 @@ class BeautySalonTest {
         salon1.addServiceToSalon(service4);
         client1.bookService(service4, salon1);
         assertEquals(1, client1.getBookedServices().size());
-        client1.cancelService(service4,salon1);
+        client1.cancelService(service4, salon1);
         assertEquals(1, client1.getBookedServices().size());
     }
 
@@ -90,7 +96,4 @@ class BeautySalonTest {
 
         assertEquals(service3, salon1.findServiceByType(Service.ServiceType.FACIAL_CARE));
     }
-
-
-
 }
