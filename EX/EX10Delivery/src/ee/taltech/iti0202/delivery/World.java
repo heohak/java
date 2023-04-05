@@ -7,12 +7,11 @@ class World {
     private Map<String, Courier> couriers = new HashMap<>();
 
     Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
-        if (locations.containsKey(name)) {
+        if (locations.containsKey(name) || otherLocations.size() != distances.size()) {
             return Optional.empty();
         }
 
         Location newLocation = new Location(name);
-        locations.put(name, newLocation);
 
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
@@ -20,7 +19,6 @@ class World {
             Location otherLocation = locations.get(otherLocationName);
 
             if (otherLocation == null) {
-                locations.remove(name);
                 return Optional.empty();
             }
 
@@ -28,6 +26,7 @@ class World {
             otherLocation.addDistance(name, distance);
         }
 
+        locations.put(name, newLocation);
         return Optional.of(newLocation);
     }
 
