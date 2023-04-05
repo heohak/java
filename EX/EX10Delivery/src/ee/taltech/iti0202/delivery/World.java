@@ -3,46 +3,47 @@ package ee.taltech.iti0202.delivery;
 import java.util.*;
 
 class World {
-    private Map<String, Location> locations = new HashMap<>();
-    private Map<String, Courier> couriers = new HashMap<>();
+    private List<String> locations = new ArrayList<>();
 
-    Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
-        if (locations.containsKey(name) || otherLocations.size() > locations.size() || otherLocations.size() != distances.size()) {
+    private Map<String, Location> locationsMap = new HashMap<>();
+    private Map<String, Courier> couriersMap = new HashMap<>();
+
+    public Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
+        Set<String> otherLocationSet = new HashSet<>(otherLocations);
+        Set<String> existingLocationsSet = new HashSet<>(locations);
+
+        if (locationsMap.containsKey(name) || otherLocations.size() != distances.size()
+                || locations.size() > otherLocations.size() || !existingLocationsSet.containsAll(otherLocationSet)) {
             return Optional.empty();
-        }
-
-        Location newLocation = new Location(name);
-
-        for (int i = 0; i < otherLocations.size(); i++) {
-            String otherLocationName = otherLocations.get(i);
-            int distance = distances.get(i);
-            Location otherLocation = locations.get(otherLocationName);
-
-            if (otherLocation == null) {
-                return Optional.empty();
+        } else {
+            Location location = new Location(name);
+            for (int i = 0; i < otherLocations.size(); i++) {
+                String otherLocationName = otherLocations.get(i);
+                int distance = distances.get(i);
+                if (existingLocationsSet.contains(otherLocationName)) {
+                    location.addDistance(otherLocationName, distance);
+                    locationsMap.get(otherLocationName).addDistance(name, distance);
+                }
             }
-
-            newLocation.addDistance(otherLocationName, distance);
-            otherLocation.addDistance(name, distance);
+            locationsMap.put(name, location);
+            locations.add(name);
+            return Optional.of(location);
         }
-
-        locations.put(name, newLocation);
-        return Optional.of(newLocation);
     }
 
     Optional<Courier> addCourier(String name, String to) {
-        if (couriers.containsKey(name) || !locations.containsKey(to)) {
+        if (couriersMap.containsKey(name) || !locationsMap.containsKey(to)) {
             return Optional.empty();
         }
 
-        Location location = locations.get(to);
+        Location location = locationsMap.get(to);
         Courier courier = new Courier(name, location);
-        couriers.put(name, courier);
+        couriersMap.put(name, courier);
         return Optional.of(courier);
     }
 
     boolean giveStrategy(String name, Strategy strategy) {
-        Courier courier = couriers.get(name);
+        Courier courier = couriersMap.get(name);
 
         if (courier == null) {
             return false;
@@ -53,8 +54,8 @@ class World {
     }
 
     void tick() {
-        for (Courier courier : couriers.values()) {
-            courier.tick(locations);
+        for (Courier courier : couriersMap.values()) {
+            courier.tick(locationsMap);
         }
     }
 }
