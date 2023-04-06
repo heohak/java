@@ -1,71 +1,76 @@
 package ee.taltech.iti0202.delivery;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 
 class Courier {
     private String name;
-    private Location currentLocation;
+    private Optional<Location> currentLocation;
+    private Strategy strategy;
+    private Map<String, Packet> carriedPackets;
     private Location destination;
     private int remainingDistance;
-    private Map<String, Packet> carriedPackets = new HashMap<>();
-    private Strategy strategy;
 
-    Courier(String name, Location location) {
+    public Courier(String name, Location location) {
         this.name = name;
-        this.currentLocation = location;
+        this.currentLocation = Optional.of(location);
+        this.carriedPackets = new HashMap<>();
+        this.destination = null;
+        this.remainingDistance = 0;
     }
 
-    Optional<Location> getLocation() {
-        return Optional.ofNullable(currentLocation);
+    public Optional<Location> getLocation() {
+        return currentLocation;
     }
 
-    void setStrategy(Strategy strategy) {
+    public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
     }
 
-    Strategy getStrategy() {
+    public Strategy getStrategy() {
         return strategy;
     }
 
-    public String getName() {
-        return name;
+    public boolean isMoving() {
+        return destination != null;
     }
 
-    void tick(Map<String, Location> locations) {
-        if (destination == null) {
-            if (strategy != null) {
-                Action action = strategy.getAction();
-                if (action != null) {
-                    destination = action.getGoTo();
-                    remainingDistance = currentLocation.getDistanceTo(destination.getName());
-
-                    // Deposit packages
-                    for (String packetName : action.getDeposit()) {
-                        Packet packet = carriedPackets.remove(packetName);
-                        if (packet != null) {
-                            currentLocation.addPacket(packet);
-                        }
-                    }
-
-                    // Take packages
-                    for (String packetName : action.getTake()) {
-                        Optional<Packet> packetOpt = currentLocation.getPacket(packetName);
-                        if (packetOpt.isPresent()) {
-                            carriedPackets.put(packetName, packetOpt.get());
-                        }
-                    }
-                }
-            }
-        } else {
+    public void moveOneUnit() {
+        if (remainingDistance > 0) {
             remainingDistance--;
             if (remainingDistance == 0) {
-                currentLocation = destination;
+                currentLocation = Optional.of(destination);
                 destination = null;
-            } else {
-                currentLocation = null;
             }
+        }
+    }
+
+    public void executeAction() {
+        Action action = strategy.getAction();
+
+        // Deposit packets
+        for (String packetName : action.getDeposit()) {
+            Packet packet = carriedPackets.remove(packetName);
+            if (packet != null && currentLocation.isPresent()) {
+                currentLocation.get().addPacket(packet);
+            }
+        }
+
+        // Take packets
+        for (String packetName : action.getTake()) {
+            Optional<Packet> packet = currentLocation.isPresent() ? currentLocation.get().getPacket(packetName) : Optional.empty();
+            if (packet.isPresent()) {
+                carriedPackets.put(packetName, packet.get());
+            }
+        }
+
+        // Move to destination
+        Location goToLocation = action.getGoTo();
+        if (currentLocation.isPresent()) {
+            remainingDistance = currentLocation.get().getDistanceTo(goToLocation.getName());
+            currentLocation = Optional.empty();
+            destination = goToLocation;
+            moveOneUnit(); // Move the first unit immediately
         }
     }
 }

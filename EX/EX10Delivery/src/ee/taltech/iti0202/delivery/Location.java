@@ -1,39 +1,47 @@
 package ee.taltech.iti0202.delivery;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 class Location {
     private String name;
-    private Map<String, Integer> distances = new HashMap<>();
-    private Map<String, Packet> packets = new HashMap<>();
+    private Map<String, Packet> packets;
+    private Map<String, Integer> distances;
 
-    Location(String name) {
+    public Location(String name) {
         this.name = name;
+        this.packets = new HashMap<>();
+        this.distances = new HashMap<>();
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    Integer getDistanceTo(String name) {
-        if (distances.containsKey(name)) {
-            return distances.get(name);
-        }
-        return Integer.MAX_VALUE;
+    public Integer getDistanceTo(String name) {
+        return distances.getOrDefault(name, Integer.MAX_VALUE);
     }
 
-    void addPacket(Packet packet) {
+    public void addPacket(Packet packet) {
         packets.put(packet.getName(), packet);
     }
 
-    Optional<Packet> getPacket(String name) {
+    public Optional<Packet> getPacket(String name) {
         Packet packet = packets.remove(name);
-        return packet == null ? Optional.empty() : Optional.of(packet);
+        return packet != null ? Optional.of(packet) : Optional.empty();
     }
 
     public void addDistance(String location, int distance) {
         distances.put(location, distance);
+    }
+
+    public Map<String, Packet> getPackets() {
+        return packets;
+    }
+
+    public void setPackets(Map<String, Packet> packets) {
+        this.packets = packets;
     }
 }
