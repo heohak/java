@@ -31,6 +31,10 @@ class Courier {
         return strategy;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean isMoving() {
         return destination != null;
     }
