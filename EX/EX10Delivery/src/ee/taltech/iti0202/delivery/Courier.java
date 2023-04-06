@@ -1,7 +1,9 @@
 package ee.taltech.iti0202.delivery;
 
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 class Courier {
     private String name;
@@ -11,7 +13,7 @@ class Courier {
     private Location destination;
     private int remainingDistance;
 
-    public Courier(String name, Location location) {
+     Courier(String name, Location location) {
         this.name = name;
         this.currentLocation = Optional.of(location);
         this.carriedPackets = new HashMap<>();
@@ -62,7 +64,8 @@ class Courier {
 
         // Take packets
         for (String packetName : action.getTake()) {
-            Optional<Packet> packet = currentLocation.isPresent() ? currentLocation.get().getPacket(packetName) : Optional.empty();
+            Optional<Packet> packet = currentLocation.isPresent()
+                    ? currentLocation.get().getPacket(packetName) : Optional.empty();
             if (packet.isPresent()) {
                 carriedPackets.put(packetName, packet.get());
             }

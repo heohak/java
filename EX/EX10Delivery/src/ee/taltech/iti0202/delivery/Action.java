@@ -8,7 +8,7 @@ class Action {
     private List<String> deposit = new ArrayList<>();
     private List<String> take = new ArrayList<>();
 
-    public Action(Location location) {
+     Action(Location location) {
         this.location = location;
     }
 

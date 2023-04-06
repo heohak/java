@@ -10,7 +10,7 @@ class Location {
     private Map<String, Packet> packets;
     private Map<String, Integer> distances;
 
-    public Location(String name) {
+    Location(String name) {
         this.name = name;
         this.packets = new HashMap<>();
         this.distances = new HashMap<>();
