@@ -2,7 +2,7 @@ package ee.taltech.iti0202.delivery;
 
 import java.util.*;
 
-class World {
+public class World {
     private Map<String, Location> locations;
     private Map<String, Courier> couriers;
 
@@ -12,31 +12,25 @@ class World {
     }
 
     public Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
-        if (locations.containsKey(name) || otherLocations.size() != distances.size()) {
+        HashSet<String> otherLocationSet = new HashSet<>(otherLocations);
+        HashSet<String> locationsSet = new HashSet<>(locations.keySet());
+
+        if (locations.containsKey(name)
+                || otherLocations.size() != distances.size()
+                || locations.size() > otherLocations.size()
+                || !otherLocationSet.containsAll(locationsSet)) {
             return Optional.empty();
-        }
-        if (otherLocations.size() > locations.size()) {
-            return Optional.empty();
-        }
-
-        Location newLocation = new Location(name);
-        locations.put(name, newLocation);
-
-        for (int i = 0; i < otherLocations.size(); i++) {
-            String otherLocationName = otherLocations.get(i);
-            int distance = distances.get(i);
-            Location otherLocation = locations.get(otherLocationName);
-
-            if (otherLocation == null) {
-                locations.remove(name);
-                return Optional.empty();
+        } else {
+            Location location = new Location(name);
+            for (int i = 0; i < otherLocations.size(); i++) {
+                if (locationsSet.contains(otherLocations.get(i))) {
+                    location.addDistance(otherLocations.get(i), distances.get(i));
+                    locations.get(otherLocations.get(i)).addDistance(name, distances.get(i));
+                }
             }
-
-            newLocation.addDistance(otherLocationName, distance);
-            otherLocation.addDistance(name, distance);
+            locations.put(name, location);
+            return Optional.of(location);
         }
-
-        return Optional.of(newLocation);
     }
 
     public Optional<Courier> addCourier(String name, String to) {
@@ -54,6 +48,7 @@ class World {
         if (courier == null) {
             return false;
         }
+
         courier.setStrategy(strategy);
         return true;
     }
