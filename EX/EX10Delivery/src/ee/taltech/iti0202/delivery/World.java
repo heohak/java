@@ -15,16 +15,20 @@ class World {
         if (locations.containsKey(name) || otherLocations.size() != distances.size()) {
             return Optional.empty();
         }
+        if (otherLocations.size() > locations.size()) {
+            return Optional.empty();
+        }
 
         Location newLocation = new Location(name);
         locations.put(name, newLocation);
 
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
-            Integer distance = distances.get(i);
+            int distance = distances.get(i);
             Location otherLocation = locations.get(otherLocationName);
 
             if (otherLocation == null) {
+                locations.remove(name);
                 return Optional.empty();
             }
 
