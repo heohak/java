@@ -18,9 +18,9 @@ public class Store {
     private String name;
     private BigDecimal balance;
     private BigDecimal profitMargin;
-    public Store(String name, BigDecimal balance, BigDecimal profitMargin) throws IllegalAccessException {
+    public Store(String name, BigDecimal balance, BigDecimal profitMargin) throws IllegalArgumentException {
         if (profitMargin.compareTo(BigDecimal.ONE) < 0) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
         this.name = name;
         this.balance = balance;
