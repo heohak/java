@@ -10,9 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Database {
+public final class Database {
     public static Database instance;
     private final Map<Integer, Component> components = new HashMap<>();
 

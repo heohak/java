@@ -6,9 +6,6 @@ import ee.taltech.iti0202.computerstore.database.Database;
 import ee.taltech.iti0202.computerstore.exceptions.NotEnoughMoneyException;
 import ee.taltech.iti0202.computerstore.exceptions.OutOfStockException;
 import ee.taltech.iti0202.computerstore.exceptions.ProductNotFoundException;
-
-
-import javax.xml.crypto.Data;
 import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.List;
