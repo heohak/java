@@ -54,15 +54,16 @@ public class ComputerFactory {
             throws CantMakeComputerException {
         List<Component> result = new ArrayList<>();
         int budget = customer.getBalance().intValue();
-        float[] maxPrices = useCase == Computer.UseCase.GAMING ? new float[]{1.0f / 3, 1.0f / 4, 1.0f / 12}
-                : new float[]{1.0f / 4, 1.0f / 3, 1.0f / 12};
+        final  int twelve = 12;
+        float[] maxPrices = useCase == Computer.UseCase.GAMING ? new float[]{1.0f / 3, 1.0f / 4, 1.0f / twelve}
+                : new float[]{1.0f / 4, 1.0f / 3, 1.0f / twelve};
 
         result.add(getBestComponent(budget * maxPrices[0], Component.Type.GPU));
         result.add(getBestComponent(budget * maxPrices[1], Component.Type.CPU));
-        result.add(getBestComponent(budget / 12, Component.Type.MOTHERBOARD));
-        result.add(getBestComponent(budget / 12, Component.Type.RAM));
-        result.add(getBestComponent(budget / 12, Component.Type.CASE));
-        result.add(getHddOrSsd(budget / 12));
+        result.add(getBestComponent(budget / twelve, Component.Type.MOTHERBOARD));
+        result.add(getBestComponent(budget / twelve, Component.Type.RAM));
+        result.add(getBestComponent(budget / twelve, Component.Type.CASE));
+        result.add(getHddOrSsd(budget / twelve));
 
         if (computerType == Computer.Type.DESKTOP) {
             result.add(getPsu(budget * maxPrices[2], result));
@@ -70,10 +71,10 @@ public class ComputerFactory {
             customer.addComputer(desktop);
             return desktop;
         } else {
-            result.add(getBestComponent(budget / 12, Component.Type.KEYBOARD));
-            result.add(getBestComponent(budget / 12, Component.Type.SCREEN));
-            result.add(getBestComponent(budget / 12, Component.Type.TOUCHPAD));
-            result.add(getBestComponent(budget / 12, Component.Type.BATTERY));
+            result.add(getBestComponent(budget / twelve, Component.Type.KEYBOARD));
+            result.add(getBestComponent(budget / twelve, Component.Type.SCREEN));
+            result.add(getBestComponent(budget / twelve, Component.Type.TOUCHPAD));
+            result.add(getBestComponent(budget / twelve, Component.Type.BATTERY));
             result.add(getPsu(budget * maxPrices[2], result));
             Laptop laptop = new Laptop(result);
             customer.addComputer(laptop);
