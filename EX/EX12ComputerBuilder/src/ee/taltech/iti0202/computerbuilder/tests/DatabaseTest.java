@@ -7,13 +7,12 @@ import ee.taltech.iti0202.computerbuilder.database.Database;
 import ee.taltech.iti0202.computerbuilder.exceptions.OutOfStockException;
 import ee.taltech.iti0202.computerbuilder.exceptions.ProductAlreadyExistsException;
 import ee.taltech.iti0202.computerbuilder.exceptions.ProductNotFoundException;
-import ee.taltech.iti0202.computerbuilder.store.Store;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DatabaseTest {
     private Database database;
@@ -91,7 +90,5 @@ class DatabaseTest {
         database.decreaseComponentStock(0, 2);
         assertEquals(4, database.getComponents().get(0).getAmount());
     }
-
-
 
 }

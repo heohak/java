@@ -7,15 +7,14 @@ import ee.taltech.iti0202.computerbuilder.computer.ComputerFactory;
 import ee.taltech.iti0202.computerbuilder.database.Database;
 import ee.taltech.iti0202.computerbuilder.exceptions.CantMakeComputerException;
 import ee.taltech.iti0202.computerbuilder.exceptions.ProductAlreadyExistsException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ComputerFactoryTest {
     private Database database;
@@ -84,7 +83,8 @@ class ComputerFactoryTest {
     @Test
     void testOrderGamingLaptop() throws CantMakeComputerException {
         Computer computer = ComputerFactory.order(Computer.Type.LAPTOP, Computer.UseCase.GAMING, customer);
-        List<Component> components = List.of(component1, component2, component3, component4, component5, component6, component7, component8, component9, component10, component11);
+        List<Component> components = List.of(component1, component2, component3, component4, component5, component6,
+                component7, component8, component9, component10, component11);
         assertTrue(computer.getComponents().containsAll(components));
         database.resetEntireDatabase();
     }
@@ -92,7 +92,8 @@ class ComputerFactoryTest {
     @Test
     void testOrderWorkLaptop() throws CantMakeComputerException {
         Computer computer = ComputerFactory.order(Computer.Type.LAPTOP, Computer.UseCase.WORK, customer);
-        List<Component> components = List.of(component1, component2, component3, component4, component5, component6, component7, component8, component9, component10, component11);
+        List<Component> components = List.of(component1, component2, component3, component4, component5, component6,
+                component7, component8, component9, component10, component11);
         assertTrue(computer.getComponents().containsAll(components));
         database.resetEntireDatabase();
 
@@ -101,7 +102,8 @@ class ComputerFactoryTest {
     @Test
     void testOrderGamingDesktop() throws CantMakeComputerException {
         Computer computer = ComputerFactory.order(Computer.Type.DESKTOP, Computer.UseCase.GAMING, customer);
-        List<Component> components = List.of(component1, component2, component3, component4, component5, component6, component7);
+        List<Component> components = List.of(component1, component2, component3, component4, component5, component6,
+                component7);
         assertTrue(computer.getComponents().containsAll(components));
         database.resetEntireDatabase();
     }
@@ -109,7 +111,8 @@ class ComputerFactoryTest {
     @Test
     void testOrderWorkDesktop() throws CantMakeComputerException {
         Computer computer = ComputerFactory.order(Computer.Type.DESKTOP, Computer.UseCase.WORK, customer);
-        List<Component> components = List.of(component1, component2, component3, component4, component5, component6, component7);
+        List<Component> components = List.of(component1, component2, component3, component4, component5, component6,
+                component7);
         assertTrue(computer.getComponents().containsAll(components));
         database.resetEntireDatabase();
     }
