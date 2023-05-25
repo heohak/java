@@ -14,7 +14,7 @@ public class Timetable {
 
 
     public Optional<String> addTask(String name, int day, int duration, boolean priority) {
-        if (dayLimits.containsKey(day) && dayLimits.get(day) >= 5) {
+        if (dayLimits.containsKey(day) && dayLimits.get(day) + duration > 5) {
             return Optional.empty();
         }
         if (day < 1 || duration < 1 || duration > 5) {
