@@ -45,6 +45,8 @@ public class Timetable {
         for (Task task : tasks) {
             if (task.getCode().equals(taskNumber) && !task.isDone()) {
                 task.setDone(true);
+                tasks.remove(task);
+                dayLimits.remove(task.getDay());
                 return true;
             }
         }
