@@ -20,6 +20,8 @@ public class Robot {
 
     private List<Product> products = new ArrayList<>();
 
+    private double currentWeight;
+
     public Robot(String name, int maxWeight) {
         this.name = name;
         this.id = nextId++;
@@ -62,5 +64,13 @@ public class Robot {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public double getCurrentWeight() {
+        return currentWeight;
+    }
+
+    public void setCurrentWeight(double currentWeight) {
+        this.currentWeight = currentWeight;
     }
 }

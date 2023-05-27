@@ -21,6 +21,8 @@ public class Company {
 
     private List<Order> orders = new ArrayList<>();
 
+    private final double transportFee = 5;
+
 
     public Company() {
     }
@@ -78,5 +80,32 @@ public class Company {
             robotStatuses.put(robot.getId(), robot.getStatus());
         }
         return robotStatuses;
+    }
+
+    public void processOrder() {
+        for (Order order : orders) {
+            if (order.isCompleted()) continue;
+            for (Robot robot : robots) {
+                if (robot.getStatus() == RobotStatus.IDLE) {
+                    List<Product> remainingProducts = new ArrayList<>();
+                    for (Product product : order.getOrderProducts()) {
+                        if (product.getWeight() + robot.getCurrentWeight() <= robot.getMaxWeight()) {
+                            robot.getProducts().add(product);
+                            robot.setCurrentWeight(robot.getCurrentWeight() + product.getWeight());
+                        } else {
+                            remainingProducts.add(product);
+                        }
+                    }
+                    order.setOrderProducts(remainingProducts);
+                    if (order.getOrderProducts().isEmpty()) {
+                        order.setCompleted(true);
+                        order.getClient().setBalance(order.getClient().getBalance() - order.getOrderValue() - transportFee);
+                    }
+                    if (!robot.getProducts().isEmpty()) {
+                        sendRobotToFillOrder(robot);
+                    }
+                }
+            }
+        }
     }
 }
