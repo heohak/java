@@ -8,7 +8,7 @@ import java.util.List;
 public class Robot {
     private String name;
 
-    private static int nextId = 0;
+    private static int nextId = 1;
 
     private  int id;
 
@@ -32,10 +32,6 @@ public class Robot {
 
     public String getName() {
         return name;
-    }
-
-    public static int getNextId() {
-        return nextId;
     }
 
     public int getId() {
@@ -72,5 +68,12 @@ public class Robot {
 
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
+    }
+
+    public void reset() {
+        this.isInACompany = false;
+        this.status = RobotStatus.IDLE;
+        this.products.clear();
+        this.id = nextId++;
     }
 }

@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.deliveryrobot.company;
 
+import ee.taltech.iti0202.deliveryrobot.exceptions.CantAddItemToRobotException;
 import ee.taltech.iti0202.deliveryrobot.exceptions.RobotAlreadyInACompanyException;
 import ee.taltech.iti0202.deliveryrobot.order.Order;
 import ee.taltech.iti0202.deliveryrobot.product.Product;
@@ -43,16 +44,26 @@ public class Company {
         }
     }
 
-    public void AddProductToRobot(Robot robot, Product product) {
-        if (!robot.getProducts().contains(product) && product.getWeight() < robot.getMaxWeight() && robot.getStatus().equals(RobotStatus.IDLE)) {
+    public void addProductToRobot(Robot robot, Product product) throws CantAddItemToRobotException {
+        if (!robot.getProducts().contains(product)
+                && product.getWeight() < robot.getMaxWeight()
+                && robot.getStatus().equals(RobotStatus.IDLE)
+                && robots.contains(robot)
+                && products.contains(product)) {
             robot.getProducts().add(product);
+            products.remove(product);
+            robot.setStatus(RobotStatus.ACTIVE);
+        }
+        else {
+            throw new CantAddItemToRobotException();
         }
     }
 
-    public void sendRobotToFillOrder(Robot robot) {
-        if (robot.getProducts().size() > 0) {
-            robot.setStatus(RobotStatus.ACTIVE);
+    public void sendRobotToDeliverPackage(Robot robot) {
+        if (robot.getProducts().size() > 0 && robot.getStatus().equals(RobotStatus.ACTIVE)) {
             sentOutProducts.addAll(robot.getProducts());
+            robot.getProducts().clear();
+            robot.setStatus(RobotStatus.IDLE);
 
         }
 
@@ -81,6 +92,11 @@ public class Company {
         }
         return robotStatuses;
     }
+    public void reset() {
+        this.products.clear();
+        this.robots.clear();
+        this.orders.clear();
+    }
 
     public void processOrder() {
         for (Order order : orders) {
@@ -102,7 +118,7 @@ public class Company {
                         order.getClient().setBalance(order.getClient().getBalance() - order.getOrderValue() - transportFee);
                     }
                     if (!robot.getProducts().isEmpty()) {
-                        sendRobotToFillOrder(robot);
+                        sendRobotToDeliverPackage(robot);
                     }
                 }
             }

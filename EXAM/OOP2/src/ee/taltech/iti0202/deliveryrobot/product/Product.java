@@ -6,9 +6,12 @@ public class Product {
 
     private double price;
 
-    public Product(double weight, double price) {
+    private String name;
+
+    public Product(String name, double weight, double price) {
         this.weight = weight;
         this.price = price;
+        this.name = name;
     }
 
     public double getWeight() {
@@ -25,5 +28,9 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getName() {
+        return name;
     }
 }

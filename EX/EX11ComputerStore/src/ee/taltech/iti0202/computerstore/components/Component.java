@@ -98,4 +98,9 @@ public class Component {
 
     }
 
+    public static void main(String[] args) {
+        Component comp1 = new Component("jou", Type.CPU, BigDecimal.valueOf(20) ,"ju", 8, 6);
+        System.out.println(comp1.getId());
+    }
+
 }
