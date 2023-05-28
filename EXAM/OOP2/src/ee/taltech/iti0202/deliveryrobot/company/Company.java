@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class Company {
 
+    private Map<Product, Integer> productOrderCounts = new HashMap<>();
+
     private List<Robot> robots = new ArrayList<>();
 
     private List<Product> products = new ArrayList<>();
@@ -21,7 +23,7 @@ public class Company {
 
     private List<Order> orders = new ArrayList<>();
 
-    private final double transportFee = 5;
+    protected final double transportFee = 5;
 
 
     public Company() {
@@ -88,6 +90,10 @@ public class Company {
         return orders;
     }
 
+    public Map<Product, Integer> getProductOrderCounts() {
+        return productOrderCounts;
+    }
+
     public Map<Integer, RobotStatus> getRobotsByStatus() {
         Map<Integer,RobotStatus> robotStatuses = new HashMap<>();
         for (Robot robot : robots) {
@@ -104,10 +110,13 @@ public class Company {
     public void processOrder() throws CantSendOutRobotException, NoFreeRobotsException {
         for (Order order : orders) {
             if (order.isCompleted()) continue;
+            boolean freeRobotFound = false; // Add this
             for (Robot robot : robots) {
                 if (robot.getStatus() == RobotStatus.IDLE) {
+                    freeRobotFound = true; // Add this
                     List<Product> remainingProducts = new ArrayList<>();
-                    double orderValue = order.getOrderValue();  // Move this up before clearing products
+                    double orderValue = order.getOrderValue();
+
                     for (Product product : order.getOrderProducts()) {
                         if (product.getWeight() + robot.getCurrentWeight() <= robot.getMaxWeight()) {
                             robot.getProducts().add(product);
@@ -120,14 +129,16 @@ public class Company {
                     order.setOrderProducts(remainingProducts);
                     if (order.getOrderProducts().isEmpty()) {
                         order.setCompleted(true);
-                        order.getClient().setBalance(order.getClient().getBalance() - orderValue - transportFee);  // Use calculated orderValue
+                        order.getClient().setBalance(order.getClient().getBalance() - orderValue - transportFee);
                     }
                     if (!robot.getProducts().isEmpty()) {
                         sendRobotToDeliverPackage(robot);
                     }
-                } else {
-                    throw new NoFreeRobotsException();
+                    break; // once you have found an idle robot, you don't need to check further robots for this order
                 }
+            }
+            if (!freeRobotFound) { // If no free robots were found for an order, throw the exception
+                throw new NoFreeRobotsException();
             }
         }
     }

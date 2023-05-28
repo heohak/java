@@ -33,6 +33,8 @@ class CompanyTest {
 
     Product product4;
 
+    Product product5;
+
     Order order1;
 
     Order order2;
@@ -62,8 +64,9 @@ class CompanyTest {
         product2 = new Product("Laud", 100, 50);
         product3 = new Product("pastakas", 5, 5);
         product4 = new Product("Auto", 3000, 1000);
+        product5 = new Product("Tool", 75, 50);
         List<Product> list1 = List.of(product1, product2, product3);
-        List<Product> list2 = List.of(product4, product3);
+        List<Product> list2 = List.of(product5, product3);
 
         client1 = new Client("Harry", 7000);
         client2 = new Client("Marx", 3000);
@@ -76,10 +79,11 @@ class CompanyTest {
     }
 
     @Test
-    public void testAddRobotToCompany() throws RobotAlreadyInACompanyException {
+    public void testAddRobotsToCompany() throws RobotAlreadyInACompanyException {
         assertEquals(0, company1.getRobots().size());
         company1.addRobot(robot1);
-        assertEquals(1, company1.getRobots().size());
+        company1.addRobot(robot2);
+        assertEquals(2, company1.getRobots().size());
     }
     @Test
     public void testCantAddRobotToSameCompany() throws RobotAlreadyInACompanyException {
