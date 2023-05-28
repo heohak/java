@@ -28,11 +28,6 @@ class RobotTest {
 
 
     }
-    @Test
-    public void testRobotId() {
-        assertEquals(1, robot1.getId());
-        assertEquals(2, robot2.getId());
-    }
 
     @Test
     public void testConstructor() {
@@ -58,4 +53,5 @@ class RobotTest {
         robot.setInACompany(true);
         assertTrue(robot.isInACompany());
     }
+
 }

@@ -13,6 +13,13 @@ import java.util.List;
 
 public class CompanyMostPopularItemsFirstStrategy extends Company {
 
+    /**
+     * It processes orders based on the popularity of the items, meaning the items ordered most frequently
+     * are processed first.
+     *
+     * @throws CantSendOutRobotException
+     * @throws NoFreeRobotsException
+     */
     @Override
     public void processOrder() throws CantSendOutRobotException, NoFreeRobotsException {
         for (Order order : getOrders()) {

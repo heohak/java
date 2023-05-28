@@ -14,6 +14,13 @@ import java.util.List;
 
 public class CompanyLowWeightsStrategy extends Company {
 
+    /**
+     * Sorts the products in the order by their weight and starts filling the robots with the products,
+     * starting from the ones with the lowest weight.
+     *
+     * @throws CantSendOutRobotException
+     * @throws NoFreeRobotsException
+     */
     @Override
     public void processOrder() throws CantSendOutRobotException, NoFreeRobotsException {
         for (Order order : getOrders()) {

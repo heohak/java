@@ -28,10 +28,18 @@ public class Company {
 
     protected final double transportFee = 5;
 
-
+    /**
+     * Company class.
+     */
     public Company() {
     }
 
+    /**
+     * Adds a robot to the company if it is not in a company already.
+     *
+     * @param robot
+     * @throws RobotAlreadyInACompanyException
+     */
     public void addRobot(Robot robot) throws RobotAlreadyInACompanyException {
         if (!robot.isInACompany()) {
             robots.add(robot);
@@ -41,12 +49,24 @@ public class Company {
         }
     }
 
+    /**
+     * Adds a product to the company if it is not already present.
+     *
+     * @param product
+     */
     public void addProduct(Product product) {
         if (!products.contains(product)) {
             products.add(product);
         }
     }
 
+    /**
+     * Adds a product to a robot if certain conditions are met.
+     *
+     * @param robot
+     * @param product
+     * @throws CantAddItemToRobotException
+     */
     public void addProductToRobot(Robot robot, Product product) throws CantAddItemToRobotException {
         if (!robot.getProducts().contains(product)
                 && product.getWeight() < robot.getMaxWeight()
@@ -62,6 +82,12 @@ public class Company {
         }
     }
 
+    /**
+     * Sends a robot to deliver its package if certain conditions are met.
+     *
+     * @param robot
+     * @throws CantSendOutRobotException
+     */
     public void sendRobotToDeliverPackage(Robot robot) throws CantSendOutRobotException {
         if (robot.getProducts().size() > 0 && robot.getStatus().equals(RobotStatus.ACTIVE)) {
             sentOutProducts.addAll(robot.getProducts());
@@ -75,26 +101,56 @@ public class Company {
 
     }
 
+    /**
+     * Returns a list of the company's products.
+     *
+     * @return List
+     */
     public List<Product> getProducts() {
         return products;
     }
 
+    /**
+     * Returns a list of products that have been sent out for delivery.
+     *
+     * @return List
+     */
     public List<Product> getSentOutProducts() {
         return sentOutProducts;
     }
 
+    /**
+     * Returns a list of the company's robots.
+     *
+     * @return List
+     */
     public List<Robot> getRobots() {
         return robots;
     }
 
+    /**
+     * Returns a list of the company's orders.
+     *
+     * @return List
+     */
     public List<Order> getOrders() {
         return orders;
     }
 
+    /**
+     * Returns a map of the company's products and their order counts.
+     *
+     * @return Map
+     */
     public Map<Product, Integer> getProductOrderCounts() {
         return productOrderCounts;
     }
 
+    /**
+     * Returns a map of the company's robots and their statuses.
+     *
+     * @return Map
+     */
     public Map<Integer, RobotStatus> getRobotsByStatus() {
         Map<Integer, RobotStatus> robotStatuses = new HashMap<>();
         for (Robot robot : robots) {
@@ -102,12 +158,13 @@ public class Company {
         }
         return robotStatuses;
     }
-    public void reset() {
-        this.products.clear();
-        this.robots.clear();
-        this.orders.clear();
-    }
 
+    /**
+     * Processes all orders of the company, assigning free robots to orders and sending out robots to deliver.
+     *
+     * @throws CantSendOutRobotException
+     * @throws NoFreeRobotsException
+     */
     public void processOrder() throws CantSendOutRobotException, NoFreeRobotsException {
         for (Order order : orders) {
             if (order.isCompleted()) continue;
