@@ -3,7 +3,7 @@ package ee.taltech.iti0202.deliveryrobot.tests;
 import ee.taltech.iti0202.deliveryrobot.product.Product;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProductTest {
 

@@ -25,7 +25,8 @@ public class CompanyMostPopularItemsFirstStrategy extends Company {
                     double orderValue = order.getOrderValue();
 
                     // Sort the products in the order by the number of times they have been ordered
-                    order.getOrderProducts().sort((p1, p2) -> getProductOrderCounts().getOrDefault(p2, 0) - getProductOrderCounts().getOrDefault(p1, 0));
+                    order.getOrderProducts().sort((p1, p2) -> getProductOrderCounts()
+                            .getOrDefault(p2, 0) - getProductOrderCounts().getOrDefault(p1, 0));
 
                     for (Product product : order.getOrderProducts()) {
                         if (product.getWeight() + robot.getCurrentWeight() <= robot.getMaxWeight()) {

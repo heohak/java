@@ -2,7 +2,11 @@ package ee.taltech.iti0202.deliveryrobot.tests;
 
 import ee.taltech.iti0202.deliveryrobot.client.Client;
 import ee.taltech.iti0202.deliveryrobot.company.Company;
-import ee.taltech.iti0202.deliveryrobot.exceptions.*;
+import ee.taltech.iti0202.deliveryrobot.exceptions.CantAddItemToRobotException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.CantSendOutRobotException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.InsufficientBalanceException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.NoFreeRobotsException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.RobotAlreadyInACompanyException;
 import ee.taltech.iti0202.deliveryrobot.order.Order;
 import ee.taltech.iti0202.deliveryrobot.product.Product;
 import ee.taltech.iti0202.deliveryrobot.robot.Robot;
@@ -11,10 +15,12 @@ import ee.taltech.iti0202.deliveryrobot.robot.RobotStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CompanyTest {
     Robot robot1;
@@ -97,7 +103,8 @@ class CompanyTest {
     }
 
     @Test
-    public void testRobotInWrongStatusCantAddItem() throws RobotAlreadyInACompanyException, CantAddItemToRobotException {
+    public void testRobotInWrongStatusCantAddItem() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException {
         company1.addRobot(robot1);
         company1.addProduct(product2);
         company1.addProduct(product1);
@@ -107,7 +114,8 @@ class CompanyTest {
     }
 
     @Test
-    public void testCheckIfRobotStatusChanges() throws RobotAlreadyInACompanyException, CantAddItemToRobotException, CantSendOutRobotException {
+    public void testCheckIfRobotStatusChanges() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException, CantSendOutRobotException {
         company2.addProduct(product1);
         company2.addRobot(robot1);
         assertEquals(RobotStatus.IDLE, robot1.getStatus());
@@ -121,7 +129,8 @@ class CompanyTest {
 
     }
     @Test
-    public void testSendRobotToDeliverAPackage() throws RobotAlreadyInACompanyException, CantAddItemToRobotException, CantSendOutRobotException {
+    public void testSendRobotToDeliverAPackage() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException, CantSendOutRobotException {
         company1.addProduct(product1);
         company1.addRobot(robot1);
         company1.addProductToRobot(robot1, product1);
@@ -134,14 +143,15 @@ class CompanyTest {
 
     }
     @Test
-    public void testShowWhichRobotsAreInWhichState() throws RobotAlreadyInACompanyException, CantAddItemToRobotException {
+    public void testShowWhichRobotsAreInWhichState() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException {
 
         company1.addProduct(product1);
         company1.addRobot(robot1);
         company1.addRobot(robot2);
         company1.addRobot(robot3);
         robot3.setStatus(RobotStatus.BROKEN);
-        company1.addProductToRobot(robot1,product1);
+        company1.addProductToRobot(robot1, product1);
         assertEquals(3, company1.getRobotsByStatus().size());
         assertEquals(RobotStatus.ACTIVE, company1.getRobotsByStatus().get(robot1.getId()));
         assertEquals(RobotStatus.IDLE, company1.getRobotsByStatus().get(robot2.getId()));
@@ -150,14 +160,15 @@ class CompanyTest {
     }
 
     @Test
-    public void testShowWhichPackagesAreSentOut() throws RobotAlreadyInACompanyException, CantAddItemToRobotException, CantSendOutRobotException {
+    public void testShowWhichPackagesAreSentOut() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException, CantSendOutRobotException {
         company1.addProduct(product1);
         company1.addProduct(product2);
         company1.addProduct(product3);
         company1.addRobot(robot1);
         company1.addProductToRobot(robot1, product1);
         company1.sendRobotToDeliverPackage(robot1);
-        company1.addProductToRobot(robot1,product2);
+        company1.addProductToRobot(robot1, product2);
         company1.sendRobotToDeliverPackage(robot1);
         assertEquals(2, company1.getSentOutProducts().size());
         assertEquals("Tass", company1.getSentOutProducts().get(0).getName());
@@ -173,7 +184,8 @@ class CompanyTest {
     }
     @Test
 
-    public void testCompleteClientsOrders() throws RobotAlreadyInACompanyException, CantSendOutRobotException, NoFreeRobotsException, InsufficientBalanceException {
+    public void testCompleteClientsOrders() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException, NoFreeRobotsException, InsufficientBalanceException {
         company1.addRobot(robot1);
         company1.addRobot(robot2);
         company1.addRobot(robot3);
@@ -186,17 +198,19 @@ class CompanyTest {
 
     }
     @Test
-    public void testCantCompleteOrderBecauseNoFreeRobots() throws RobotAlreadyInACompanyException, CantAddItemToRobotException, CantSendOutRobotException, NoFreeRobotsException {
+    public void testCantCompleteOrderBecauseNoFreeRobots() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException, CantSendOutRobotException, NoFreeRobotsException {
         company1.addRobot(robot1);
         company1.addProduct(product1);
         client1.placeOrder(company1, order1);
-        company1.addProductToRobot(robot1,product1);
+        company1.addProductToRobot(robot1, product1);
         assertThrows(NoFreeRobotsException.class, () -> company1.processOrder());
 
 
     }
     @Test
-    public void testClientOrderCompletedAndClientLosesMoney() throws RobotAlreadyInACompanyException, CantSendOutRobotException, NoFreeRobotsException, InsufficientBalanceException {
+    public void testClientOrderCompletedAndClientLosesMoney() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException, NoFreeRobotsException, InsufficientBalanceException {
         company1.addRobot(robot1);
         assertEquals(7000, client1.getBalance());
         client1.placeOrder(company1, order1);

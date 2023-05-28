@@ -18,7 +18,8 @@ public class Client {
         if (!company.getOrders().contains(order)) {
             company.getOrders().add(order);
             for (Product product : order.getOrderProducts()) {
-                company.getProductOrderCounts().put(product, company.getProductOrderCounts().getOrDefault(product, 0) + 1);
+                company.getProductOrderCounts().put(product, company.getProductOrderCounts()
+                        .getOrDefault(product, 0) + 1);
             }
         }
     }

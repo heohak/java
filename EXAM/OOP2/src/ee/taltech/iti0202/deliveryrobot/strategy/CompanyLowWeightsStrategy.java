@@ -7,7 +7,6 @@ import ee.taltech.iti0202.deliveryrobot.order.Order;
 import ee.taltech.iti0202.deliveryrobot.product.Product;
 import ee.taltech.iti0202.deliveryrobot.robot.Robot;
 import ee.taltech.iti0202.deliveryrobot.robot.RobotStatus;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Comparator;

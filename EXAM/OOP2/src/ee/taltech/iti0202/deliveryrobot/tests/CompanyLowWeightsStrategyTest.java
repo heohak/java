@@ -1,7 +1,6 @@
 package ee.taltech.iti0202.deliveryrobot.tests;
 
 import ee.taltech.iti0202.deliveryrobot.client.Client;
-import ee.taltech.iti0202.deliveryrobot.company.Company;
 import ee.taltech.iti0202.deliveryrobot.exceptions.CantSendOutRobotException;
 import ee.taltech.iti0202.deliveryrobot.exceptions.NoFreeRobotsException;
 import ee.taltech.iti0202.deliveryrobot.exceptions.RobotAlreadyInACompanyException;
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CompanyLowWeightsStrategyTest {
 
@@ -64,7 +63,8 @@ class CompanyLowWeightsStrategyTest {
     }
 
     @Test
-    public void testLowWeightItemsFirstStrategy() throws RobotAlreadyInACompanyException, CantSendOutRobotException, NoFreeRobotsException {
+    public void testLowWeightItemsFirstStrategy() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException, NoFreeRobotsException {
         company1.addRobot(robot1);
         client1.placeOrder(company1, order1);
         company1.processOrder();

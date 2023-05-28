@@ -8,7 +8,6 @@ import ee.taltech.iti0202.deliveryrobot.order.Order;
 import ee.taltech.iti0202.deliveryrobot.product.Product;
 import ee.taltech.iti0202.deliveryrobot.robot.Robot;
 import ee.taltech.iti0202.deliveryrobot.robot.RobotBuilder;
-import ee.taltech.iti0202.deliveryrobot.strategy.CompanyLowWeightsStrategy;
 import ee.taltech.iti0202.deliveryrobot.strategy.CompanyMostPopularItemsFirstStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CompanyMostPopularItemsFirstStrategyTest {
 
@@ -66,9 +65,10 @@ class CompanyMostPopularItemsFirstStrategyTest {
     }
 
     @Test
-    public void testMostPopularItemsFirstDelivered() throws RobotAlreadyInACompanyException, CantSendOutRobotException, NoFreeRobotsException {
+    public void testMostPopularItemsFirstDelivered() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException, NoFreeRobotsException {
         company1.addRobot(robot1);
-        client1.placeOrder(company1,order1);
+        client1.placeOrder(company1, order1);
         company1.processOrder();
         assertEquals("Tass", company1.getSentOutProducts().get(0).getName());
         assertEquals("Kapp", company1.getSentOutProducts().get(3).getName());

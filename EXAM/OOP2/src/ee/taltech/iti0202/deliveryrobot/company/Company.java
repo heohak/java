@@ -1,6 +1,9 @@
 package ee.taltech.iti0202.deliveryrobot.company;
 
-import ee.taltech.iti0202.deliveryrobot.exceptions.*;
+import ee.taltech.iti0202.deliveryrobot.exceptions.CantAddItemToRobotException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.CantSendOutRobotException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.NoFreeRobotsException;
+import ee.taltech.iti0202.deliveryrobot.exceptions.RobotAlreadyInACompanyException;
 import ee.taltech.iti0202.deliveryrobot.order.Order;
 import ee.taltech.iti0202.deliveryrobot.product.Product;
 import ee.taltech.iti0202.deliveryrobot.robot.Robot;
@@ -33,8 +36,7 @@ public class Company {
         if (!robot.isInACompany()) {
             robots.add(robot);
             robot.setInACompany(true);
-        }
-        else {
+        } else {
             throw new RobotAlreadyInACompanyException();
         }
     }
@@ -55,8 +57,7 @@ public class Company {
             products.remove(product);
             robot.setCurrentWeight(robot.getCurrentWeight() + product.getWeight());
             robot.setStatus(RobotStatus.ACTIVE);
-        }
-        else {
+        } else {
             throw new CantAddItemToRobotException();
         }
     }
@@ -95,7 +96,7 @@ public class Company {
     }
 
     public Map<Integer, RobotStatus> getRobotsByStatus() {
-        Map<Integer,RobotStatus> robotStatuses = new HashMap<>();
+        Map<Integer, RobotStatus> robotStatuses = new HashMap<>();
         for (Robot robot : robots) {
             robotStatuses.put(robot.getId(), robot.getStatus());
         }
@@ -110,10 +111,10 @@ public class Company {
     public void processOrder() throws CantSendOutRobotException, NoFreeRobotsException {
         for (Order order : orders) {
             if (order.isCompleted()) continue;
-            boolean freeRobotFound = false; // Add this
+            boolean freeRobotFound = false;
             for (Robot robot : robots) {
                 if (robot.getStatus() == RobotStatus.IDLE) {
-                    freeRobotFound = true; // Add this
+                    freeRobotFound = true;
                     List<Product> remainingProducts = new ArrayList<>();
                     double orderValue = order.getOrderValue();
 
@@ -134,10 +135,10 @@ public class Company {
                     if (!robot.getProducts().isEmpty()) {
                         sendRobotToDeliverPackage(robot);
                     }
-                    break; // once you have found an idle robot, you don't need to check further robots for this order
+                    break;
                 }
             }
-            if (!freeRobotFound) { // If no free robots were found for an order, throw the exception
+            if (!freeRobotFound) {
                 throw new NoFreeRobotsException();
             }
         }
