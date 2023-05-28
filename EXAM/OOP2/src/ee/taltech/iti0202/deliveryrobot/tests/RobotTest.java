@@ -1,32 +1,23 @@
 package ee.taltech.iti0202.deliveryrobot.tests;
 
 import ee.taltech.iti0202.deliveryrobot.robot.Robot;
-import ee.taltech.iti0202.deliveryrobot.robot.RobotBuilder;
 import ee.taltech.iti0202.deliveryrobot.robot.RobotStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RobotTest {
-    Robot robot1;
-
-    Robot robot2;
 
     @BeforeEach
-    void setup() {
-        robot1 = new RobotBuilder()
-                .setName("robot1")
-                .setMaxWeight(500)
-                .createRobot();
-        robot2 = new RobotBuilder()
-                .setName("robot2")
-                .setMaxWeight(200)
-                .createRobot();
-
-
+    void resetRobotId() throws NoSuchFieldException, IllegalAccessException {
+        Field field = Robot.class.getDeclaredField("nextId");
+        field.setAccessible(true);
+        field.set(null, 1); // Reset nextId to 1
     }
 
     @Test
@@ -52,6 +43,15 @@ class RobotTest {
         Robot robot = new Robot("Robo1", 200);
         robot.setInACompany(true);
         assertTrue(robot.isInACompany());
+    }
+
+    @Test
+    void testRobotId() {
+        Robot robot1 = new Robot("robot1", 100);
+        Robot robot2 = new Robot("robot2", 200);
+
+        assertEquals(1, robot1.getId());
+        assertEquals(2, robot2.getId());
     }
 
 }
