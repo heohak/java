@@ -36,6 +36,8 @@ class CompanyMostPopularItemsFirstStrategyTest {
 
     Order order1;
 
+    Order order2;
+
 
     Client client1;
 
@@ -60,8 +62,14 @@ class CompanyMostPopularItemsFirstStrategyTest {
         list1.add(product1);
         list1.add(product1);
         list1.add(product1);
+        List<Product> list2 = new ArrayList<>();
+        list2.add(product2);
+        list2.add(product3);
+        list2.add(product2);
+        list2.add(product2);
         client1 = new Client("Harry", 5000);
         order1 = new Order(list1, client1);
+        order2 = new Order(list2, client1);
     }
 
     @Test
@@ -75,6 +83,20 @@ class CompanyMostPopularItemsFirstStrategyTest {
         assertEquals("Pliiats", company1.getSentOutProducts().get(5).getName());
 
 
+
+    }
+    @Test
+    public void testMostPopularItemsFirstDeliveredMultipleOrders() throws RobotAlreadyInACompanyException, CantSendOutRobotException, NoFreeRobotsException {
+        company1.addRobot(robot1);
+        client1.placeOrder(company1, order2);
+        client1.placeOrder(company1, order1);
+        company1.processOrder();
+        assertEquals("Pliiats", company1.getSentOutProducts().get(0).getName());
+        assertEquals("Pliiats", company1.getSentOutProducts().get(1).getName());
+        assertEquals("Pliiats", company1.getSentOutProducts().get(2).getName());
+        assertEquals("Kapp", company1.getSentOutProducts().get(3).getName());
+        assertEquals("Pliiats", company1.getSentOutProducts().get(4).getName());
+        assertEquals("Tass", company1.getSentOutProducts().get(9).getName());
 
     }
 

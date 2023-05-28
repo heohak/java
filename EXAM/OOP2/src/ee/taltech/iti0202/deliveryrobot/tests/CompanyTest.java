@@ -113,6 +113,7 @@ class CompanyTest {
 
     }
 
+
     @Test
     public void testCheckIfRobotStatusChanges() throws RobotAlreadyInACompanyException,
             CantAddItemToRobotException, CantSendOutRobotException {
@@ -140,6 +141,14 @@ class CompanyTest {
         assertEquals(0, company1.getProducts().size());
         assertEquals(0, robot1.getProducts().size());
 
+
+    }
+
+    @Test
+    public void testCantSendRobotOutNoPackageWithRobot() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException {
+        company1.addRobot(robot1);
+        assertThrows(CantSendOutRobotException.class, () -> company1.sendRobotToDeliverPackage(robot1));
 
     }
     @Test

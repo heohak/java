@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.deliveryrobot.tests;
 
 import ee.taltech.iti0202.deliveryrobot.client.Client;
+import ee.taltech.iti0202.deliveryrobot.exceptions.CantAddItemToRobotException;
 import ee.taltech.iti0202.deliveryrobot.exceptions.CantSendOutRobotException;
 import ee.taltech.iti0202.deliveryrobot.exceptions.NoFreeRobotsException;
 import ee.taltech.iti0202.deliveryrobot.exceptions.RobotAlreadyInACompanyException;
@@ -16,10 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CompanyLowWeightsStrategyTest {
 
     Robot robot1;
+
+    Robot robot2;
 
 
 
@@ -36,6 +40,8 @@ class CompanyLowWeightsStrategyTest {
 
     Order order1;
 
+    Order order2;
+
 
     Client client1;
 
@@ -45,6 +51,10 @@ class CompanyLowWeightsStrategyTest {
         robot1 = new RobotBuilder()
                 .setName("robot1")
                 .setMaxWeight(3000)
+                .createRobot();
+        robot2 = new RobotBuilder()
+                .setName("robot2")
+                .setMaxWeight(500)
                 .createRobot();
 
         company1 = new CompanyLowWeightsStrategy();
@@ -58,8 +68,12 @@ class CompanyLowWeightsStrategyTest {
         list1.add(product3);
         list1.add(product2);
         list1.add(product1);
+        List<Product> list2 = new ArrayList<>();
+        list2.add(product1);
+        list2.add(product3);
         client1 = new Client("Harry", 5000);
         order1 = new Order(list1, client1);
+        order2 = new Order(list2, client1);
     }
 
     @Test
@@ -72,6 +86,29 @@ class CompanyLowWeightsStrategyTest {
         assertEquals("Tass", company1.getSentOutProducts().get(1).getName());
         assertEquals("Kapp", company1.getSentOutProducts().get(2).getName());
         assertEquals("Klaver", company1.getSentOutProducts().get(3).getName());
+    }
+
+    @Test
+    public void testLowWeightItemsFirstStrategyNoFreeRobots() throws RobotAlreadyInACompanyException,
+            CantAddItemToRobotException {
+        company1.addRobot(robot2);
+        company1.addProduct(product2);
+        company1.addProductToRobot(robot2, product2);
+        client1.placeOrder(company1, order1);
+        assertThrows(NoFreeRobotsException.class, company1::processOrder);
+    }
+
+    @Test
+    public void testLowWeightItemsFirstStrategyMultipleOrders() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException, NoFreeRobotsException {
+        company1.addRobot(robot1);
+        client1.placeOrder(company1, order2);
+        client1.placeOrder(company1, order1);
+        company1.processOrder();
+        assertEquals("Tass", company1.getSentOutProducts().get(0).getName());
+        assertEquals("Klaver", company1.getSentOutProducts().get(5).getName());
+
+
     }
 
 }
