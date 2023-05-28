@@ -86,7 +86,8 @@ class CompanyMostPopularItemsFirstStrategyTest {
 
     }
     @Test
-    public void testMostPopularItemsFirstDeliveredMultipleOrders() throws RobotAlreadyInACompanyException, CantSendOutRobotException, NoFreeRobotsException {
+    public void testMostPopularItemsFirstDeliveredMultipleOrders() throws RobotAlreadyInACompanyException,
+            CantSendOutRobotException, NoFreeRobotsException {
         company1.addRobot(robot1);
         client1.placeOrder(company1, order2);
         client1.placeOrder(company1, order1);
