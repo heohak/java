@@ -63,7 +63,24 @@ public class Exam {
      * @return decoded message
      */
     public static String decodeMessage(String message) {
-        return "";
+        String alpha = "abcdefghijklmnopqrstuvwxyz";
+        String number = "";
+        String result = "";
+        for (int i = 0; i < message.length(); i++) {
+            if (!Character.isDigit(message.charAt(i)) && number.length() == 0) {
+                result += message.charAt(i);
+            } else if (Character.isDigit(message.charAt(i))) {
+                number += message.charAt(i);
+            } else if (!Character.isDigit(message.charAt(i)) && number.length() != 0) {
+                result += alpha.charAt(Integer.parseInt(number) % 26);
+                result += message.charAt(i);
+                number = "";
+            }
+        }
+        if (number.length() != 0) {
+            result += alpha.charAt(Integer.parseInt(number) % 26);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
