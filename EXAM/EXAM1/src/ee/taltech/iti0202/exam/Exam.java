@@ -24,14 +24,24 @@ public class Exam {
      * @return sum of all prime factors
      */
     public static int primeFactorsSum(int num) {
-        List<Integer> list1 = new ArrayList<>();
-        for (int i = 3; i < num;i++) {
-            if (i % 2 != 0) {
-                list1.add(i);
+        int sum = 0;
+        while (num % 2 == 0) {
+            sum += 2;
+            num /= 2;
+        }
 
+        for (int i = 3; i <= Math.sqrt(num); i += 2) {
+            while (num % i == 0) {
+                sum += i;
+                num /= i;
             }
         }
-        return 0;
+
+        if (num > 2) {
+            sum += num;
+        }
+
+        return sum;
     }
 
     /**
