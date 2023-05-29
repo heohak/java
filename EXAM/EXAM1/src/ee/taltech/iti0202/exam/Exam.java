@@ -25,11 +25,15 @@ public class Exam {
      */
     public static int primeFactorsSum(int num) {
         int sum = 0;
+
+        // Divide by 2 until the number is not divisible
         while (num % 2 == 0) {
             sum += 2;
             num /= 2;
         }
 
+        // Now num must be odd, so we can skip even numbers in the loop
+        // Also, we can stop once we reach the square root of num
         for (int i = 3; i <= Math.sqrt(num); i += 2) {
             while (num % i == 0) {
                 sum += i;
@@ -37,6 +41,7 @@ public class Exam {
             }
         }
 
+        // If num is still greater than 2, it must be a prime number
         if (num > 2) {
             sum += num;
         }
