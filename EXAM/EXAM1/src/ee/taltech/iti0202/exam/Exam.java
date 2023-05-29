@@ -72,10 +72,11 @@ public class Exam {
                 int answer = values.get(values.size() - 1) - values.get(0) - 1;
                 finalist.add(answer);
             }
-            if (finalist.size() == 0) {
-                return -1;
-            }
 
+        }
+
+        if (finalist.size() == 0) {
+            return -1;
         }
         int finalfinal = Collections.max(finalist);
         return finalfinal;
