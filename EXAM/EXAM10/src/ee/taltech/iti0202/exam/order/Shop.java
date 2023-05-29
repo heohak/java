@@ -67,15 +67,19 @@ public class Shop {
     }
 
     public int getOrderSum(int orderNumber) {
-
+        boolean isPresent = false;
         int result = 0;
         for (Order order : orders) {
             if (order.getId() == orderNumber) {
+                isPresent = true;
                 result = order.getOrderSum();
                 return result;
             }
         }
-        return -1;
+        if (isPresent == false) {
+            return -1;
+        }
+        return result;
     }
     public boolean cancelOrder(int orderNumber) {
         for (Order order : orders) {
