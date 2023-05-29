@@ -20,6 +20,7 @@ public class Library {
     public boolean addBook(Book book) {
         if (!books.contains(book)) {
             books.add(book);
+            lendOutCount.put(book, 0);
             return true;
         } else {
             return false;
