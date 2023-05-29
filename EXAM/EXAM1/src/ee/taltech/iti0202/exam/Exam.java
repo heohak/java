@@ -24,31 +24,19 @@ public class Exam {
      * @return sum of all prime factors
      */
     public static int primeFactorsSum(int num) {
-        int max = 1000000; // You can adjust this as needed
-        boolean[] primes = new boolean[max];
-        for (int i = 2; i < max; i++) {
-            primes[i] = true;
-        }
-        for (int p = 2; p * p < max; p++) {
-            if (primes[p]) {
-                for (int i = p * p; i < max; i += p) {
-                    primes[i] = false;
-                }
-            }
-        }
         int sum = 0;
-        for (int p = 2; p < max && num > 1; p++) {
-            if (primes[p]) {
-                while (num % p == 0) {
-                    sum += p;
-                    num /= p;
-                }
+
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            while (num % i == 0) {
+                sum += i;
+                num /= i;
             }
         }
-        if (num > 1) {
-            // num is a prime larger than max
-            sum += num;
+
+        if (num != 1) {
+            sum += num; // If number is still not 1, it means it's a prime.
         }
+
         return sum;
     }
 
