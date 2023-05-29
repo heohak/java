@@ -1,5 +1,7 @@
 package ee.taltech.iti0202.exam;
 
+import java.util.*;
+
 public class Exam {
 
     /**
@@ -22,6 +24,13 @@ public class Exam {
      * @return sum of all prime factors
      */
     public static int primeFactorsSum(int num) {
+        List<Integer> list1 = new ArrayList<>();
+        for (int i = 3; i < num;i++) {
+            if (i % 2 != 0) {
+                list1.add(i);
+
+            }
+        }
         return 0;
     }
 
@@ -43,6 +52,38 @@ public class Exam {
      * @return longest distance
      */
     public static int longestDistanceBetweenEqualSymbols(String s) {
-        return -2;
+        if (s.equals("")) {
+            return -1;
+        }
+        Map<Character,List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char currentChar = s.charAt(i);
+            if (!map.containsKey(currentChar)) {
+                map.put(currentChar, new ArrayList<>());
+            }
+            map.get(currentChar).add(i);
+        }
+        System.out.println(map);
+        List<Integer> finalist = new ArrayList<>();
+        for (Map.Entry<Character,List<Integer>> entry : map.entrySet()) {
+            char key = entry.getKey();
+            List<Integer> values = entry.getValue();
+            if (values.size() > 1) {
+                int answer = values.get(values.size() - 1) - values.get(0) - 1;
+                finalist.add(answer);
+            }
+            if (finalist.size() == 0) {
+                return -1;
+            }
+
+        }
+        int finalfinal = Collections.max(finalist);
+        return finalfinal;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestDistanceBetweenEqualSymbols("abcdefa"));
+        System.out.println(longestDistanceBetweenEqualSymbols("aiu"));
+        System.out.println(longestDistanceBetweenEqualSymbols("aaaa"));
     }
 }
