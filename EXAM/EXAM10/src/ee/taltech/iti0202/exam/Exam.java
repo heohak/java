@@ -26,7 +26,7 @@ public class Exam {
             return 0;
         }
         int count = 0;
-        for (int i = 1; i < numbers.size() - 2; i++) {
+        for (int i = 1; i < numbers.size() - 1; i++) {
             int i1 = numbers.get(i);
             int i2 = numbers.get(i + 1);
             int i3 = numbers.get(i - 1);
