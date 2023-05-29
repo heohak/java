@@ -3,8 +3,10 @@ package ee.taltech.iti0202.tk;
 import com.sun.tools.jconsole.JConsoleContext;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Map;
+import java.sql.SQLOutput;
+import java.util.*;
+
+import static java.lang.Math.abs;
 
 public class Exam {
 
@@ -68,7 +70,18 @@ public class Exam {
      * evenlySpaced(4, 6, 3) => false
      */
     public static boolean evenlySpaced(int a, int b, int c) {
-        return false;
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(a);
+        numbers.add(b);
+        numbers.add(c);
+        System.out.println(numbers);
+        Collections.sort(numbers);
+        System.out.println(numbers);
+        if (Math.abs(numbers.get(2) - numbers.get(1)) == Math.abs(numbers.get(0) - numbers.get(1))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -82,7 +95,21 @@ public class Exam {
      * zipZap("zzzopzop") => "zzzpzp"
      */
     public static String zipZap(String str) {
-        return null;
+        String result = "";
+        for (int i = 0; i < str.length() - 2; i++) {
+            char c = str.charAt(i);
+            char c2 = str.charAt(i + 1);
+            char c3 = str.charAt(i + 2);
+            if (c == 'z' && c3 == 'p') {
+                 result = result + "zp";
+                 i+=2;
+
+            } else {
+                result = result + c;
+            }
+
+        }
+        return result;
     }
 
     /**
@@ -94,10 +121,23 @@ public class Exam {
      * mapSwitchKeysAndValues({"a": "a", "e": "e"}) => {}
      */
     public static Map<String, String> mapSwitchKeysAndValues(Map<String, String> map) {
-        return null;
+        Map<String, String> result = new HashMap<>();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            String key1 = entry.getKey();
+            String value1 = entry.getValue();
+            if (!key1.equals(value1)) {
+                result.put(value1, key1);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-        System.out.println(integerBattles(70451));
+        Map<String, String> map6 = new HashMap<>();
+        map6.put("a", "b");
+        map6.put("c", "d");
+        map6.put("e", "e");
+        System.out.println(mapSwitchKeysAndValues(map6));
+
     }
 }
