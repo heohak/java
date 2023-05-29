@@ -85,6 +85,7 @@ public class Shop {
                 }
                 order.getOrderProducts().clear();
                 contrabandList.add(order);
+                orders.remove(order);
                 return true;
             }
         }
