@@ -3,8 +3,6 @@ package ee.taltech.iti0202.exam.order;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.swing.text.rtf.RTFAttributes.BooleanAttribute.False;
-import static javax.swing.text.rtf.RTFAttributes.BooleanAttribute.True;
 
 public class Shop {
 
@@ -85,16 +83,5 @@ public class Shop {
 
     public List<Product> getAvailableProducts() {
         return products;
-    }
-
-
-
-
-    public static void main(String[] args) {
-        Shop shop = new Shop();
-        shop.createNewOrder();
-        shop.createNewOrder();
-        System.out.println(shop.orders.get(0).getId());
-        System.out.println(shop.orders.get(1).getId());
     }
 }
