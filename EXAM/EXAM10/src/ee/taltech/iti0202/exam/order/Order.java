@@ -8,11 +8,10 @@ public class Order {
     List<Product> orderProducts = new ArrayList<>();
 
     private int id;
-    private static int nextId = 1;
 
 
-    public Order() {
-        this.id = nextId++;
+    public Order(int id) {
+        this.id = id;
     }
 
     public List<Product> getOrderProducts() {

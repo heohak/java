@@ -28,7 +28,7 @@ public class Shop {
     }
 
     public int createNewOrder() {
-        Order order = new Order();
+        Order order = new Order(orders.size() + 1);
 
         orders.add(order);
 
@@ -63,18 +63,16 @@ public class Shop {
                 }
             }
         }
-            return false;
+        return false;
     }
 
     public int getOrderSum(int orderNumber) {
-        int result = -1;
+        int result = 0;
         for (Order order : orders) {
             if (order.getId() == orderNumber) {
                 result = order.getOrderSum();
-                return result;
             }
         }
-
         return result;
     }
     public boolean cancelOrder(int orderNumber) {
@@ -85,7 +83,6 @@ public class Shop {
                 }
                 order.getOrderProducts().clear();
                 contrabandList.add(order);
-                orders.remove(order);
                 return true;
             }
         }
