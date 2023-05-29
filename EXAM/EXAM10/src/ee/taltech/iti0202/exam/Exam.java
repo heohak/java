@@ -13,8 +13,20 @@ public class Exam {
      * countSingleTwos([2, 2, 2, 1, 3, 2, 1, 2]) => 2
      */
     public static int countSingleTwos(List<Integer> numbers) {
+        if (numbers.size() == 0) {
+            return 0;
+        }
+        if (numbers.size() == 1 && numbers.get(0) == 2) {
+            return 1;
+        }
+        if (numbers.size() == 1 && numbers.get(0) != 2) {
+            return 0;
+        }
+        if (numbers.size() == 2 && numbers.get(0) == 2 && numbers.get(1) == 2) {
+            return 0;
+        }
         int count = 0;
-        for (int i = 1; i < numbers.size() - 2;i++) {
+        for (int i = 1; i < numbers.size() - 2; i++) {
             int i1 = numbers.get(i);
             int i2 = numbers.get(i + 1);
             int i3 = numbers.get(i - 1);
