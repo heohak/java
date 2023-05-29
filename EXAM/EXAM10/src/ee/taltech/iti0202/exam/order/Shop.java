@@ -77,7 +77,7 @@ public class Shop {
     }
     public boolean cancelOrder(int orderNumber) {
         for (Order order : orders) {
-            if (order.getId() == orderNumber) {
+            if (order.getId() == orderNumber && !contrabandList.contains(order)) {
                 for (Product prod : order.getOrderProducts()) {
                     products.add(prod);
                 }
