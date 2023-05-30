@@ -29,11 +29,11 @@ List<Product> products = new ArrayList<>();
     }
 
     public Optional<Product> sellProduct(String name, int maxPrice) {
-        products
+        List<Product> sortedlist = products
                 .stream()
                 .sorted(Comparator.comparing(Product::getPrice).reversed())
                 .collect(Collectors.toList());
-        for (Product p : products) {
+        for (Product p : sortedlist) {
             if (p.getName() != null) {
 
             if (p.getName().equals(name) && p.getPrice() <= maxPrice) {
