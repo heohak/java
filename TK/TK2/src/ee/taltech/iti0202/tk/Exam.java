@@ -67,7 +67,7 @@ public class Exam {
     public static String oneTwo(String str) {
         String result = "";
         if (str.length() < 3) {
-            return str;
+            return result;
         }
         for (int i = 0; i < str.length() - 2;i+=3) {
             char c1 = str.charAt(i);
