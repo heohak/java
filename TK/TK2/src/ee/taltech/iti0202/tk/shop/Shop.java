@@ -4,49 +4,38 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Shop {
-    List<Product> products = new ArrayList<>();
 
-    /**
-     *
-     * @param product
-     * @return boolean
-     */
-    public boolean addProduct(Product product) {
+List<Product> products = new ArrayList<>();
+    boolean addProduct(Product product) {
         if (product.getPrice() < 0) {
             return false;
         }
         for (Product prod : products) {
-            if (prod.getName() == product.getName() && prod.getPrice() == product.getPrice()) {
-                return false;
-            }
+            if (prod.getName().equals(product.getName()) && prod.getPrice() == product.getPrice());
+            return false;
         }
         products.add(product);
         return true;
-    }
-
-    /**
-     *
-     * @param name
-     * @param maxPrice
-     * @return Optional
-     */
-    public Optional<Product> sellProduct(String name, int maxPrice) {
-        Optional<Product> optionalProduct = products.stream()
-                .filter(product -> product.getName() != null && product.getName().equals(name) && product
-                        .getPrice() <= maxPrice)
-                .max(Comparator.comparingInt(Product::getPrice));
-        optionalProduct.ifPresent(products::remove);
-        return optionalProduct;
-
 
     }
 
-    /**
-     *
-     * @return List
-     */
+    Optional<Product> sellProduct(String name, int maxPrice) {
+        products
+                .stream()
+                .sorted(Comparator.comparing(Product::getPrice).reversed())
+                .collect(Collectors.toList());
+        for (Product p : products) {
+            if( p.getName().equals(name) && p.getPrice() <= maxPrice) {
+                products.remove(p);
+                return Optional.of(p);
+            }
+        }
+        return Optional.empty();
+    }
+
     public List<Product> getProducts() {
         return products;
     }
