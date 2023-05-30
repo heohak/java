@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Shop {
 
 List<Product> products = new ArrayList<>();
-    boolean addProduct(Product product) {
+    public boolean addProduct(Product product) {
         if (product.getPrice() < 0) {
             return false;
         }
@@ -22,7 +22,7 @@ List<Product> products = new ArrayList<>();
 
     }
 
-    Optional<Product> sellProduct(String name, int maxPrice) {
+    public Optional<Product> sellProduct(String name, int maxPrice) {
         products
                 .stream()
                 .sorted(Comparator.comparing(Product::getPrice).reversed())
