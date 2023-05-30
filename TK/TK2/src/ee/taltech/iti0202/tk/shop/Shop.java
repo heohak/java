@@ -16,10 +16,6 @@ List<Product> products = new ArrayList<>();
         if (product.getPrice() < 0) {
             return false;
         }
-        for (Product prod : products) {
-            if (prod.getName().equals(product.getName()) && prod.getPrice() == product.getPrice());
-            return false;
-        }
         products.add(product);
         return true;
 
@@ -31,10 +27,13 @@ List<Product> products = new ArrayList<>();
                 .sorted(Comparator.comparing(Product::getPrice).reversed())
                 .collect(Collectors.toList());
         for (Product p : products) {
-            if( p.getName().equals(name) && p.getPrice() <= maxPrice) {
+            if (p.getName() != null) {
+
+            if (p.getName().equals(name) && p.getPrice() <= maxPrice) {
                 products.remove(p);
                 return Optional.of(p);
             }
+        }
         }
         return Optional.empty();
     }
