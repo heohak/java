@@ -10,11 +10,10 @@ public class Shop {
 
 List<Product> products = new ArrayList<>();
     public boolean addProduct(Product product) {
-        if (product.getPrice() < 0) {
+        if (products.contains(product)) {
             return false;
         }
-        for (Product prod : products) {
-            if (prod.getName().equals(product.getName()) && prod.getPrice() == product.getPrice());
+        if (product.getPrice() < 0) {
             return false;
         }
         products.add(product);
@@ -28,7 +27,7 @@ List<Product> products = new ArrayList<>();
                 .sorted(Comparator.comparing(Product::getPrice).reversed())
                 .collect(Collectors.toList());
         for (Product p : products) {
-            if( p.getName().equals(name) && p.getPrice() <= maxPrice) {
+            if(p.getName().equals(name) && p.getPrice() <= maxPrice) {
                 products.remove(p);
                 return Optional.of(p);
             }
