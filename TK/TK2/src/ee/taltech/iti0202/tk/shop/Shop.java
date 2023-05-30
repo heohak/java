@@ -16,6 +16,13 @@ List<Product> products = new ArrayList<>();
         if (product.getPrice() < 0) {
             return false;
         }
+        for (Product prod : products) {
+            if (prod.getName() != null && product.getName() != null) {
+                if (prod.getName().equals(product.getName()) && prod.getPrice() == product.getPrice()) {
+                    return false;
+                }
+            }
+        }
         products.add(product);
         return true;
 
