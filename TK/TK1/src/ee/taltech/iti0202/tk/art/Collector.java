@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Collector {
 
-    List<Painting> paintings = new ArrayList<>();
+    private List<Painting> paintings = new ArrayList<>();
 
-    boolean addPainting(Painting painting) {
+    public boolean addPainting(Painting painting) {
         if (paintings.contains(painting)) {
             return false;
         }
@@ -25,7 +25,7 @@ public class Collector {
         return paintings;
     }
 
-    boolean sellPainting(Painting painting, Collector fellowCollector) {
+    public boolean sellPainting(Painting painting, Collector fellowCollector) {
         if (paintings.contains(painting) && !fellowCollector.paintings.contains(painting)) {
             if (fellowCollector.addPainting(painting)) {
                 return true;
