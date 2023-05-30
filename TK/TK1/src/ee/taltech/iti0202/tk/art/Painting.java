@@ -36,7 +36,7 @@ public class Painting {
             return "This is a painting named " + title + " and made by an unknown artist.";
         }
         else {
-            return "This is a painting named " + title + " and made by " + author;
+            return "This is a painting named " + title + " and made by " + author + ".";
         }
     }
 }
