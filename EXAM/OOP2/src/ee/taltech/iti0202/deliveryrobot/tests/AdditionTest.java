@@ -237,4 +237,27 @@ public class AdditionTest {
 
 
     }
+    @Test
+    public void testWithHowManyDeliversNeededForOrder() throws CantSendOutRobotException, NoFreeRobotsException, RobotAlreadyInACompanyException {
+        robot1 = new RobotBuilder()
+                .setName("robot1")
+                .setMaxWeight(30)
+                .createRobot();
+        product1 = new Product("P1", 10, 5);
+        product2 = new Product("P2", 30, 6);
+        product3 = new Product("P3", 10, 7);
+        company1 = new Company();
+        company1.addRobot(robot1);
+        client1 = new Client("Client", 1000);
+        List<Product> list1 = new ArrayList<>();
+        list1.add(product1);
+        list1.add(product2);
+        list1.add(product3);
+        order1 = new Order(list1, client1);
+        client1.placeOrder(company1, order1);
+        company1.processOrder();
+        assertEquals(2, company1.getClientOrderCount());
+
+
+    }
 }
