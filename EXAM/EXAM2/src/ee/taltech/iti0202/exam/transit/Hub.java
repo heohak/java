@@ -62,7 +62,7 @@ public class Hub {
      */
     public void startRoute(Bus bus) {
         for (BusStop busStop : bus.getStops()) {
-            if (!bus.isMoving() && busStop.getBusLines().contains(bus.getLineNumber()) && !busStop.getCurrentBusesIn().contains(bus.getLineNumber())) {
+            if (!bus.isMoving() && busStop.getBusLines().contains(bus.getLineNumber())) {
                 bus.setCurrentStop(bus.getBusStops().get(0));
                 movingBuses.add(bus);
                 bus.setMoving(true);
@@ -126,7 +126,10 @@ public class Hub {
      * those stops can be left out from the map or they can point to an empty list.
      */
     public Map<String, List<Bus>> getLocations() {
-        return null;
+            Map<String, List<Bus>> result = new HashMap<>();
+            return null;
     }
+
+
 }
 
