@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.exam;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,8 +22,19 @@ public class Exam {
      * @return "ordered" list
      */
     public static List<Integer> zeroFront(List<Integer> numbers) {
-        Collections.sort(numbers);
-        return numbers;
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0;i <numbers.size();i++) {
+            int i1 = numbers.get(i);
+            if (i1 == 0) {
+                result.add(i1);
+            }
+        } for (int i = 0; i < numbers.size();i++) {
+            int i2 = numbers.get(i);
+            if (i2 != 0) {
+                result.add(i2);
+            }
+        }
+        return result;
     }
 
     /**
@@ -36,6 +48,15 @@ public class Exam {
      */
     public static int findUnsortedSubarray(int[] nums) {
       return -1;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(1);
+        list1.add(0);
+        list1.add(0);
+        list1.add(1);
+        System.out.println(zeroFront(list1));
     }
 
 }
