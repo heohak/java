@@ -200,4 +200,33 @@ public class Company {
             }
         }
     }
+
+    public  List<Robot> searchRobotByName(String name) {
+        List<Robot> result = new ArrayList<>();
+        for (Robot robot : robots) {
+            if (robot.getName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(robot);
+
+            }
+
+        }
+        return result;
+
+    }
+
+
+    public  List<Robot> searchRobotByID(int id) {
+        List<Robot> result = new ArrayList<>();
+        for (Robot robot : robots) {
+            if (robot.getId() == id) {
+                result.add(robot);
+            }
+
+        }
+        return result;
+
+    }
+
+
+
 }
