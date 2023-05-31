@@ -198,7 +198,8 @@ public class AdditionTest {
 
 
     @Test
-    public void testHeavyItemsFirstStrategyMultipleOrders() throws CantSendOutRobotException, NoFreeRobotsException, RobotAlreadyInACompanyException {
+    public void testHeavyItemsFirstStrategyMultipleOrders() throws CantSendOutRobotException, NoFreeRobotsException,
+            RobotAlreadyInACompanyException {
         robot1 = new RobotBuilder()
                 .setName("robot1")
                 .setMaxWeight(30000)
@@ -238,7 +239,8 @@ public class AdditionTest {
 
     }
     @Test
-    public void testWithHowManyDeliversNeededForOrder() throws CantSendOutRobotException, NoFreeRobotsException, RobotAlreadyInACompanyException {
+    public void testWithHowManyDeliversNeededForOrder() throws CantSendOutRobotException, NoFreeRobotsException,
+            RobotAlreadyInACompanyException {
         robot1 = new RobotBuilder()
                 .setName("robot1")
                 .setMaxWeight(30)
