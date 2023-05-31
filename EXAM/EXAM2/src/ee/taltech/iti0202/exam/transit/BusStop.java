@@ -10,6 +10,8 @@ public class BusStop {
 
   private List<String> currentBusesIn;
 
+  private List<Bus> currentBusesInList;
+
   /**
    *
    * @param name
@@ -38,6 +40,10 @@ public class BusStop {
 
   public List<String> getCurrentBusesIn() {
     return currentBusesIn;
+  }
+
+  public List<Bus> getCurrentBusesInList() {
+    return currentBusesInList;
   }
 }
 
