@@ -10,8 +10,6 @@ import ee.taltech.iti0202.deliveryrobot.product.Product;
 import ee.taltech.iti0202.deliveryrobot.robot.Robot;
 import ee.taltech.iti0202.deliveryrobot.robot.RobotBuilder;
 import ee.taltech.iti0202.deliveryrobot.strategy.CompanyHeavyItemsStrategy;
-import ee.taltech.iti0202.deliveryrobot.strategy.CompanyLowWeightsStrategy;
-import jdk.jfr.StackTrace;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -84,6 +82,32 @@ public class AdditionTest {
     }
 
     @Test
+    public void testSearchRobotByIdNoRobotWithThatId() throws RobotAlreadyInACompanyException {
+        robot1 = new RobotBuilder()
+                .setName("MinU roBsu")
+                .setMaxWeight(500)
+                .createRobot();
+        robot2 = new RobotBuilder()
+                .setName("rObsU")
+                .setMaxWeight(200)
+                .createRobot();
+        robot3 = new RobotBuilder()
+                .setName("robot3")
+                .setMaxWeight(10000)
+                .createRobot();
+        company1 = new Company();
+        company1.addRobot(robot1);
+        company1.addRobot(robot2);
+        company1.addRobot(robot3);
+        List<Robot> resultList = company1.searchRobotByID(4);
+        assertEquals(0, resultList.size());
+
+
+
+
+    }
+
+    @Test
     public void testSearchRobotByName() throws RobotAlreadyInACompanyException {
         robot1 = new RobotBuilder()
                 .setName("MinU roBsu")
@@ -120,7 +144,7 @@ public class AdditionTest {
                 .setMaxWeight(200)
                 .createRobot();
         robot3 = new RobotBuilder()
-                .setName("roBsu")
+                .setName("ROBSU")
                 .setMaxWeight(10000)
                 .createRobot();
         company1 = new Company();
@@ -135,7 +159,8 @@ public class AdditionTest {
     }
 
     @Test
-    public void testHeavyItemsFirstStrategy() throws CantSendOutRobotException, NoFreeRobotsException, RobotAlreadyInACompanyException {
+    public void testHeavyItemsFirstStrategy() throws CantSendOutRobotException,
+            NoFreeRobotsException, RobotAlreadyInACompanyException {
         robot1 = new RobotBuilder()
                 .setName("robot1")
                 .setMaxWeight(30000)
@@ -165,6 +190,49 @@ public class AdditionTest {
         assertEquals("Klaver", company1.getSentOutProducts().get(0).getName());
         assertEquals("Kapp", company1.getSentOutProducts().get(1).getName());
         assertEquals("Tass", company1.getSentOutProducts().get(2).getName());
+        assertEquals("Pliiats", company1.getSentOutProducts().get(3).getName());
+
+
+    }
+
+
+
+    @Test
+    public void testHeavyItemsFirstStrategyMultipleOrders() throws CantSendOutRobotException, NoFreeRobotsException, RobotAlreadyInACompanyException {
+        robot1 = new RobotBuilder()
+                .setName("robot1")
+                .setMaxWeight(30000)
+                .createRobot();
+        robot2 = new RobotBuilder()
+                .setName("robot2")
+                .setMaxWeight(5000)
+                .createRobot();
+
+        company1 = new CompanyHeavyItemsStrategy();
+        company1.addRobot(robot1);
+        company1.addRobot(robot2);
+
+        product1 = new Product("Tass", 7, 15);
+        product2 = new Product("Pliiats", 5, 50);
+        product3 = new Product("Kapp", 600, 125);
+        product4 = new Product("Klaver", 1000, 1000);
+        product5 = new Product("Auto", 2500, 4000);
+        List<Product> list1 = new ArrayList<>();
+        list1.add(product2);
+        list1.add(product3);
+
+        List<Product> list2 = new ArrayList<>();
+        list2.add(product3);
+        list2.add(product5);
+        client1 = new Client("Harry", 5000);
+        order1 = new Order(list1, client1);
+        order2 = new Order(list2, client1);
+        client1.placeOrder(company1, order2);
+        client1.placeOrder(company1, order1);
+        company1.processOrder();
+        assertEquals("Auto", company1.getSentOutProducts().get(0).getName());
+        assertEquals("Kapp", company1.getSentOutProducts().get(1).getName());
+        assertEquals("Kapp", company1.getSentOutProducts().get(2).getName());
         assertEquals("Pliiats", company1.getSentOutProducts().get(3).getName());
 
 
