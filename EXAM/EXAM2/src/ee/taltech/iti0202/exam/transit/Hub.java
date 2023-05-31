@@ -12,8 +12,6 @@ public class Hub {
     List<Bus> movingBuses = new ArrayList<>();
 
     Map<String, BusStop> busStops = new HashMap<>();
-
-    List<BusStop> busStopList = new ArrayList<>();
     /**
      * Returns all the buses in the hub in insertion order.
      */
@@ -52,7 +50,6 @@ public class Hub {
     public void addBusStop(BusStop busStop) {
         if (!busStops.containsKey(busStop.getName())) {
             busStops.put(busStop.getName(), busStop);
-            busStopList.add(busStop);
         }
     }
     /**
@@ -65,15 +62,10 @@ public class Hub {
      */
     public void startRoute(Bus bus) {
         for (BusStop busStop : bus.getStops()) {
-            if (busStop.getCurrentBusesIn() != null) {
-
-            if (!bus.isMoving() && busStop.getBusLines().contains(bus.getLineNumber()) && !busStop.getCurrentBusesIn().contains(bus.getLineNumber())) {
+            if (!bus.isMoving() && busStop.getBusLines().contains(bus.getLineNumber())) {
                 bus.setCurrentStop(bus.getBusStops().get(0));
-                busStop.getCurrentBusesIn().add(bus.getLineNumber());
-                busStop.getCurrentBusesInList().add(bus);
                 movingBuses.add(bus);
                 bus.setMoving(true);
-            }
             }
         }
     }
@@ -134,19 +126,8 @@ public class Hub {
      * those stops can be left out from the map or they can point to an empty list.
      */
     public Map<String, List<Bus>> getLocations() {
-            Map<String, List<Bus>> result = new HashMap<>();
-            for (BusStop busstop : busStopList) {
-                if (!result.containsKey(busstop.getName())) {
-                    result.put(busstop.getName(), new ArrayList<>());
-                } else {
-                    for (Bus bus : busstop.getCurrentBusesInList()) {
-                        result.get(busstop.getName()).add(bus);
-                    }
-                }
-            }
-            return result;
+        Map<String, List<Bus>> result = new HashMap<>();
+        return null;
     }
 
-
 }
-
