@@ -10,6 +10,11 @@ public class BusStop {
 
   private List<String> currentBusesIn;
 
+  /**
+   *
+   * @param name
+   * @param busLines
+   */
   public BusStop(String name, List<String> busLines) {
     this.name = name;
     this.busLines = busLines;

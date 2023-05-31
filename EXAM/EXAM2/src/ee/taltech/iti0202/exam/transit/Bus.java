@@ -16,6 +16,11 @@ public class Bus {
 
     private boolean isMoving;
 
+    /**
+     *
+     * @param licencePlate
+     * @param lineNumber
+     */
     public Bus(String licencePlate, String lineNumber) {
         this.licencePlate = licencePlate;
         this.lineNumber = lineNumber;

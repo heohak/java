@@ -1,7 +1,6 @@
 package ee.taltech.iti0202.exam;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Exam {
@@ -23,12 +22,12 @@ public class Exam {
      */
     public static List<Integer> zeroFront(List<Integer> numbers) {
         List<Integer> result = new ArrayList<>();
-        for (int i = 0;i <numbers.size();i++) {
+        for (int i = 0; i < numbers.size(); i++) {
             int i1 = numbers.get(i);
             if (i1 == 0) {
                 result.add(i1);
             }
-        } for (int i = 0; i < numbers.size();i++) {
+        } for (int i = 0; i < numbers.size(); i++) {
             int i2 = numbers.get(i);
             if (i2 != 0) {
                 result.add(i2);

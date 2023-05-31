@@ -81,7 +81,7 @@ public class Hub {
     }
 
     /**
-     * Pass time. Move all buses to the next stop. 
+     * Pass time. Move all buses to the next stop.
      * If the bus is at the last stop, then move it to the first stop, update the location.
      * If there is a bus with the same line number in the stop already, then the bus is not moved.
      * Example:
