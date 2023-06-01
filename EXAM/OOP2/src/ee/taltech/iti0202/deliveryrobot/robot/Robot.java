@@ -8,6 +8,7 @@ import java.util.List;
 public class Robot {
     private String name;
 
+
     private static int nextId = 1;
 
     private  int id;
@@ -57,10 +58,18 @@ public class Robot {
     }
 
     /**
+     *
+     * @return int
+     */
+
+    /**
      * Returns the maximum weight the robot can carry.
      *
      * @return int
      */
+
+
+
     public int getMaxWeight() {
         return maxWeight;
     }

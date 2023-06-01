@@ -28,6 +28,8 @@ public class Company {
 
     protected final double transportFee = 5;
 
+    private int clientOrderCount;
+
     /**
      * Company class.
      */
@@ -120,10 +122,21 @@ public class Company {
     }
 
     /**
+     *
+     * @return int
+     */
+    public int getClientOrderCount() {
+        return clientOrderCount;
+    }
+
+    /**
      * Returns a list of the company's robots.
      *
      * @return List
      */
+
+
+
     public List<Robot> getRobots() {
         return robots;
     }
@@ -182,6 +195,7 @@ public class Company {
                             robot.setCurrentWeight(robot.getCurrentWeight() + product.getWeight());
                         } else {
                             remainingProducts.add(product);
+                            clientOrderCount++;
                         }
                     }
                     order.setOrderProducts(remainingProducts);
@@ -191,6 +205,7 @@ public class Company {
                     }
                     if (!robot.getProducts().isEmpty()) {
                         sendRobotToDeliverPackage(robot);
+                        clientOrderCount++;
                     }
                     break;
                 }
@@ -200,4 +215,42 @@ public class Company {
             }
         }
     }
+
+    /**
+     *
+     * @param name
+     * @return List
+     */
+    public  List<Robot> searchRobotByName(String name) {
+        List<Robot> result = new ArrayList<>();
+        for (Robot robot : robots) {
+            if (robot.getName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(robot);
+
+            }
+
+        }
+        return result;
+
+    }
+
+    /**
+     *
+     * @param id
+     * @return List
+     */
+    public  List<Robot> searchRobotByID(int id) {
+        List<Robot> result = new ArrayList<>();
+        for (Robot robot : robots) {
+            if (robot.getId() == id) {
+                result.add(robot);
+            }
+
+        }
+        return result;
+
+    }
+
+
+
 }
