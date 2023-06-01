@@ -1,8 +1,8 @@
 package ee.taltech.iti0202.controller;
 
 
-import com.example.demo.repository.Employee;
-import com.example.demo.service.EmployeeService;
+import ee.taltech.iti0202.repository.Employee;
+import ee.taltech.iti0202.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

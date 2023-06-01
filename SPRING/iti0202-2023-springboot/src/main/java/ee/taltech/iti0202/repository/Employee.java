@@ -1,3 +1,5 @@
+package ee.taltech.iti0202.repository;
+
 import jakarta.persistence.*;
 import lombok.*;
 
