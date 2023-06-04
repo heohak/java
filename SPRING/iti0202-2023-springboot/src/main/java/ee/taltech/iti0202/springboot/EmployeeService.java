@@ -3,7 +3,8 @@ package ee.taltech.iti0202.springboot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -11,14 +12,28 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    /**
+     *
+     * @return List
+     */
     public List<Employee> findAllEmployees() {
         return employeeRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return Employee
+     */
     public Optional<Employee> findEmployeeById(Long id) {
         return employeeRepository.findById(id);
     }
 
+    /**
+     *
+     * @param employee
+     * @return String
+     */
     public String addEmployee(Employee employee) {
         Optional<Employee> existingEmployee = employeeRepository.findByEmailIgnoreCase(employee.getEmail());
         if (existingEmployee.isPresent()) {
@@ -28,6 +43,11 @@ public class EmployeeService {
         return "Employee added to database";
     }
 
+    /**
+     *
+     * @param id
+     * @return String
+     */
     public String deleteEmployee(Long id) {
         Optional<Employee> existingEmployee = employeeRepository.findById(id);
         if (existingEmployee.isPresent()) {
@@ -38,6 +58,12 @@ public class EmployeeService {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param newEmployee
+     * @return String
+     */
     public String updateEmployee(Long id, Employee newEmployee) {
         Optional<Employee> existingEmployee = employeeRepository.findById(id);
         if (!existingEmployee.isPresent()) {
@@ -57,6 +83,12 @@ public class EmployeeService {
         return "Employee data overwritten";
     }
 
+
+    /**
+     *
+     * @param company
+     * @return List
+     */
     public List<Employee> findEmployeesByCompany(String company) {
         return employeeRepository.findAllByCompanyIgnoreCase(company);
     }
